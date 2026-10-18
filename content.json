@@ -1,0 +1,436 @@
+{
+  "site": {
+    "name": "Nabla Lab",
+    "domain": "nabla.ac.cn",
+    "language": "en",
+    "foundingYear": 2025,
+    "navigation": [
+      {
+        "label": "About us",
+        "href": "#about"
+      },
+      {
+        "label": "Our research",
+        "href": "#research"
+      },
+      {
+        "label": "People",
+        "href": "#people"
+      },
+      {
+        "label": "News",
+        "href": "#news"
+      },
+      {
+        "label": "Contact",
+        "href": "#contact"
+      }
+    ],
+    "foundingDate": "2025-03-01"
+  },
+  "hero": {
+    "eyebrow": "Independent academic community",
+    "title": "A shared foundation. A wider horizon.",
+    "description": "Nabla Lab is an independent academic community with roots at HIT Weihai, connecting members at different institutions through continuing collaborative research and shared research experience.",
+    "primaryAction": {
+      "label": "Explore our research",
+      "href": "#research"
+    },
+    "secondaryAction": {
+      "label": "Meet our people",
+      "href": "#people"
+    }
+  },
+  "about": {
+    "id": "about",
+    "title": "About us",
+    "lead": "Shared beginnings. Continuing research together.",
+    "body": "Nabla Lab was established on 1 March 2025 as an independent academic community, growing from a student-led group at Harbin Institute of Technology, Weihai. Its early focus was research and research training. Our members share an undergraduate educational background in the HIT (Weihai)–University of Strathclyde cooperative programme. Today, our members pursue academic paths at different institutions. Our main goal is to continue working together on research questions and shared projects. Alongside this collaborative work, we support research training and share methods and practical experience. Our interests span fluid mechanics, wave–structure interaction, marine engineering, computation, aerodynamics and the low-altitude economy.",
+    "purpose": {
+      "title": "Continuing research together.",
+      "priorities": [
+        {
+          "label": "01 / PRIMARY FOCUS",
+          "title": "Collaborative research",
+          "description": "Discuss research questions and advance shared projects as our members pursue academic paths at different institutions."
+        },
+        {
+          "label": "02 / SUPPORTING FOCUS",
+          "title": "Research training & experience",
+          "description": "Support one another’s development through research training and the exchange of methods and practical experience."
+        }
+      ]
+    },
+    "nameOrigin": {
+      "title": "The name Nabla.",
+      "lead": "Nabla Lab takes its name from ∇ (nabla), the differential operator that appears in the Navier–Stokes equations describing fluid motion.",
+      "body": "The name reflects our shared interest in fluid mechanics.",
+      "sourceUrl": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter30.pdf"
+    }
+  },
+  "research": {
+    "id": "research",
+    "title": "Our research",
+    "intro": "Four themes connect our members’ current research interests.",
+    "themes": [
+      {
+        "id": "fluid-mechanics-computation",
+        "title": "Fluid Mechanics & Computation",
+        "description": "Understanding fluid motion through mechanics and computational approaches. Our interests include computational fluid dynamics and physics-informed neural networks as ways to study fluid behaviour.",
+        "keywords": [
+          "Computational fluid dynamics (CFD)",
+          "Physics-informed neural networks (PINNs)"
+        ],
+        "memberSlugs": [
+          "yongqi-yuan",
+          "jiahe-tian",
+          "zhuoxi-hu"
+        ]
+      },
+      {
+        "id": "waves-structures-marine-engineering",
+        "title": "Waves, Structures & Marine Engineering",
+        "description": "Exploring how waves, fluids and structures interact in marine settings. This theme brings together interests in wave–structure interaction, fluid–structure interaction, structural mechanics, marine engineering and offshore renewable energy.",
+        "keywords": [
+          "Fluid–structure interaction & structural mechanics",
+          "Offshore renewable energy"
+        ],
+        "memberSlugs": [
+          "yongqi-yuan",
+          "jiahe-tian",
+          "yu-zhao",
+          "zhirui-ju"
+        ]
+      },
+      {
+        "id": "aerodynamics-noise",
+        "title": "Aerodynamics & Noise",
+        "description": "Studying aerodynamic behaviour and noise associated with unmanned aerial vehicles. Current interests connect fluid mechanics and aerodynamics with the question of UAV noise reduction.",
+        "keywords": [
+          "Aerodynamics",
+          "UAV noise reduction"
+        ],
+        "memberSlugs": [
+          "zhuoxi-hu"
+        ]
+      },
+      {
+        "id": "low-altitude-economy",
+        "title": "Low-altitude Economy",
+        "description": "An area of interest connecting low-altitude aviation with engineering questions. Within this theme, our current interests include the aerodynamics and noise of unmanned aerial vehicles.",
+        "keywords": [
+          "Low-altitude economy",
+          "UAV aerodynamics & noise"
+        ],
+        "memberSlugs": [
+          "zhuoxi-hu"
+        ]
+      }
+    ]
+  },
+  "people": {
+    "id": "people",
+    "title": "People",
+    "intro": "A shared undergraduate background, with academic paths continuing across different institutions.",
+    "sharedEducationNote": "Our members have studied or are studying in the HIT (Weihai)–University of Strathclyde cooperative undergraduate programme. Their current academic roles are listed individually below.",
+    "members": [
+      {
+        "slug": "yongqi-yuan",
+        "name": "Yongqi Yuan",
+        "chineseName": "袁泳棋",
+        "role": "DPhil student in Engineering Science",
+        "institution": "University of Oxford",
+        "additionalAffiliation": "Lady Margaret Hall",
+        "bio": "Yongqi is a DPhil student in Engineering Science at the University of Oxford and a member of Lady Margaret Hall. His current academic status is Probationary Research Student (PRS). Research interests include wave–structure interaction, fluid mechanics and computational fluid dynamics.",
+        "interests": [
+          "Wave–structure interaction",
+          "Fluid mechanics",
+          "Computational fluid dynamics (CFD)"
+        ],
+        "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
+        "profileHref": "/people/yongqi-yuan/",
+        "profileActionLabel": "View academic profile",
+        "initials": "YY",
+        "degreeProgramme": "DPhil in Engineering Science",
+        "academicStatus": "Probationary Research Student (PRS)",
+        "academicProfiles": [
+          {
+            "label": "ORCID",
+            "title": "0009-0004-7632-3743",
+            "url": "https://orcid.org/0009-0004-7632-3743",
+            "description": "Researcher identifier and academic record"
+          },
+          {
+            "label": "GITHUB",
+            "title": "yongqi-yuan",
+            "url": "https://github.com/yongqi-yuan",
+            "description": "Personal GitHub profile"
+          }
+        ],
+        "educationHistory": [
+          {
+            "degree": "DPhil in Engineering Science",
+            "institution": "University of Oxford",
+            "institutionUrl": "https://www.ox.ac.uk/",
+            "startDate": "2026-10",
+            "startLabel": "October 2026",
+            "endDate": null,
+            "endLabel": "present",
+            "location": "Oxford, UK",
+            "status": "Probationary Research Student (PRS)"
+          },
+          {
+            "degree": "BEng (Hons) in Naval Architecture with Ocean Engineering",
+            "institution": "University of Strathclyde",
+            "institutionUrl": "https://www.strath.ac.uk/engineering/navalarchitectureoceanmarineengineering/",
+            "startDate": "2022-09",
+            "startLabel": "September 2022",
+            "endDate": "2026-06",
+            "endLabel": "June 2026",
+            "location": "Glasgow, UK",
+            "honours": "First Class Honours"
+          },
+          {
+            "degree": "BEng in Naval Architecture and Marine Engineering",
+            "institution": "Harbin Institute of Technology, Weihai",
+            "institutionUrl": "https://en.hitwh.edu.cn/",
+            "startDate": "2022-08",
+            "startLabel": "August 2022",
+            "endDate": "2026-06",
+            "endLabel": "June 2026",
+            "location": "Weihai, China"
+          }
+        ],
+        "portrait": {
+          "src": "/assets/yongqi-yuan-portrait.jpg",
+          "width": 4160,
+          "height": 4160,
+          "alt": "Yongqi Yuan",
+          "credit": "Portrait supplied by Yongqi Yuan."
+        }
+      },
+      {
+        "slug": "jiahe-tian",
+        "name": "Jiahe Tian",
+        "chineseName": "田嘉禾",
+        "role": "PhD student",
+        "institution": "University of Strathclyde",
+        "department": "Department of Naval Architecture, Ocean & Marine Engineering",
+        "additionalAffiliation": "Kelvin Hydrodynamics Laboratory",
+        "bio": "Jiahe is a PhD student in Strathclyde’s Department of Naval Architecture, Ocean & Marine Engineering and Kelvin Hydrodynamics Laboratory. Research interests include offshore renewable energy, physics-informed neural networks and wave–structure interaction.",
+        "interests": [
+          "Offshore renewable energy",
+          "Physics-informed neural networks (PINNs)",
+          "Wave–structure interaction"
+        ],
+        "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
+        "initials": "JT",
+        "profileHref": "/people/jiahe-tian/"
+      },
+      {
+        "slug": "yu-zhao",
+        "name": "Yu Zhao",
+        "chineseName": "赵煜",
+        "role": "Undergraduate student",
+        "institution": "HIT Weihai · University of Strathclyde",
+        "bio": "Yu is an undergraduate in the joint undergraduate programme between HIT Weihai and the University of Strathclyde. Research interests include fluid–structure interaction, structural mechanics and wave–structure interaction.",
+        "interests": [
+          "Fluid–structure interaction",
+          "Structural mechanics",
+          "Wave–structure interaction"
+        ],
+        "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
+        "initials": "YZ",
+        "profileHref": "/people/yu-zhao/"
+      },
+      {
+        "slug": "zhuoxi-hu",
+        "name": "Zhuoxi Hu",
+        "chineseName": "胡卓曦",
+        "role": "Undergraduate student",
+        "institution": "HIT Weihai · University of Strathclyde",
+        "bio": "Zhuoxi is an undergraduate in the joint undergraduate programme between HIT Weihai and the University of Strathclyde. Research interests include UAV noise reduction, the low-altitude economy, fluid mechanics and aerodynamics.",
+        "interests": [
+          "UAV noise reduction",
+          "Low-altitude economy",
+          "Fluid mechanics",
+          "Aerodynamics"
+        ],
+        "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
+        "initials": "ZH",
+        "profileHref": "/people/zhuoxi-hu/"
+      },
+      {
+        "slug": "zhirui-ju",
+        "name": "Zhirui Ju",
+        "chineseName": "具志睿",
+        "role": "Undergraduate student",
+        "institution": "HIT Weihai · University of Strathclyde",
+        "bio": "Zhirui is an undergraduate in the joint undergraduate programme between HIT Weihai and the University of Strathclyde. Research interests include marine engineering. Further research details will be added as they become available.",
+        "interests": [
+          "Marine engineering"
+        ],
+        "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
+        "initials": "ZJ",
+        "profileHref": "/people/zhirui-ju/"
+      }
+    ]
+  },
+  "news": {
+    "id": "news",
+    "title": "News",
+    "intro": "Updates from our community.",
+    "emptyState": "Research updates and community news will appear here.",
+    "items": []
+  },
+  "contact": {
+    "id": "contact",
+    "title": "Contact",
+    "lead": "At present, Nabla Lab primarily supports collaboration among its existing members.",
+    "body": "We discuss research questions, share progress and exchange practical experience as our members work on shared projects across institutions.",
+    "action": {
+      "label": "Explore member profiles",
+      "href": "/people/"
+    },
+    "email": null,
+    "postalAddress": null,
+    "tagline": "Keeping our members connected through research.",
+    "heading": "Collaboration within our community.",
+    "profileNote": "Member profiles bring together our academic backgrounds and research interests.",
+    "currentFocus": "Member collaboration"
+  },
+  "history": {
+    "id": "history",
+    "title": "Our history",
+    "summary": "Founded in 2025, Nabla Lab began with research and research training. Earlier work laid the groundwork for its CFD studies. This timeline follows the community’s formation, technical milestones and publication.",
+    "timeline": [
+      {
+        "dateStart": "2023",
+        "dateEnd": "2024",
+        "displayDate": "2023–2024",
+        "title": "Preparatory CFD work",
+        "description": "Wave-generation and validation work in ANSYS Fluent prepared the foundation for later studies."
+      },
+      {
+        "dateStart": "2024-12-09",
+        "displayDate": "9 December 2024",
+        "title": "OpenFOAM environment",
+        "description": "An OpenFOAM and Ubuntu environment was established."
+      },
+      {
+        "dateStart": "2025-02-26",
+        "dateEnd": "2025-02-28",
+        "displayDate": "February 2025",
+        "title": "First OpenFOAM case",
+        "description": "The first waves2Foam/OpenFOAM case was set up on 26 February; the toolbox was loaded on 28 February."
+      },
+      {
+        "dateStart": "2025-03-01",
+        "displayDate": "1 March 2025",
+        "title": "Nabla Lab established",
+        "description": "Nabla Lab was established as a student-led group; Yu Zhao was invited to join."
+      },
+      {
+        "dateStart": "2025-04-01",
+        "displayDate": "1 April 2025",
+        "title": "Gap-resonance study",
+        "description": "The gap-resonance study began."
+      },
+      {
+        "dateStart": "2025-06-04",
+        "displayDate": "4 June 2025",
+        "title": "Key technical progress",
+        "description": "Progress was made on key techniques for the study."
+      },
+      {
+        "dateStart": "2025-06-27",
+        "displayDate": "27 June 2025",
+        "title": "Zhuoxi Hu invited to join",
+        "description": "Zhuoxi Hu was invited to join Nabla Lab."
+      },
+      {
+        "dateStart": "2025-08-07",
+        "displayDate": "7 August 2025",
+        "title": "Main CFD work completed",
+        "description": "The main CFD work for the gap-resonance study was completed."
+      },
+      {
+        "dateStart": "2025-08-14",
+        "displayDate": "14 August–8 November 2025",
+        "title": "Analysis, figures and writing",
+        "description": "Results were revisited, with data analysis, figure preparation and writing continuing through early November.",
+        "dateEnd": "2025-11-08"
+      },
+      {
+        "dateStart": "2025-11-08",
+        "dateEnd": "2025-12-14",
+        "displayDate": "November–December 2025",
+        "title": "Writing and revision",
+        "description": "Manuscript writing and revisions continued, with completion on 14 December."
+      },
+      {
+        "dateStart": "2025-11-24",
+        "displayDate": "24 November 2025",
+        "title": "Zhirui Ju invited to join",
+        "description": "Zhirui Ju was invited to join Nabla Lab."
+      },
+      {
+        "dateStart": "2025-12-19",
+        "displayDate": "19 December 2025",
+        "title": "Submitted to Ocean Engineering",
+        "description": "A manuscript was submitted to Ocean Engineering.",
+        "eventType": "manuscript-submission",
+        "currentManuscriptStatus": null
+      },
+      {
+        "dateStart": "2026-03-02",
+        "displayDate": "2 March 2026",
+        "title": "Published in Ocean Engineering",
+        "description": "The gap-resonance paper by Yongqi Yuan, Jiahe Tian and Yu Zhao was published online as the version of record in Ocean Engineering.",
+        "publicationId": "gap-resonance-2026"
+      },
+      {
+        "dateStart": "2026-10-09",
+        "displayDate": "9 October 2026",
+        "title": "New website",
+        "description": "The Nabla Lab website brings the community together at nabla.ac.cn."
+      }
+    ]
+  },
+  "publications": [
+    {
+      "id": "gap-resonance-2026",
+      "title": "Fluid resonance in the narrow gap between side-by-side boxes with different corner configurations",
+      "authors": [
+        {
+          "name": "Yongqi Yuan",
+          "slug": "yongqi-yuan"
+        },
+        {
+          "name": "Jiahe Tian",
+          "slug": "jiahe-tian"
+        },
+        {
+          "name": "Yu Zhao",
+          "slug": "yu-zhao"
+        }
+      ],
+      "journal": "Ocean Engineering",
+      "year": 2026,
+      "volume": "353",
+      "part": "2",
+      "articleNumber": "124671",
+      "doi": "10.1016/j.oceaneng.2026.124671",
+      "publisherUrl": "https://www.sciencedirect.com/science/article/pii/S0029801826005056",
+      "onlineDate": "2026-03-02",
+      "issueDate": "2026-04-30",
+      "status": "Published",
+      "summary": "Using a two-dimensional viscous-flow model in OpenFOAM, the study examines fluid resonance between two fixed boxes with sharp, chamfered or rounded corners. It explores how corner shape, corner dimensions and incoming wave amplitude affect resonance and nonlinear wave responses.",
+      "finding": "Smoothing the corners shifts resonance towards higher frequencies and increases the resonant wave response. The study connects these changes to flow separation, viscous dissipation and higher-harmonic contributions.",
+      "sources": [
+        "https://www.sciencedirect.com/science/article/pii/S0029801826005056",
+        "https://api.crossref.org/works/10.1016/j.oceaneng.2026.124671"
+      ]
+    }
+  ]
+}
