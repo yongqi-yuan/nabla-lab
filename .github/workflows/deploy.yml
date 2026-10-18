@@ -1,0 +1,63 @@
+name: Deploy Nabla Lab to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract the initial migration archive
+        shell: python
+        run: |
+          from pathlib import Path
+          import zipfile
+          archive = Path('nabla-github-pages-migration.zip')
+          if archive.exists():
+              with zipfile.ZipFile(archive) as z:
+                  for entry in z.infolist():
+                      relative = Path(entry.filename).relative_to('nabla-lab')
+                      if '..' in relative.parts or relative.is_absolute():
+                          raise ValueError('Unsafe archive path')
+                      destination = Path('.') / relative
+                      if entry.is_dir():
+                          destination.mkdir(parents=True, exist_ok=True)
+                      else:
+                          destination.parent.mkdir(parents=True, exist_ok=True)
+                          destination.write_bytes(z.read(entry))
+              archive.unlink()
+              readme = Path('README.md')
+              text = readme.read_text()
+              text = text.replace('In Settings → Pages, choose **Deploy from a branch**, branch **main**, folder **/docs**.', 'In Settings → Pages, choose **GitHub Actions**. The workflow builds and publishes on every push to main.')
+              readme.write_text(text)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node build.mjs
+      - name: Preserve migrated source in the repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Extract Nabla source and build GitHub Pages site"
+            git push
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
