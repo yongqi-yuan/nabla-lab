@@ -45,3 +45,12 @@ test('draft text and images persist on disk without changing published sources',
 test('invalid uploads and invalid paths cannot be saved',async()=>{
   const response=await post('/local-api/save',{state:original,base:original,images:[{path:'/assets/uploads/../../outside.png',base64:'aGVsbG8='}]});assert.equal(response.status,400);
 });
+test('after a successful publication the working copy updates and private drafts stay local',async()=>{
+  const candidate=structuredClone(original);const remaining=structuredClone(candidate);
+  remaining.articles.articles.push({id:'still-local',status:'draft',zh:{title:'保留在电脑的文章'},en:{title:''}});
+  const image={path:'/assets/uploads/published.png',base64:Buffer.from('\x89PNG\r\n\x1a\n','latin1').toString('base64')};
+  const response=await post('/local-api/record-publication',{candidate,sha:'a'.repeat(40),images:[image],draft:{state:remaining,base:candidate,images:[]}});assert.equal(response.status,200);
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(tmp,'editorial-articles.json'))),candidate.articles);
+  const stored=JSON.parse(fs.readFileSync(path.join(tmp,'.local-studio/draft.json')));assert.equal(stored.state.articles.articles[0].zh.title,'保留在电脑的文章');
+  assert.equal(fs.existsSync(path.join(tmp,'docs/assets/uploads/published.png')),true);
+});
