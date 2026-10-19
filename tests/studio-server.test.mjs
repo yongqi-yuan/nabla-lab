@@ -53,4 +53,5 @@ test('after a successful publication the working copy updates and private drafts
   assert.deepEqual(JSON.parse(fs.readFileSync(path.join(tmp,'editorial-articles.json'))),candidate.articles);
   const stored=JSON.parse(fs.readFileSync(path.join(tmp,'.local-studio/draft.json')));assert.equal(stored.state.articles.articles[0].zh.title,'保留在电脑的文章');
   assert.equal(fs.existsSync(path.join(tmp,'docs/assets/uploads/published.png')),true);
+  assert.ok((await (await fetch(base+'/admin/manifest.json')).json()).assets.includes('/assets/uploads/published.png'));
 });

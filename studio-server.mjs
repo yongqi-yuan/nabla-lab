@@ -67,6 +67,7 @@ export function createStudioServer(folder=root){
           const history=path.join(local,'history',payload.sha);fs.mkdirSync(history,{recursive:true});
           for(const file of ['site-edits.json','editorial-articles.json'])fs.copyFileSync(path.join(folder,file),path.join(history,file));
           for(const image of images){const destination=path.join(folder,'docs',image.path);fs.mkdirSync(path.dirname(destination),{recursive:true});fs.writeFileSync(destination,Buffer.from(image.base64,'base64'));}
+          const manifestFile=path.join(local,'manifest.json'),manifest=readJSON(manifestFile);manifest.assets=[...new Set([...(manifest.assets||[]),...images.map(image=>image.path)])];atomicJSON(manifestFile,manifest);
           atomicJSON(path.join(folder,'site-edits.json'),candidate.edits);atomicJSON(path.join(folder,'editorial-articles.json'),candidate.articles);atomicJSON(path.join(local,'published.json'),candidate);
           if(payload.draft)atomicJSON(draftFile,sanitizeDraft(payload.draft,folder));else if(fs.existsSync(draftFile))fs.unlinkSync(draftFile);
           return json(200,{recorded:true});
