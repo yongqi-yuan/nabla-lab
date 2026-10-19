@@ -177,3 +177,6 @@
 html[lang="zh-Hans"] .hero-content h1,html[lang="zh-Hans"] .section-top h2,html[lang="zh-Hans"] .intro-heading h2,html[lang="zh-Hans"] .page-masthead h1{font-family:var(--sans);line-height:1.4}
 html[lang="zh-Hans"] .prose{line-height:2}html[lang="zh-Hans"] .eyebrow{letter-spacing:1px}
 @media(max-width:1240px){.language-switch{margin-inline:40px}}@media(max-width:480px){.language-switch{margin-inline:22px;padding-bottom:8px}}
+
+/* CMS article media */
+.editorial-body img,.cms-article-cover img{max-width:100%;height:auto}.cms-article-cover{margin:2rem 0}.editorial-body ul{padding-left:1.5rem}

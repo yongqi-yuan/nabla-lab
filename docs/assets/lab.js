@@ -23,7 +23,7 @@
   function renderSearch() {
     const query = input.value.trim().toLocaleLowerCase();
     const tokens = query.split(/\s+/).filter(Boolean);
-    const matches = pages.filter(page => tokens.every(token => (page.title+' '+page.description).toLocaleLowerCase().includes(token)));
+    const matches = pages.filter(page => tokens.every(token => (page.title+' '+page.description+' '+(page.searchText||'')).toLocaleLowerCase().includes(token)));
     results.replaceChildren();
     status.textContent = query ? `${matches.length} result${matches.length === 1 ? '' : 's'} for “${input.value.trim()}”` : 'Browse the site, or type to search.';
     for (const page of matches) {

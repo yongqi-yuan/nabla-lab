@@ -1,3 +1,4 @@
+import { buildCMS } from './cms-build.mjs';
 import { localizeSite } from './bilingual.mjs';
 import { editorial, editorialFeature, buildEditorial } from './editorial.mjs';
 import fs from 'node:fs';
@@ -154,3 +155,5 @@ fs.writeFileSync(path.join(dist,'robots.txt'),`User-agent: *\nAllow: /\nSitemap:
 console.log(`Generated ${generatedRoutes.size} pages for Nabla Lab.`);
 
 localizeSite(root,generatedRoutes);
+
+buildCMS(root,generatedRoutes);
