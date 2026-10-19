@@ -170,3 +170,10 @@
 .editorial-record p{font-size:15px;line-height:1.9}
 @media(min-width:901px){.primary-nav{gap:24px}}
 @media(max-width:760px){.editorial-feature-grid{grid-template-columns:1fr;gap:28px}.editorial-feature h2{font-size:34px}.editorial-feature-article{padding:20px 0 20px 22px}.editorial-feature-article h3{font-size:29px}.editorial-masthead{padding-top:42px;padding-bottom:30px}.editorial-masthead h1{font-size:44px}.editorial-masthead h1 span{font-size:23px}.editorial-masthead .editorial-deck{font-size:23px}.editorial-card h2{font-size:31px}.editorial-principles{grid-template-columns:1fr;gap:18px}.editorial-essay{padding:25px 24px 50px}.editorial-essay h1{font-size:39px}.editorial-subtitle{font-size:23px}.editorial-essay-header .eyebrow{margin-top:30px}.editorial-body{font-size:18px;line-height:2}.editorial-meta{gap:6px 18px}.editorial-feedback{padding:22px 20px}}
+
+.language-switch{display:flex;align-items:center;justify-content:flex-end;gap:10px;max-width:1160px;margin:0 auto;padding:0 0 12px;font-size:14px;line-height:1.5;color:var(--muted)}
+.language-switch a{padding:5px 8px;min-height:32px;display:inline-flex;align-items:center}.language-switch a[aria-current]{color:var(--blue);font-weight:700;border-bottom:2px solid var(--red)}
+.translation-note{font-size:14px!important;line-height:1.8;border-left:2px solid var(--red);padding:12px 18px;background:var(--pale);color:var(--muted)}
+html[lang="zh-Hans"] .hero-content h1,html[lang="zh-Hans"] .section-top h2,html[lang="zh-Hans"] .intro-heading h2,html[lang="zh-Hans"] .page-masthead h1{font-family:var(--sans);line-height:1.4}
+html[lang="zh-Hans"] .prose{line-height:2}html[lang="zh-Hans"] .eyebrow{letter-spacing:1px}
+@media(max-width:1240px){.language-switch{margin-inline:40px}}@media(max-width:480px){.language-switch{margin-inline:22px;padding-bottom:8px}}

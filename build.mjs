@@ -1,3 +1,4 @@
+import { localizeSite } from './bilingual.mjs';
 import { editorial, editorialFeature, buildEditorial } from './editorial.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -151,3 +152,5 @@ fs.writeFileSync(path.join(dist,'assets/search-index.js'),'window.NABLA_SEARCH_I
 fs.writeFileSync(path.join(dist,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...generatedRoutes].map(url=>`<url><loc>${origin}${url}</loc></url>`).join('')}</urlset>`);
 fs.writeFileSync(path.join(dist,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 console.log(`Generated ${generatedRoutes.size} pages for Nabla Lab.`);
+
+localizeSite(root,generatedRoutes);
