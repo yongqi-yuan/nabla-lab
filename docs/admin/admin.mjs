@@ -1,5 +1,5 @@
 import {readRemoteState,commitContent} from './github-publisher.mjs';
-import {inspectPage,escapeHTML as e,articleDocument,validateArticles,londonDate,safeURL} from './editor-core.mjs';
+import {inspectPage,renderEditedPage,escapeHTML as e,articleDocument,validateArticles,londonDate,safeURL} from './editor-core.mjs';
 const $=id=>document.getElementById(id),repo='yongqi-yuan/nabla-lab',draftKey='nabla-content-studio-v1';
 let previewGeneration=0;
 let manifest,state,baseline,headAtConnect,token='',mode='pages',selected='/',articleID='',fieldKind='text',previewLanguage='zh',scope='main',filter='',busy=false,dirty=false,pendingImages=new Map(),baseCache=new Map(),previewTimer,renderGeneration=0,formLanguage=window.innerWidth<1150?'zh':'both',uploadedPreviews=new Map();
@@ -82,7 +82,7 @@ async function updatePreview(){
   if(!manifest||mode==='media')return;
   const generation=++previewGeneration;
   const lang=previewLanguage;let html;
-  if(mode==='pages')html=inspectPage(await baseFor(selected,lang),state.edits.pages[languageURL(selected,lang)]?.fields||{},state.edits.shared[lang]).html;
+  if(mode==='pages')html=renderEditedPage(await baseFor(selected,lang),state.edits.pages[languageURL(selected,lang)]||{},state.edits.shared[lang],lang);
   else {const a=currentArticle();if(!a){$('preview').srcdoc='<p style="font-family:system-ui;padding:40px;color:#617680">选择一篇社论，或点击「新建社论」。</p>';return;}html=articleDocument(await baseFor('/editorial/',lang),a,lang);html=inspectPage(html,{},state.edits.shared[lang]).html;}
   if(generation!==previewGeneration)return;
   // A script-free same-origin sandbox enables scroll restoration without executing article content.

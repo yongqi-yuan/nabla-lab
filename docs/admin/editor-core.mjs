@@ -48,6 +48,15 @@ export function inspectPage(html,patch={},shared={}) {
   }
   return {fields,html:out};
 }
+export function renderEditedPage(html,record={},shared={},lang='zh') {
+  let result=inspectPage(html,record.fields||{},shared).html;
+  if(record.revisions?.length&&/editorial-essay/.test(result)){
+    const heading=lang==='zh'?'更正与补充':'Corrections and additions';
+    const note=`<aside class="editorial-record"><h2>${heading}</h2>${record.revisions.map(r=>`<p><time>${escapeHTML(r.date)}</time> — ${escapeHTML(r.note)}</p>`).join('')}</aside>`;
+    result=result.replace('<div class="editorial-record">',note+'<div class="editorial-record">');
+  }
+  return result;
+}
 export function londonDate(){return new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
 export function validateArticles(data) {
   if(!data||!Array.isArray(data.articles))throw new Error('社论数据格式错误。');

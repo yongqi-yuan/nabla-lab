@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {inspectPage, articleDocument, escapeHTML, validateArticles} from './docs/admin/editor-core.mjs';
+import {inspectPage, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './docs/admin/editor-core.mjs';
 const e=escapeHTML;
 export function buildCMS(root,routes){
   const dir=path.join(root,'docs'),admin=path.join(dir,'admin');
@@ -28,9 +28,7 @@ export function buildCMS(root,routes){
       const inspected=inspectPage(html,patch,edits.shared[lang]||{});
       const known=new Set(inspected.fields.map(f=>f.key));
       for(const key of Object.keys(patch))if(!known.has(key))console.warn(`CMS: stale field ${localURL} ${key}`);
-      let final=inspected.html;
-      const history=edits.pages[localURL]?.revisions;
-      if(url.startsWith('/editorial/')&&url!=='/editorial/'&&history?.length)final=final.replace('<div class="editorial-record">',`<aside class="editorial-record"><h2>${lang==='zh'?'更正与补充':'Corrections and additions'}</h2>${history.map(r=>`<p><time>${e(r.date)}</time> — ${e(r.note)}</p>`).join('')}</aside><div class="editorial-record">`);
+      const final=renderEditedPage(html,edits.pages[localURL]||{},edits.shared[lang]||{},lang);
       fs.writeFileSync(pageFile(localURL),final);
     }
     manifest.pages.push({url,title:decodeTitle(originals.en),zhTitle:decodeTitle(originals.zh),base:{en:`/admin/base/${slug}.en.html`,zh:`/admin/base/${slug}.zh.html`}});
