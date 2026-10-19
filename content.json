@@ -30,7 +30,7 @@
   },
   "hero": {
     "eyebrow": "Independent academic community",
-    "title": "A shared foundation. A wider horizon.",
+    "title": "Nabla Lab",
     "description": "Nabla Lab is an independent academic community with roots at HIT Weihai, connecting members at different institutions through continuing collaborative research and shared research experience.",
     "primaryAction": {
       "label": "Explore our research",
@@ -44,10 +44,10 @@
   "about": {
     "id": "about",
     "title": "About us",
-    "lead": "Shared beginnings. Continuing research together.",
+    "lead": "An independent research group founded in 2025, with members now based at different universities.",
     "body": "Nabla Lab was established on 1 March 2025 as an independent academic community, growing from a student-led group at Harbin Institute of Technology, Weihai. Its early focus was research and research training. Our members share an undergraduate educational background in the HIT (Weihai)–University of Strathclyde cooperative programme. Today, our members pursue academic paths at different institutions. Our main goal is to continue working together on research questions and shared projects. Alongside this collaborative work, we support research training and share methods and practical experience. Our interests span fluid mechanics, wave–structure interaction, marine engineering, computation, aerodynamics and the low-altitude economy.",
     "purpose": {
-      "title": "Continuing research together.",
+      "title": "What we work on together",
       "priorities": [
         {
           "label": "01 / PRIMARY FOCUS",
@@ -62,7 +62,7 @@
       ]
     },
     "nameOrigin": {
-      "title": "The name Nabla.",
+      "title": "The name Nabla",
       "lead": "Nabla Lab takes its name from ∇ (nabla), the differential operator that appears in the Navier–Stokes equations describing fluid motion.",
       "body": "The name reflects our shared interest in fluid mechanics.",
       "sourceUrl": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter30.pdf"
@@ -76,7 +76,7 @@
       {
         "id": "fluid-mechanics-computation",
         "title": "Fluid Mechanics & Computation",
-        "description": "Understanding fluid motion through mechanics and computational approaches. Our interests include computational fluid dynamics and physics-informed neural networks as ways to study fluid behaviour.",
+        "description": "Our interests include computational fluid dynamics, theoretical analysis and physics-informed neural networks for studying fluid motion.",
         "keywords": [
           "Computational fluid dynamics (CFD)",
           "Physics-informed neural networks (PINNs)"
@@ -90,7 +90,7 @@
       {
         "id": "waves-structures-marine-engineering",
         "title": "Waves, Structures & Marine Engineering",
-        "description": "Exploring how waves, fluids and structures interact in marine settings. This theme brings together interests in wave–structure interaction, fluid–structure interaction, structural mechanics, marine engineering and offshore renewable energy.",
+        "description": "Our interests include wave loading, gap resonance, fluid–structure interaction, structural mechanics and offshore renewable energy.",
         "keywords": [
           "Fluid–structure interaction & structural mechanics",
           "Offshore renewable energy"
@@ -105,7 +105,7 @@
       {
         "id": "aerodynamics-noise",
         "title": "Aerodynamics & Noise",
-        "description": "Studying aerodynamic behaviour and noise associated with unmanned aerial vehicles. Current interests connect fluid mechanics and aerodynamics with the question of UAV noise reduction.",
+        "description": "This work concerns UAV aerodynamics and noise reduction, drawing on fluid mechanics and aeroacoustics.",
         "keywords": [
           "Aerodynamics",
           "UAV noise reduction"
@@ -117,7 +117,7 @@
       {
         "id": "low-altitude-economy",
         "title": "Low-altitude Economy",
-        "description": "An area of interest connecting low-altitude aviation with engineering questions. Within this theme, our current interests include the aerodynamics and noise of unmanned aerial vehicles.",
+        "description": "Our interest in low-altitude aviation focuses on engineering questions related to UAV aerodynamics and noise.",
         "keywords": [
           "Low-altitude economy",
           "UAV aerodynamics & noise"
@@ -131,7 +131,7 @@
   "people": {
     "id": "people",
     "title": "People",
-    "intro": "A shared undergraduate background, with academic paths continuing across different institutions.",
+    "intro": "Five members with a shared undergraduate background.",
     "sharedEducationNote": "Our members have studied or are studying in the HIT (Weihai)–University of Strathclyde cooperative undergraduate programme. Their current academic roles are listed individually below.",
     "members": [
       {
@@ -294,8 +294,8 @@
     },
     "email": null,
     "postalAddress": null,
-    "tagline": "Keeping our members connected through research.",
-    "heading": "Collaboration within our community.",
+    "tagline": "Group information and links to individual member profiles.",
+    "heading": "Member collaboration",
     "profileNote": "Member profiles bring together our academic backgrounds and research interests.",
     "currentFocus": "Member collaboration"
   },

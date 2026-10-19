@@ -1,5 +1,5 @@
 import {readRemoteState,commitContent} from './github-publisher.mjs';
-import {inspectPage,renderEditedPage,escapeHTML as e,articleDocument,validateArticles,londonDate,safeURL} from './editor-core.mjs';
+import {inspectPage,inspectTextBlocks,renderEditedPage,escapeHTML as e,articleDocument,validateArticles,londonDate,safeURL} from './editor-core.mjs';
 const $=id=>document.getElementById(id),repo='yongqi-yuan/nabla-lab',draftKey='nabla-content-studio-v1';
 let previewGeneration=0;
 let manifest,state,baseline,headAtConnect,token='',mode='pages',selected='/',articleID='',fieldKind='text',previewLanguage='zh',scope='main',filter='',busy=false,dirty=false,pendingImages=new Map(),baseCache=new Map(),previewTimer,renderGeneration=0,formLanguage=window.innerWidth<1150?'zh':'both',uploadedPreviews=new Map();
@@ -7,7 +7,7 @@ let localSaveTimer,localSavedSignature='';
 const clone=x=>JSON.parse(JSON.stringify(x));
 const serial=x=>JSON.stringify(x);
 const publishable=s=>({edits:s.edits,articles:{...s.articles,articles:s.articles.articles.filter(a=>a.status==='published')}});
-const canPublish=()=>serial(publishable(state))!==serial(baseline)||pendingImages.size>0;
+const canPublish=()=>!manifest?.previewOnly&&(serial(publishable(state))!==serial(baseline)||pendingImages.size>0);
 const notice=(text,error=false)=>{const n=$('notice');n.hidden=!text;n.textContent=text;n.className=error?'error':'';};
 async function json(url){const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error(`无法加载 ${url}（${r.status}）`);return r.json();}
 function languageURL(url,lang){return (lang==='zh'?'/zh':'')+url;}
@@ -17,6 +17,7 @@ function setDirty(){
   dirty=serial(state)!==serial(baseline)||pendingImages.size>0;
   $('save-state').textContent=dirty?(canPublish()?'未发布 · 等待保存到电脑':'社论草稿仅保存在本机'):'与已载入版本一致';
   $('publish').disabled=busy||!canPublish();
+  if(manifest?.previewOnly){$('publish').title='本地结构预览，确认页面方案后再发布网站模板';$('save-state').textContent='本地结构预览 · 可保存草稿';}
   if(dirty){try{localStorage.setItem(draftKey,serial({version:1,state,base:baseline,date:new Date().toISOString()}));}catch{$('save-state').textContent='有未发布修改 · 请导出备份';}}
   else localStorage.removeItem(draftKey);
   schedulePreview();
@@ -39,7 +40,7 @@ function schedulePreview(){clearTimeout(previewTimer);previewTimer=setTimeout(()
 function pagePatch(url){if(!state.edits.pages[url])state.edits.pages[url]={fields:{}};return state.edits.pages[url].fields;}
 function patchFor(lang){return scope==='shared'?state.edits.shared[lang]:state.edits.pages[languageURL(selected,lang)]?.fields||{};}
 function updateField(lang,key,value,original){const p=scope==='shared'?state.edits.shared[lang]:pagePatch(languageURL(selected,lang));if(value===original)delete p[key];else p[key]=value;cleanEmptyPages();setDirty();}
-function cleanEmptyPages(){for(const [url,p] of Object.entries(state.edits.pages))if(!Object.keys(p.fields||{}).length&&!p.revisions?.length)delete state.edits.pages[url];}
+function cleanEmptyPages(){for(const [url,p] of Object.entries(state.edits.pages))if(!Object.keys(p.fields||{}).length&&!Object.keys(p.blocks||{}).length&&!p.revisions?.length)delete state.edits.pages[url];}
 async function baseFor(url,lang){const p=manifest.pages.find(p=>p.url===url);if(!p)throw new Error('页面不存在。');const file=p.base[lang];if(!baseCache.has(file)){const response=await fetch(file,{cache:'no-store'});if(!response.ok)throw new Error('无法加载页面预览，请刷新。');baseCache.set(file,await response.text());}return baseCache.get(file);}
 function sidebar(){
   const list=$('item-list');list.replaceChildren();
@@ -54,7 +55,7 @@ async function render(){
   const generation=++renderGeneration;sidebar();
   $('page-controls').hidden=mode!=='pages';$('new-article').hidden=mode!=='articles';document.querySelector('.studio').classList.toggle('wide-mode',mode==='media');
   if(mode==='pages'){
-    const p=currentPage();$('editor-title').textContent=p.zhTitle;$('editor-description').textContent=scope==='shared'?'页眉与页脚的修改会应用到该语言的所有页面。':'中英文独立修改；此处只更新当前页面。同一介绍在其他页面出现时，请分别修改。';
+    const p=currentPage();$('editor-title').textContent=p.zhTitle;$('editor-description').textContent=scope==='shared'?'页眉与页脚的修改会应用到该语言的所有页面。':'按完整段落编辑。中英文分别填写；支持空行分段、**粗体**和[链接文字](https://…)。';
     const htmls=await Promise.all(['en','zh'].map(lang=>baseFor(selected,lang)));if(generation!==renderGeneration)return;
     const form=$('editor-form');form.replaceChildren();
     if(selected.startsWith('/editorial/')&&selected!=='/editorial/')appendHint(form,'已发表文章保留首次发表日期。更正请在发布时填写说明；新的观点宜另发一篇社论。');
@@ -64,8 +65,15 @@ async function render(){
       if(formLanguage!=='both'&&formLanguage!==lang)continue;
       const column=document.createElement('div');column.className='language-fields';column.dataset.language=lang==='en'?'ENGLISH':'简体中文';grid.append(column);
       const h=document.createElement('div');h.className='bilingual-head';h.textContent=lang==='en'?'ENGLISH':'简体中文';column.append(h);
+      if(fieldKind==='text'&&scope==='main'){
+        const record=state.edits.pages[languageURL(selected,lang)]||{};
+        const blocks=inspectTextBlocks(htmls[index],record,state.edits.shared[lang]);
+        for(const block of blocks.filter(b=>!filter||b.value.toLowerCase().includes(filter.toLowerCase())))column.append(blockWidget(block,lang));
+        if(!blocks.length)column.innerHTML='<p class="empty">这个页面没有独立文字段落。</p>';
+        continue;
+      }
       const inspected=inspectPage(htmls[index]);const patch=patchFor(lang);
-      const fields=inspected.fields.filter(f=>f.scope===scope&&(fieldKind==='text'?['text','title','description'].includes(f.kind):fieldKind==='image'?['image','alt'].includes(f.kind):f.kind==='link')).filter(f=>!filter||(patch[f.key]??f.value).toLowerCase().includes(filter.toLowerCase()));
+      const fields=inspected.fields.filter(f=>f.scope===scope&&(['text','detail'].includes(fieldKind)?['text','title','description'].includes(f.kind):fieldKind==='image'?['image','alt'].includes(f.kind):f.kind==='link')).filter(f=>!filter||(patch[f.key]??f.value).toLowerCase().includes(filter.toLowerCase()));
       const groups=new Map();
       for(const f of fields){const group=f.kind==='title'||f.kind==='description'?'搜索与分享':scope==='shared'?'全站通用内容':f.section; if(!groups.has(group))groups.set(group,[]);groups.get(group).push(f);}
       let groupIndex=0;
@@ -91,6 +99,14 @@ function fieldWidget(f,lang,patch){
   }
   input.addEventListener('input',()=>{updateField(lang,f.key,input.value,f.value);wrap.classList.toggle('changed',input.value!==f.value);});
   reset.addEventListener('click',()=>{input.value=f.value;updateField(lang,f.key,f.value,f.value);wrap.classList.remove('changed');if(f.kind==='image')wrap.querySelector('img').src=previewImage(f.value);});wrap.append(input);return wrap;
+}
+function blockWidget(block,lang){
+  const wrap=document.createElement('div');wrap.className='field block-field';const head=document.createElement('div');head.className='field-head';
+  const label=document.createElement('label');label.textContent=block.label;label.htmlFor=lang+'-'+block.key;
+  const reset=document.createElement('button');reset.type='button';reset.className='reset-field';reset.textContent='恢复这一段';head.append(label,reset);
+  const input=document.createElement('textarea');input.id=label.htmlFor;input.value=block.value;input.rows=block.tag==='p'||block.value.length>80?Math.min(8,Math.max(4,Math.ceil(block.value.length/38))):2;
+  const save=()=>{const url=languageURL(selected,lang);pagePatch(url);const record=state.edits.pages[url];record.blocks??={};record.blocks[block.key]=input.value;wrap.classList.add('changed');setDirty();};
+  input.addEventListener('input',save);reset.addEventListener('click',()=>{input.value=block.original;save();});wrap.append(head,input);return wrap;
 }
 function previewImage(path){return pendingImages.get(path)?.url||uploadedPreviews.get(path)||path;}
 async function updatePreview(){
@@ -176,12 +192,12 @@ function review(){
 function validateState(candidate){
   validateArticles({...candidate.articles,articles:candidate.articles.articles.filter(a=>a.status==='published')});
   if(candidate.edits.version!==1||!candidate.edits.pages||!candidate.edits.shared)throw new Error('页面草稿格式错误。');
-  for(const [url,p] of Object.entries(candidate.edits.pages)){const base=url.startsWith('/zh/')?url.slice(3)||'/':url;if(!manifest.pages.some(x=>x.url===base))throw new Error('草稿包含未知页面。');if(!p.fields||Object.values(p.fields).some(v=>typeof v!=='string'||v.length>100000))throw new Error('页面字段格式错误。');}
+  for(const [url,p] of Object.entries(candidate.edits.pages)){const base=url.startsWith('/zh/')?url.slice(3)||'/':url;if(!manifest.pages.some(x=>x.url===base))throw new Error('草稿包含未知页面。');if(p.blocks&&Object.entries(p.blocks).some(([key,v])=>!/^block-[a-z0-9]+-\d+$/.test(key)||typeof v!=='string'||v.length>100000))throw new Error('段落内容格式错误。');if(!p.fields||Object.values(p.fields).some(v=>typeof v!=='string'||v.length>100000))throw new Error('页面字段格式错误。');}
   for(const lang of ['en','zh'])if(!candidate.edits.shared[lang]||Object.values(candidate.edits.shared[lang]).some(v=>typeof v!=='string'||v.length>100000))throw new Error('通用字段格式错误。');
   for(const a of candidate.articles.articles){if(typeof a.id!=='string'||!a.en||!a.zh)throw new Error('文章格式错误。');const old=baseline.articles.articles.find(b=>b.id===a.id);if(old?.status==='published'&&(old.slug!==a.slug||old.date!==a.date||a.status!=='published'))throw new Error('已发表文章的网址和首次发表日期不可更改。');}
 }
 async function publish(){
-  if(busy)return;if(!token){$('publish-dialog').close();$('login-dialog').showModal();return;}
+  if(busy||manifest?.previewOnly)return;if(!token){$('publish-dialog').close();$('login-dialog').showModal();return;}
   clearTimeout(localSaveTimer);
   busy=true;$('publish-confirm').disabled=true;$('publish').disabled=true;const status=$('publish-status');let published=false;
   try{
@@ -239,6 +255,7 @@ async function init(){
   window.addEventListener('beforeunload',event=>{if(busy||localSignature()!==localSavedSignature){event.preventDefault();event.returnValue='';}});
   setDirty(); // Do not remove a recoverable draft while loading an unmodified remote version.
   if(draft?.state&&serial(draft.state)!==serial(state))try{localStorage.setItem(draftKey,serial(draft));}catch{}
-  await render();localSavedSignature=localSignature();$('save-state').textContent=dirty?'已恢复电脑上的草稿':'本地编辑 · 尚无新修改';
+  if(manifest.previewOnly)notice('当前是全站视觉与文案预览，使用独立草稿。原来的草稿已保留；正式网站保持原样。');
+  await render();localSavedSignature=localSignature();$('save-state').textContent=manifest.previewOnly?'结构预览 · 独立草稿':dirty?'已恢复电脑上的草稿':'本地编辑 · 尚无新修改';
 }
 init().catch(err=>{fail(err);$('save-state').textContent='载入失败，请刷新重试';});

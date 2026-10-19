@@ -5,12 +5,20 @@ import { editorial } from './editorial.mjs';
 export function localizeSite(root, routes) {
   const dir=path.join(root,'docs');
   const dictionary=JSON.parse(fs.readFileSync(path.join(root,'translations.zh.json'),'utf8'));
+  const homeCopy=JSON.parse(fs.readFileSync(path.join(root,'home-copy.json'),'utf8'));
+  const homeDictionary={};let translatingHome=false;
+  function homeTranslations(en,zh){
+    if(typeof en==='string'&&typeof zh==='string'&&!en.startsWith('/'))homeDictionary[en]=zh;
+    else if(en&&zh&&typeof en==='object')for(const key of Object.keys(en))homeTranslations(en[key],zh[key]);
+  }
+  homeTranslations(homeCopy.en,homeCopy.zh);
   const english=JSON.parse(fs.readFileSync(path.join(root,'editorial.en.json'),'utf8'));
   const decode=s=>s.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&nbsp;/g,' ');
   const escape=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const months={January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};
   function translate(raw) {
     const value=decode(raw).trim();
+    if(translatingHome&&homeDictionary[value])return raw.replace(raw.trim(),escape(homeDictionary[value]));
     if(dictionary[value]) return raw.replace(raw.trim(),escape(dictionary[value]));
     if(value.endsWith(' | Nabla Lab')) return escape(translate(value.slice(0,-12))+'｜Nabla Lab');
     const date=value.match(/^(?:(\d{1,2}) )?([A-Z][a-z]+) (\d{4})$/);
@@ -59,8 +67,13 @@ export function localizeSite(root, routes) {
     '发表记录':'Publication record','首次发表：':'First published: ','2026 年 10 月 18 日':'18 October 2026','。本文为创刊说明。后续如有更正或补充，将在此标注日期与内容。':'. This is the founding note. Dated corrections or additions will be recorded here.',
     '© 2026 袁泳棋 / Yongqi Yuan。本文代表署名作者的观点。':'© 2026 袁泳棋 / Yongqi Yuan. This article represents the named author’s views.','返回 Nabla 社论':'Back to Nabla Editorial','记录科研、技术与生活中的问题，也记录我们如何改变自己的看法。':'Recording questions about research, technology and life — and how we change our minds.'
   };
+  Object.assign(enMap,{
+    '栏目源于组会中的非正式交流。所有成员都可以撰文，读者可通过邮件反馈。':'The series grew out of informal group discussions. All members may contribute, and readers can send feedback by email.',
+    '成员署名':'Signed contributions','发表与更正记录':'Publication and correction records','引用与反馈':'Quotations and feedback','邮件反馈':'Feedback by email'
+  });
   editorial.sections.forEach(([heading,paras],i)=>{enMap[heading]=english.headings[i];paras.forEach((p,j)=>{enMap[p]=english.paragraphs[i][j];});});
   for(const url of [...routes,'/404.html']){
+    translatingHome=url==='/';
     const file=url==='/404.html'?path.join(dir,'404.html'):path.join(dir,url,'index.html');
     const original=fs.readFileSync(file,'utf8');
     const zhFile=url==='/404.html'?path.join(dir,'zh/404.html'):path.join(dir,'zh',url,'index.html');

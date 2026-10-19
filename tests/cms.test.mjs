@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {inspectPage,safeURL,markdown,articleDocument,validateArticles} from '../editor/editor-core.mjs';
+import {inspectPage,inspectTextBlocks,renderEditedPage,safeURL,markdown,articleDocument,validateArticles} from '../editor/editor-core.mjs';
 import {buildCMS} from '../cms-build.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'.local-studio/manifest.json')));
@@ -13,9 +13,9 @@ test('every bilingual page round-trips without changing the public site',()=>{
   for(const p of manifest.pages)for(const lang of ['en','zh']){const html=fs.readFileSync(path.join(root,'.local-studio',p.base[lang].replace('/admin/','')),'utf8');assert.equal(inspectPage(html).html,html,p.url+' '+lang);}
 });
 test('exact field edits escape HTML, preserve adjacent copy and restore the original',()=>{
-  const fields=inspectPage(home).fields,field=fields.find(f=>f.kind==='text'&&f.value==='共同的起点。');assert.ok(field);
+  const fields=inspectPage(home).fields,field=fields.find(f=>f.kind==='text'&&f.value.startsWith('Nabla Lab 成立于 2025 年。'));assert.ok(field);
   const changed=inspectPage(home,{[field.key]:'<script>alert(1)</script> & test'}).html;
-  assert.ok(changed.includes('&lt;script&gt;alert(1)&lt;/script&gt; &amp; test'));assert.ok(changed.includes('因科研而相连。'));
+  assert.ok(changed.includes('&lt;script&gt;alert(1)&lt;/script&gt; &amp; test'));assert.ok(changed.includes('我们的研究兴趣包括'));
   assert.equal(inspectPage(home,{}).html,home);
 });
 test('shared header/footer field identifiers apply across routes',()=>{
@@ -24,9 +24,10 @@ test('shared header/footer field identifiers apply across routes',()=>{
   assert.ok(inspectPage(about,{}, {[field.key]:'研究与交流'}).html.includes('研究与交流'));
 });
 test('image replacement, alt text and mail links are usable without allowing active content',()=>{
-  const fields=inspectPage(home).fields,img=fields.find(f=>f.kind==='image'&&f.scope==='main');assert.ok(img);
-  assert.ok(inspectPage(home,{[img.key]:'/assets/uploads/test.jpg'}).html.includes('src="/assets/uploads/test.jpg"'));
-  assert.throws(()=>inspectPage(home,{[img.key]:'javascript:alert(1)'}));
+  const photoPage=fs.readFileSync(path.join(root,'.local-studio/base/people--yongqi-yuan.zh.html'),'utf8');
+  const fields=inspectPage(photoPage).fields,img=fields.find(f=>f.kind==='image'&&f.scope==='main');assert.ok(img);
+  assert.ok(inspectPage(photoPage,{[img.key]:'/assets/uploads/test.jpg'}).html.includes('src="/assets/uploads/test.jpg"'));
+  assert.throws(()=>inspectPage(photoPage,{[img.key]:'javascript:alert(1)'}));
   assert.equal(safeURL('javascript:alert(1)'),false);assert.equal(safeURL('//evil.test/x'),false);assert.equal(safeURL('/assets/../admin/test.jpg',{image:true}),false);assert.equal(safeURL('mailto:yongqi.yuan@eng.ox.ac.uk'),true);
 });
 test('article rendering uses safe formatting, correct locale links and preserved publication dates',()=>{
@@ -41,7 +42,7 @@ test('build applies bilingual edits and indexes published articles, excluding dr
   const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'nabla-cms-test-'));
   try{
     fs.cpSync(path.join(root,'docs'),path.join(tmp,'docs'),{recursive:true});
-    const field=inspectPage(home).fields.find(f=>f.value==='共同的起点。');
+    const field=inspectPage(home).fields.find(f=>f.value.startsWith('Nabla Lab 成立于 2025 年。'));
     fs.writeFileSync(path.join(tmp,'site-edits.json'),JSON.stringify({version:1,pages:{'/zh/':{fields:{[field.key]:'共同探索。'}}},shared:{en:{},zh:{}}}));
     fs.writeFileSync(path.join(tmp,'editorial-articles.json'),JSON.stringify({version:1,articles:[article,{...article,id:'draft',slug:'draft-essay',status:'draft'}]}));
     buildCMS(tmp,new Set(manifest.pages.map(p=>p.url)));
@@ -82,4 +83,16 @@ test('publication refuses stale content before any write',async()=>{
 });
 test('a push racing the final update is not retried or forced',async()=>{
   const {api,requests}=mockGitHub({rejectRef:true});await assert.rejects(commitContent(api,{repo:'test/lab',baseline:minimal,candidate:minimal}),/concurrent push/);assert.equal(requests.filter(r=>r.method==='PATCH').length,1);assert.equal(requests.at(-1).body.force,false);
+});
+test('whole-paragraph editing preserves links, formatting and saved legacy edits',()=>{
+  const html='<html><head><title>Example</title></head><body><main id="main"><p class="lead">A <strong>research</strong> group.<br>Read <a href="/about/">about us</a>.</p><p>Another paragraph.</p></main></body></html>';
+  const legacy=inspectPage(html).fields.find(f=>f.value==='research');const record={fields:{[legacy.key]:'small research'}};
+  const blocks=inspectTextBlocks(html,record);assert.equal(blocks.length,2);assert.ok(blocks[0].value.includes('**small research**'));assert.ok(blocks[0].value.includes('[about us](/about/)'));
+  record.blocks={[blocks[0].key]:'A complete introduction.\n\nRead [our work](/research/).'};
+  const updated=renderEditedPage(html,record);assert.ok(updated.includes('<p class="lead">A complete introduction.</p><p>Read <a href="/research/"'));assert.ok(updated.includes('<p>Another paragraph.</p>'));
+  record.blocks[blocks[0].key]='<script>alert(1)</script>';assert.ok(!renderEditedPage(html,record).includes('<script>'));
+});
+test('visual homepage keeps descriptive headings, images and equal circular member display',()=>{
+  assert.ok(home.indexOf('id="research"')<home.indexOf('id="publications"'));assert.ok(home.indexOf('id="publications"')<home.indexOf('id="community"'));
+  assert.ok(home.includes('id="people-circle">'));assert.ok(home.includes('id="people-list" hidden'));assert.ok(home.includes('class="visual-hero-photo"'));assert.ok(home.includes('/assets/gap-resonance-sketch.svg'));assert.ok(!home.includes('共同的起点。'));
 });

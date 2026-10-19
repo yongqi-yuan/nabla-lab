@@ -65,3 +65,12 @@ if (community) {
     toggle.textContent = paused ? 'Resume motion' : 'Pause motion';
   });
 }
+
+for (const button of document.querySelectorAll('[data-people-view]')) {
+  button.addEventListener('click', () => {
+    const circle = button.dataset.peopleView === 'circle';
+    document.getElementById('people-list').hidden = circle;
+    document.getElementById('people-circle').hidden = !circle;
+    document.querySelectorAll('[data-people-view]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
+  });
+}

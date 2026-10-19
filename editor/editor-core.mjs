@@ -50,6 +50,7 @@ export function inspectPage(html,patch={},shared={}) {
 }
 export function renderEditedPage(html,record={},shared={},lang='zh') {
   let result=inspectPage(html,record.fields||{},shared).html;
+  result=applyTextBlocks(html,result,record.blocks||{});
   if(record.revisions?.length&&/editorial-essay/.test(result)){
     const heading=lang==='zh'?'更正与补充':'Corrections and additions';
     const note=`<aside class="editorial-record"><h2>${heading}</h2>${record.revisions.map(r=>`<p><time>${escapeHTML(r.date)}</time> — ${escapeHTML(r.note)}</p>`).join('')}</aside>`;
@@ -81,4 +82,35 @@ export function articleMain(a,lang='zh') {
 export function articleDocument(shell,a,lang='zh') {
   const url=`${lang==='zh'?'/zh':''}/editorial/${a.slug}/`,title=a[lang].title||a.en.title;
   return shell.replace(/<main id="main">[\s\S]*?<\/main>/,`<main id="main">${articleMain(a,lang)}</main>`).replace(/<title>[\s\S]*?<\/title>/,`<title>${escapeHTML(title)} | Nabla Lab</title>`).replace(/(name="description" content=")[^"]*/,(_,p)=>p+escapeHTML(a[lang].abstract||a.en.abstract)).replace(/(property="og:title" content=")[^"]*/,(_,p)=>p+escapeHTML(title)).replace(/(property="og:description" content=")[^"]*/,(_,p)=>p+escapeHTML(a[lang].abstract||a.en.abstract)).replace(/(rel="canonical" href=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(property="og:url" content=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(<link rel="alternate" hreflang="(?:en|x-default)" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/editorial/'+a.slug+'/').replace(/(<link rel="alternate" hreflang="zh-Hans" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/zh/editorial/'+a.slug+'/').replace(/(<a href=")[^"]*(" lang="(?:en|zh-Hans)" hreflang=)/g,(_,p,suffix)=>p+(suffix.includes('zh-Hans')?'/zh':'')+'/editorial/'+a.slug+'/'+suffix);
+}
+
+// Paragraph-level editing keeps inline formatting and links together in one field.
+function blockCandidates(html){
+  const main=html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);if(!main)return [];
+  const start=main.index+main[0].indexOf('>')+1,counts={},blocks=[];
+  const re=/<(h[1-3]|p|li|figcaption)\b([^>]*)>([\s\S]*?)<\/\1\s*>/gi;
+  for(const match of main[1].matchAll(re)){
+    const [whole,tag,attrs,inner]=match;
+    if(/community-member|quiet-authors|quiet-citation|quiet-essay-meta/.test(attrs))continue;
+    if(/<(?:h[1-6]|p|li|div|ul|ol|svg|img|button|section|article|figure|dl|table)\b/i.test(inner)||/aria-hidden="true"/.test(attrs))continue;
+    if(/editorial-essay/.test(html)&&/<time\b/i.test(inner))continue;
+    const stem='block-'+hash(tag.toLowerCase()+':'+inner),count=counts[stem]||0;counts[stem]=count+1;
+    blocks.push({key:stem+'-'+count,tag:tag.toLowerCase(),attrs,inner,start:start+match.index,end:start+match.index+whole.length});
+  }return blocks;
+}
+function blockMarkdown(html){
+  return decodeHTML(html.replace(/<span\b[^>]*class="[^"]*sr-only[^"]*"[^>]*>[\s\S]*?<\/span>/gi,'').replace(/<br\s*\/?>/gi,'\n').replace(/<(strong|b)\b[^>]*>([\s\S]*?)<\/\1>/gi,'**$2**').replace(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi,(_,url,label)=>`[${label.replace(/<[^>]*>/g,'')}](${url})`).replace(/<[^>]*>/g,'')).replace(/[ \t]+/g,' ').trim();
+}
+export function inspectTextBlocks(html,record={},shared={}){
+  const originals=blockCandidates(html),current=blockCandidates(inspectPage(html,record.fields||{},shared).html);
+  return originals.map((block,i)=>({...block,value:record.blocks?.[block.key]??blockMarkdown(current[i]?.inner??block.inner),original:blockMarkdown(block.inner),label:({h1:'页面标题',h2:'章节标题',h3:'小标题',p:'完整段落',li:'列表内容',figcaption:'图片说明'})[block.tag]}));
+}
+function renderBlock(block,value){
+  const text=String(value);if(block.tag==='p')return text.split(/\n\s*\n/).map((paragraph,i)=>`<p${i===0?block.attrs:''}>${inline(paragraph).replace(/\n/g,'<br>')}</p>`).join('');
+  return `<${block.tag}${block.attrs}>${inline(text).replace(/\n/g,'<br>')}</${block.tag}>`;
+}
+export function applyTextBlocks(original,rendered,overrides={}){
+  const originals=blockCandidates(original),current=blockCandidates(rendered);let result=rendered;
+  for(let i=current.length-1;i>=0;i--){const key=originals[i]?.key;if(key&&Object.hasOwn(overrides,key)){const block=current[i];result=result.slice(0,block.start)+renderBlock(block,overrides[key])+result.slice(block.end);}}
+  return result;
 }

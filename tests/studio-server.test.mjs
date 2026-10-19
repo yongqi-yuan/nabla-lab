@@ -55,3 +55,13 @@ test('after a successful publication the working copy updates and private drafts
   assert.equal(fs.existsSync(path.join(tmp,'docs/assets/uploads/published.png')),true);
   assert.ok((await (await fetch(base+'/admin/manifest.json')).json()).assets.includes('/assets/uploads/published.png'));
 });
+test('structure preview saves to an independent draft without replacing the original',async()=>{
+  const before=fs.readFileSync(path.join(tmp,'.local-studio/draft.json'));
+  fs.writeFileSync(path.join(tmp,'.local-studio/preview-mode.json'),JSON.stringify({previewOnly:true}));
+  const preview=createStudioServer(tmp);preview.listen(0,'127.0.0.1');await once(preview,'listening');const address='http://127.0.0.1:'+preview.address().port;
+  try{
+    const manifest=await (await fetch(address+'/admin/manifest.json')).json();assert.equal(manifest.previewOnly,true);
+    const response=await fetch(address+'/local-api/save',{method:'POST',headers:{Origin:address,'X-Nabla-Studio':'local','Content-Type':'application/json'},body:JSON.stringify({state:original,base:original,images:[]})});assert.equal(response.status,200);
+    assert.deepEqual(fs.readFileSync(path.join(tmp,'.local-studio/draft.json')),before);assert.equal(fs.existsSync(path.join(tmp,'.local-studio/review-draft.json')),true);
+  }finally{await new Promise(resolve=>preview.close(resolve));}
+});

@@ -1,0 +1,100 @@
+{
+  "en": {
+    "title": "Nabla Lab",
+    "intro": [
+      "Nabla Lab began in 2025 with students from the joint undergraduate programme between Harbin Institute of Technology, Weihai and the University of Strathclyde. We now study and work at different universities, and continue to collaborate on research.",
+      "Our interests include fluid mechanics, wave–structure interaction, computational fluid dynamics, aerodynamics and noise. We also share methods and experience from our research."
+    ],
+    "aboutLink": "About the group and its history",
+    "researchTitle": "Research",
+    "topics": [
+      {
+        "title": "Waves and structures",
+        "text": "Wave loading, gap resonance, fluid–structure interaction and offshore renewable energy.",
+        "url": "/research/wave-loading/"
+      },
+      {
+        "title": "Computation and theory",
+        "text": "Computational fluid dynamics, theoretical analysis and physics-informed neural networks.",
+        "url": "/research/fluid-mechanics/"
+      },
+      {
+        "title": "Aerodynamics and noise",
+        "text": "UAV aerodynamics and noise reduction, including problems related to low-altitude flight.",
+        "url": "/research/aerodynamics-noise/"
+      }
+    ],
+    "papersTitle": "Publications",
+    "papersLink": "Publication details and BibTeX",
+    "peopleTitle": "People",
+    "peopleIntro": "Five members, working together across institutions. Select a name to read their academic profile.",
+    "listView": "List",
+    "circleView": "Circle",
+    "editorialTitle": "Nabla Editorial",
+    "editorialIntro": "Signed articles by our members on research, technology and everyday life.",
+    "editorialLink": "Read the archive",
+    "foundingLabel": "Founding note",
+    "historyLink": "History",
+    "contactLink": "Contact",
+    "creditsLink": "Copyright and credits",
+    "viewLabel": "Member display",
+    "moreLabel": "More information",
+    "heroResearch": "Fluid mechanics · Wave–structure interaction · CFD",
+    "heroImageAlt": "Ocean wave illustration with a curling crest and white spray",
+    "heroImageCaption": "Ocean wave illustration",
+    "introTitle": "About Nabla Lab",
+    "paperImageAlt": "A schematic of two adjacent boxes and the water in their narrow gap",
+    "paperImageCaption": "Gap resonance · schematic",
+    "researchLink": "Research directions",
+    "publicationLink": "View publications"
+  },
+  "zh": {
+    "title": "Nabla Lab",
+    "intro": [
+      "Nabla Lab 成立于 2025 年。我们相识于哈工大（威海）—思克莱德大学联合培养项目，目前在不同院校继续学习和研究，并保持科研合作。",
+      "我们的研究兴趣包括流体力学、波浪–结构物作用、计算流体力学、空气动力学与噪声，也交流研究方法和科研经验。"
+    ],
+    "aboutLink": "团队介绍与发展经历",
+    "researchTitle": "研究",
+    "topics": [
+      {
+        "title": "波浪与结构物",
+        "text": "波浪荷载、间隙共振、流固耦合，以及海上可再生能源。",
+        "url": "/research/wave-loading/"
+      },
+      {
+        "title": "计算与理论方法",
+        "text": "计算流体力学、理论分析与物理信息神经网络。",
+        "url": "/research/fluid-mechanics/"
+      },
+      {
+        "title": "空气动力学与噪声",
+        "text": "无人机空气动力学、降噪，以及低空飞行中的相关工程问题。",
+        "url": "/research/aerodynamics-noise/"
+      }
+    ],
+    "papersTitle": "论文",
+    "papersLink": "论文详情与 BibTeX",
+    "peopleTitle": "成员",
+    "peopleIntro": "目前有五位成员，在不同院校保持合作。点击姓名可查看个人学术主页。",
+    "listView": "列表",
+    "circleView": "圆形",
+    "editorialTitle": "Nabla 社论",
+    "editorialIntro": "成员署名文章，记录关于科研、技术和日常生活的思考。",
+    "editorialLink": "查看全部文章",
+    "foundingLabel": "创刊说明",
+    "historyLink": "发展经历",
+    "contactLink": "联系",
+    "creditsLink": "版权与素材说明",
+    "viewLabel": "成员展示方式",
+    "moreLabel": "更多信息",
+    "heroResearch": "流体力学 · 波浪–结构物作用 · CFD",
+    "heroImageAlt": "卷起的海浪与白色浪花示意图",
+    "heroImageCaption": "海浪示意图",
+    "introTitle": "关于 Nabla Lab",
+    "paperImageAlt": "两个相邻箱体及其狭缝内水体的示意图",
+    "paperImageCaption": "间隙共振示意",
+    "researchLink": "研究方向",
+    "publicationLink": "论文成果"
+  }
+}

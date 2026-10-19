@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {inspectPage, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './editor/editor-core.mjs';
+import {inspectPage, inspectTextBlocks, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './editor/editor-core.mjs';
 const e=escapeHTML;
 export function buildCMS(root,routes){
   const dir=path.join(root,'docs'),admin=path.join(root,'.local-studio');
@@ -29,6 +29,8 @@ export function buildCMS(root,routes){
       const inspected=inspectPage(html,patch,edits.shared[lang]||{});
       const known=new Set(inspected.fields.map(f=>f.key));
       for(const key of Object.keys(patch))if(!known.has(key))console.warn(`CMS: stale field ${localURL} ${key}`);
+      const blockKeys=new Set(inspectTextBlocks(html).map(b=>b.key));
+      for(const key of Object.keys(edits.pages[localURL]?.blocks||{}))if(!blockKeys.has(key))console.warn(`CMS: stale paragraph ${localURL} ${key}`);
       const final=renderEditedPage(html,edits.pages[localURL]||{},edits.shared[lang]||{},lang);
       fs.writeFileSync(pageFile(localURL),final);
     }

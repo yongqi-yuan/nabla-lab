@@ -19,6 +19,7 @@ function validateState(state,folder,{published=false}={}){
   for(const [url,record] of Object.entries(state.edits.pages)){
     const en=url.startsWith('/zh/')?url.slice(3):url,p=manifest.pages.find(p=>p.url===en);
     if(!p)throw Error('草稿包含未知页面。');scan(record.fields);
+    if(record.blocks&&Object.entries(record.blocks).some(([key,v])=>!/^block-[a-z0-9]+-\d+$/.test(key)||typeof v!=='string'||v.length>100000))throw Error('段落格式无效。');
     const lang=url.startsWith('/zh/')?'zh':'en';
     inspectPage(fs.readFileSync(path.join(folder,'.local-studio',p.base[lang].replace('/admin/','')),'utf8'),record.fields,state.edits.shared[lang]);
   }
@@ -43,7 +44,9 @@ function sanitizeDraft(payload,folder){
 async function bodyJSON(req){let size=0,chunks=[];for await(const chunk of req){size+=chunk.length;if(size>maxBody){const error=Error('草稿过大，请减少图片或分批发布。');error.status=413;throw error;}chunks.push(chunk);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));}
 const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.gif':'image/gif','.webp':'image/webp','.pdf':'application/pdf','.bib':'text/plain; charset=utf-8'};
 export function createStudioServer(folder=root){
-  const local=path.join(folder,'.local-studio'),draftFile=path.join(local,'draft.json');fs.mkdirSync(local,{recursive:true});
+  const local=path.join(folder,'.local-studio');fs.mkdirSync(local,{recursive:true});
+  const previewFile=path.join(local,'preview-mode.json'),preview=fs.existsSync(previewFile)?readJSON(previewFile):{};
+  const draftName=preview.previewOnly?'review-draft.json':'draft.json',draftFile=path.join(local,draftName);
   const server=http.createServer(async(req,res)=>{
     const origin='http://127.0.0.1:'+server.address().port;
     const send=(status,body,type='text/plain; charset=utf-8')=>{res.writeHead(status,{'Content-Type':type,'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Cross-Origin-Resource-Policy':'same-origin','X-Frame-Options':'SAMEORIGIN'});res.end(body);};
@@ -58,7 +61,7 @@ export function createStudioServer(folder=root){
         if(req.headers.origin!==origin||req.headers['x-nabla-studio']!=='local'||!req.headers['content-type']?.startsWith('application/json'))return send(403,'不允许跨站写入。');
         const payload=await bodyJSON(req);
         if(pathname==='/local-api/save'){
-          const draft=sanitizeDraft(payload,folder);if(fs.existsSync(draftFile))fs.copyFileSync(draftFile,path.join(local,'draft.previous.json'));
+          const draft=sanitizeDraft(payload,folder);if(fs.existsSync(draftFile))fs.copyFileSync(draftFile,path.join(local,draftName.replace('.json','.previous.json')));
           atomicJSON(draftFile,draft);return json(200,{saved:true,date:draft.date});
         }
         if(pathname==='/local-api/record-publication'){
@@ -77,6 +80,7 @@ export function createStudioServer(folder=root){
       if(req.method!=='GET'&&req.method!=='HEAD')return send(405,'Method not allowed');
       if(req.headers.origin&&req.headers.origin!==origin)return send(403,'不允许跨站读取。');
       if(pathname==='/local-api/health')return json(200,{app:'nabla-local-studio',local:true});
+      if(pathname==='/admin/manifest.json'){const manifest=readJSON(path.join(local,'manifest.json'));const flag=path.join(local,'preview-mode.json');return json(200,{...manifest,...(fs.existsSync(flag)?readJSON(flag):{})});}
       if(pathname==='/admin/state.json'){
         const current=publicState(folder);return json(200,fs.existsSync(draftFile)?{...readJSON(draftFile),current}:{version:1,state:current,base:current,images:[]});
       }

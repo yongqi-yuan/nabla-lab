@@ -63,3 +63,15 @@ To publish, connect a fine-grained GitHub token restricted to **yongqi-yuan/nabl
 The live website has **no `/admin/` editor, API, manifests or draft snapshots**. The repository remains public; editor source code is visible as ordinary repository code, and published content retains Git history. Never commit `.local-studio/`.
 
 Run `node build.mjs`, `node --test tests/cms.test.mjs`, and `node --test tests/studio-server.test.mjs` for renderer/publication and local-server boundary checks. The guide is served locally at `/admin/help.html`.
+
+## Local content and structure review
+
+The `codex/nabla-content-review` branch introduces a homepage with direct academic copy, a visual presentation and editable bilingual copy in `home-copy.json` and its presentation in `home-page.mjs`. Research and publications precede the member list; the circular member view is shown by default, with a list as an alternative. The founding editorial and existing detail URLs are preserved.
+
+The default editor now handles complete paragraphs (including inline links, bold text and paragraph breaks) through stable `blocks` overrides, alongside the existing legacy `fields` overrides. Fine-grained fields remain under the explicit detail tab.
+
+When the ignored `.local-studio/preview-mode.json` contains `previewOnly: true`, the local server uses a separate `review-draft.json`, preserves the existing `draft.json`, and the editor disables publishing until the new site templates are reviewed and deployed. Original pre-review drafts are retained in `.local-studio/history/`. This flag is local to the current computer and is never deployed.
+
+The visual review retains the factual headings and paragraph editor while restoring a full image hero, research diagrams, a publication sketch, the default circular people view and a two-tone Editorial section. Ocean imagery is identified as an illustration; the gap-resonance drawing is a conceptual schematic rather than a research result. The reduced-motion preference disables the hero animation.
+
+The same local review now covers all interior routes and both languages. `page-visuals.mjs` provides contextual illustrated mastheads, and `docs/assets/interior.css` coordinates the diagrams, member profiles, publication figures, timeline, Editorial reading view and dark footer. Copy edits replace generic slogans with group history, research subjects and profile information; the founding essay’s arguments, authorship and publication dates are preserved. This branch remains a local preview until reviewed.
