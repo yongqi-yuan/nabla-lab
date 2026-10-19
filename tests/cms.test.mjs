@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {inspectPage,safeURL,markdown,articleDocument,validateArticles} from '../docs/admin/editor-core.mjs';
+import {inspectPage,safeURL,markdown,articleDocument,validateArticles} from '../editor/editor-core.mjs';
 import {buildCMS} from '../cms-build.mjs';
 const root=path.resolve(import.meta.dirname,'..');
-const manifest=JSON.parse(fs.readFileSync(path.join(root,'docs/admin/manifest.json')));
-const home=fs.readFileSync(path.join(root,'docs/admin/base/home.zh.html'),'utf8');
+const manifest=JSON.parse(fs.readFileSync(path.join(root,'.local-studio/manifest.json')));
+const home=fs.readFileSync(path.join(root,'.local-studio/base/home.zh.html'),'utf8');
 const article={id:'test',slug:'test-essay',author:'测试作者 / Test Author',date:'2026-10-19',status:'published',zh:{title:'测试社论',abstract:'中文摘要',body:'# 一个问题\n\n思考 **科研** 与生活。\n\n![波浪](/assets/ocean-hero.png)'},en:{title:'A Test Essay',abstract:'A test abstract.',body:''},revisions:[{date:'2026-10-19',note:'更正测试。'}]};
 test('every bilingual page round-trips without changing the public site',()=>{
-  for(const p of manifest.pages)for(const lang of ['en','zh']){const html=fs.readFileSync(path.join(root,'docs',p.base[lang]),'utf8');assert.equal(inspectPage(html).html,html,p.url+' '+lang);}
+  for(const p of manifest.pages)for(const lang of ['en','zh']){const html=fs.readFileSync(path.join(root,'.local-studio',p.base[lang].replace('/admin/','')),'utf8');assert.equal(inspectPage(html).html,html,p.url+' '+lang);}
 });
 test('exact field edits escape HTML, preserve adjacent copy and restore the original',()=>{
   const fields=inspectPage(home).fields,field=fields.find(f=>f.kind==='text'&&f.value==='共同的起点。');assert.ok(field);
@@ -20,7 +20,7 @@ test('exact field edits escape HTML, preserve adjacent copy and restore the orig
 });
 test('shared header/footer field identifiers apply across routes',()=>{
   const field=inspectPage(home).fields.find(f=>f.scope==='shared'&&f.kind==='text'&&f.value==='研究 · 成员 · 思想');assert.ok(field);
-  const about=fs.readFileSync(path.join(root,'docs/admin/base/about.zh.html'),'utf8');
+  const about=fs.readFileSync(path.join(root,'.local-studio/base/about.zh.html'),'utf8');
   assert.ok(inspectPage(about,{}, {[field.key]:'研究与交流'}).html.includes('研究与交流'));
 });
 test('image replacement, alt text and mail links are usable without allowing active content',()=>{
@@ -30,7 +30,7 @@ test('image replacement, alt text and mail links are usable without allowing act
   assert.equal(safeURL('javascript:alert(1)'),false);assert.equal(safeURL('//evil.test/x'),false);assert.equal(safeURL('/assets/../admin/test.jpg',{image:true}),false);assert.equal(safeURL('mailto:yongqi.yuan@eng.ox.ac.uk'),true);
 });
 test('article rendering uses safe formatting, correct locale links and preserved publication dates',()=>{
-  const shell=fs.readFileSync(path.join(root,'docs/admin/base/editorial.en.html'),'utf8');const html=articleDocument(shell,article,'en');
+  const shell=fs.readFileSync(path.join(root,'.local-studio/base/editorial.en.html'),'utf8');const html=articleDocument(shell,article,'en');
   assert.ok(html.includes('https://nabla.ac.cn/editorial/test-essay/'));assert.ok(html.includes('https://nabla.ac.cn/zh/editorial/test-essay/'));
   assert.ok(html.includes('href="/zh/editorial/test-essay/" lang="zh-Hans"'));assert.ok(html.includes('This essay is available in Chinese.'));assert.ok(html.includes('2026-10-19'));
   assert.ok(markdown('<script>bad()</script>').includes('&lt;script&gt;'));assert.ok(!markdown('[bad](javascript:alert)').includes('<a'));
@@ -55,7 +55,7 @@ test('build applies bilingual edits and indexes published articles, excluding dr
   }finally{fs.rmSync(tmp,{recursive:true,force:true});}
 });
 
-const {commitContent}=await import('../docs/admin/github-publisher.mjs');
+const {commitContent}=await import('../editor/github-publisher.mjs');
 const minimal={edits:{version:1,pages:{},shared:{en:{},zh:{}}},articles:{version:1,articles:[]}};
 function mockGitHub({conflict=false,rejectRef=false}={}){
   const requests=[];

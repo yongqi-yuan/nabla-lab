@@ -43,20 +43,23 @@ English pages keep their original URLs. Simplified Chinese pages live under `/zh
 
 Run `node build.mjs` after editing. Keep translated copy in sync with source changes. Publication titles, DOI values and institutional names may retain their original form.
 
-## Content Studio
+## Local Content Studio
 
-Open **https://nabla.ac.cn/admin/** to edit existing English/Chinese page text, metadata, links and images, preview the current design, and publish without a chat session. The editor is a static, dependency-free application; GitHub enforces write permissions.
+The editor runs only on the owner's computer. Double-click **打开 Nabla 编辑器.command**, or run `node studio-server.mjs`, then visit **http://127.0.0.1:6178/admin/**. Node.js 22 or newer is required. No package installation is needed.
 
-- `site-edits.json`: stable text/image/link overrides for each locale and optional shared header/footer overrides. Original templates remain intact. Resetting a field removes its override.
-- `editorial-articles.json`: additional signed bilingual Editorial articles. Published articles have fixed slugs and original publication dates; subsequent changes append dated revision notes. The founding note remains in its existing template and is editable through page forms.
-- `cms-build.mjs`: applies overrides after localization, adds published essays, generates editor base-page snapshots and rebuilds search/sitemap.
-- `docs/admin/`: editor UI, shared preview renderer, publication client, generated manifest/state and base pages.
-- `docs/assets/uploads/`: uploaded images, committed atomically with the text referencing them.
+The server binds **127.0.0.1 only**. It rejects unexpected Host headers, cross-origin API requests, non-JSON writes and requests without the editor's explicit request header. Paths are confined to the public site/editor directories; symlinks cannot escape them. No shell commands are accepted from browser requests. Publication credentials remain in browser memory and are sent only to GitHub.
 
-Editors create a fine-grained GitHub personal access token restricted to **yongqi-yuan/nabla-lab**, with **Contents: Read and write** and **Actions: Read-only** (deployment progress). No server, extra CMS subscription, or shared token is required. The token stays in the tab's module memory; it is never written into files, localStorage, exported drafts, URLs or Git history. Refreshing ends the session.
+- `editor/`: local form UI, shared renderer and GitHub publication client; never copied into `docs/`.
+- `.local-studio/`: ignored local snapshots, persistent draft JSON (including pending images), one previous draft, publication baselines and local backups. Never committed or deployed.
+- `site-edits.json`: published page/locale and optional shared header/footer overrides. Original templates remain intact.
+- `editorial-articles.json`: published signed bilingual essays. New drafts stay in local state until explicitly marked published.
+- `docs/assets/uploads/`: published images, committed atomically with their referencing content.
+- `cms-build.mjs`: applies overrides, builds article routes/search/sitemap, writes editor snapshots outside the public folder, and removes any legacy `docs/admin/` output.
 
-Text drafts are saved in localStorage. New article drafts remain local until explicitly marked published; other page changes and uploaded images are public when committed. Pending image bytes are held in memory and can be included in an exported draft backup. The repository is public: do not publish private material.
+Changes automatically save to the local draft file; **保存到电脑** or ⌘S saves immediately. Restarting restores text and pending images. **导出草稿备份** creates a portable JSON backup without credentials. Merely saving does not update the website or upload draft material.
 
-Before publishing, the editor compares remote content files against the loaded baseline. All content and image changes use one Git tree/commit and one non-forced main ref update. Concurrent content changes abort instead of overwriting. GitHub Actions handles the existing build/deploy workflow; the editor reports completion separately from commit success. If site templates change and an override's original field no longer exists, the build logs a stale-field warning.
+To publish, connect a fine-grained GitHub token restricted to **yongqi-yuan/nabla-lab**, with **Contents: Read and write** and **Actions: Read-only** (deployment progress). It remains only in the local editor tab's memory. All published text/images use one non-forced GitHub commit; stale content or racing updates abort rather than overwriting. The existing GitHub Actions workflow builds and deploys. After commit success, the local server records the published content and images in the working copy and keeps unpublished article drafts locally.
 
-Run `node build.mjs` and `node --test tests/cms.test.mjs` for rendering, bilingual article, image/link safety and publication conflict checks. The preview iframe is script-free and sandboxed. See `/admin/help.html` for the editor guide.
+The live website has **no `/admin/` editor, API, manifests or draft snapshots**. The repository remains public; editor source code is visible as ordinary repository code, and published content retains Git history. Never commit `.local-studio/`.
+
+Run `node build.mjs`, `node --test tests/cms.test.mjs`, and `node --test tests/studio-server.test.mjs` for renderer/publication and local-server boundary checks. The guide is served locally at `/admin/help.html`.

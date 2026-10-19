@@ -2,3 +2,6 @@
 node_modules/
 .env
 .env.*
+
+# Local editor state, image drafts, backups and logs must never be published.
+/.local-studio/

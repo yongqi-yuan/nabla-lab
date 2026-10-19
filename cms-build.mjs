@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {inspectPage, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './docs/admin/editor-core.mjs';
+import {inspectPage, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './editor/editor-core.mjs';
 const e=escapeHTML;
 export function buildCMS(root,routes){
-  const dir=path.join(root,'docs'),admin=path.join(dir,'admin');
+  const dir=path.join(root,'docs'),admin=path.join(root,'.local-studio');
+  fs.mkdirSync(admin,{recursive:true});
   const edits=JSON.parse(fs.readFileSync(path.join(root,'site-edits.json'),'utf8'));
   const articles=JSON.parse(fs.readFileSync(path.join(root,'editorial-articles.json'),'utf8'));
   validateArticles(articles);
@@ -62,6 +63,8 @@ export function buildCMS(root,routes){
   fs.writeFileSync(path.join(dir,'robots.txt'),'User-agent: *\nAllow: /\nDisallow: /admin/\nSitemap: https://nabla.ac.cn/sitemap.xml\n');
   const css=path.join(dir,'assets/lab.css'),extra='\n/* CMS article media */\n.editorial-body img,.cms-article-cover img{max-width:100%;height:auto}.cms-article-cover{margin:2rem 0}.editorial-body ul{padding-left:1.5rem}\n';
   if(!fs.readFileSync(css,'utf8').includes('/* CMS article media */'))fs.appendFileSync(css,extra);
+  // The editor and its snapshots never enter the deployed static folder.
+  fs.rmSync(path.join(dir,'admin'),{recursive:true,force:true});
   console.log(`CMS: ${routes.size} bilingual page pairs, ${publicArticles.length} additional published articles.`);
 }
 function decodeTitle(html){return (html.match(/<title>(.*?)<\/title>/)?.[1]||'Nabla Lab').replace(/\s*[|｜]\s*Nabla Lab$/,'').replace(/&amp;/g,'&');}
