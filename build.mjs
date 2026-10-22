@@ -5,6 +5,7 @@ import { localizeSite } from './bilingual.mjs';
 import { editorial, editorialFeature, buildEditorial } from './editorial.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
@@ -158,3 +159,22 @@ console.log(`Generated ${generatedRoutes.size} pages for Nabla Lab.`);
 localizeSite(root,generatedRoutes);
 
 buildCMS(root,generatedRoutes);
+
+// New style content gets a new URL, so visitors do not retain an earlier design.
+const styleVersions = new Map();
+function versionPageStyles(folder) {
+  for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
+    const file = path.join(folder, entry.name);
+    if (entry.isDirectory()) versionPageStyles(file);
+    else if (entry.name.endsWith('.html')) {
+      const html = fs.readFileSync(file, 'utf8').replace(/href="(\/assets\/[^"?]+\.css)(?:\?[^\"]*)?"/g, (_, url) => {
+        if (!styleVersions.has(url)) {
+          styleVersions.set(url, createHash('sha256').update(fs.readFileSync(path.join(dist, url))).digest('hex').slice(0, 12));
+        }
+        return `href="${url}?v=${styleVersions.get(url)}"`;
+      });
+      fs.writeFileSync(file, html);
+    }
+  }
+}
+versionPageStyles(dist);
