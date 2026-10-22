@@ -1,5 +1,7 @@
 /* Nabla UI: ink, paper, ocean imagery and a consistent reading rhythm. */
 :root {
+  --sans: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+  --serif: var(--sans);
   --paper: #faf9f5;
   --surface: #f0f4f5;
   --blue: #075571;
@@ -8,7 +10,7 @@
   --ink: #19323d;
   --muted: #5b6d75;
   --line: #d8e1e4;
-  --display: Georgia, "Times New Roman", "Songti SC", "STSong", serif;
+  --display: var(--sans);
   --header-height: 94px;
 }
 html { scroll-padding-top: 116px; }
@@ -38,7 +40,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .ui-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 25px; margin-bottom: 38px; }
 .visual-home .ui-section-heading h2 { margin: 0; }
 .visual-home .quiet-section h2, .visual-home .visual-about-title h2 { font: 400 44px/1.18 var(--display); letter-spacing: -.8px; color: var(--blue); }
-html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visual-home .visual-about-title h2 { font-family: "Songti SC", "STSong", var(--display); font-size: 38px; line-height: 1.35; letter-spacing: .2px; }
+html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visual-home .visual-about-title h2 { font-family: var(--sans); font-size: 38px; line-height: 1.35; letter-spacing: .2px; }
 .visual-home .quiet-section h2::before { display: none; }
 .quiet-link { font-size: 15px; line-height: 1.7; border-bottom: 1px solid #b0c1c8; padding-bottom: 6px; }
 .quiet-link span { margin-left: 20px; }
@@ -180,7 +182,7 @@ html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visua
 .is-lab-interior .prose p { max-width: 740px; font-size: 17px; line-height: 1.85; }
 .is-lab-interior .prose .lead { font-size: 21px; line-height: 1.75; }
 .is-lab-interior h2 { font-family: var(--display); color: var(--blue); font-size: 38px; letter-spacing: -.6px; }
-html[lang="zh-Hans"] .is-lab-interior h2 { font-family: "Songti SC", "STSong", var(--display); font-size: 33px; letter-spacing: 0; }
+html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 33px; letter-spacing: 0; }
 .is-lab-interior .values-section h2 { color: white; }
 .is-lab-interior .detail-illustration { border: 0; border-bottom: 1px solid #b5ccd6; }
 .is-lab-interior .research-card { background: #fff; border: 0; }
@@ -429,3 +431,8 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: "Songti SC", "STSong", v
 .visual-people-section .community-center .community-symbol { font-size: 64px; }
 @media (max-width:760px) { .visual-people-section .community-center .community-symbol { font-size: 55px; } }
 @media (max-width:480px) { .visual-people-section .community-center .community-symbol { font-size: 45px; } }
+
+/* Shared brand details: a blue top rule, sans-serif typography and a reverse footer logo. */
+.site-header { border-top: 8px solid var(--blue); }
+.is-quiet-home .header-inner, .is-lab-interior .header-inner { min-height: calc(var(--header-height) - 9px); }
+.site-footer .footer-brand img { background: transparent; padding: 0; width: 188px; height: auto; }
