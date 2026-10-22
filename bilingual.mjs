@@ -36,7 +36,7 @@ export function localizeSite(root, routes) {
   function languageLinks(html,url,zh) {
     const en=url,cn=zhURL(url);
     const controls=`<nav class="language-switch" aria-label="${zh?'语言切换':'Language selection'}"><a href="${en}" lang="en" hreflang="en"${zh?'':' aria-current="page"'}>EN<span class="sr-only"> — English</span></a><span aria-hidden="true">/</span><a href="${cn}" lang="zh-Hans" hreflang="zh-Hans"${zh?' aria-current="page"':''}>中文</a></nav>`;
-    html=html.replace('</header>',controls+'</header>');
+    html=html.replace('<button class="search-open"',controls+'<button class="search-open"');
     html=html.replace('</head>','<script src="/assets/languages.js" defer></script></head>');
     html=html.replace('</head>',`<link rel="alternate" hreflang="en" href="https://nabla.ac.cn${en}"><link rel="alternate" hreflang="zh-Hans" href="https://nabla.ac.cn${cn}"><link rel="alternate" hreflang="x-default" href="https://nabla.ac.cn${en}"></head>`);
     return html;

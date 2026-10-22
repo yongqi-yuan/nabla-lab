@@ -20,6 +20,8 @@ const post=(route,value,headers={})=>fetch(base+route,{method:'POST',headers:{Or
 test.after(async()=>{await new Promise(resolve=>server.close(resolve));fs.rmSync(tmp,{recursive:true,force:true});});
 test('editor and public previews run locally; production output excludes editor files',async()=>{
   assert.equal(server.address().address,'127.0.0.1');
+  const english=await fetch(base+'/',{redirect:'manual'});assert.equal(english.status,200);assert.ok((await english.text()).includes('<html lang="en">'));
+  assert.equal((await fetch(base+'/zh/',{redirect:'manual'})).status,200);
   assert.equal((await fetch(base+'/admin/')).status,200);assert.equal((await fetch(base+'/zh/')).status,200);assert.equal((await fetch(base+'/admin/editor-core.mjs')).status,200);
   assert.equal(fs.existsSync(path.join(root,'docs/admin')),false);
 });

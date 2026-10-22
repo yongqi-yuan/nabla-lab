@@ -46,7 +46,10 @@
     "paperImageAlt": "A schematic of two adjacent boxes and the water in their narrow gap",
     "paperImageCaption": "Gap resonance · schematic",
     "researchLink": "Research directions",
-    "publicationLink": "View publications"
+    "publicationLink": "View publications",
+    "groupLabel": "Independent research group",
+    "foundedLabel": "Founded in 2025",
+    "introPrefix": "About"
   },
   "zh": {
     "title": "Nabla Lab",
@@ -95,6 +98,9 @@
     "paperImageAlt": "两个相邻箱体及其狭缝内水体的示意图",
     "paperImageCaption": "间隙共振示意",
     "researchLink": "研究方向",
-    "publicationLink": "论文成果"
+    "publicationLink": "论文成果",
+    "groupLabel": "独立科研团队",
+    "foundedLabel": "成立于 2025 年",
+    "introPrefix": "关于"
   }
 }

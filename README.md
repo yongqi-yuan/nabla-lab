@@ -75,3 +75,9 @@ When the ignored `.local-studio/preview-mode.json` contains `previewOnly: true`,
 The visual review retains the factual headings and paragraph editor while restoring a full image hero, research diagrams, a publication sketch, the default circular people view and a two-tone Editorial section. Ocean imagery is identified as an illustration; the gap-resonance drawing is a conceptual schematic rather than a research result. The reduced-motion preference disables the hero animation.
 
 The same local review now covers all interior routes and both languages. `page-visuals.mjs` provides contextual illustrated mastheads, and `docs/assets/interior.css` coordinates the diagrams, member profiles, publication figures, timeline, Editorial reading view and dark footer. Copy edits replace generic slogans with group history, research subjects and profile information; the founding essay’s arguments, authorship and publication dates are preserved. This branch remains a local preview until reviewed.
+
+## UI polish preview
+
+The `codex/nabla-ui-polish` branch refines the shared navigation, type scale, editorial surfaces and homepage composition in `docs/assets/ui.css`. Language controls now share the header row; the compact menu uses the same 1020px breakpoint in CSS and JavaScript. Research diagrams are arranged as a featured subject with two companion topics, and the overview masthead uses an original composite conceptual drawing. The equal-member orbit scales to the viewport and keeps its motion control separate from hover/focus pause states. Reduced-motion preferences disable smooth scrolling and motion effects.
+
+The local server serves the English homepage at `/`, the Chinese homepage at `/zh/`, and the editor at `/admin/`. This preview uses an independent draft and does not change the published website.

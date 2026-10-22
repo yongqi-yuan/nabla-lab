@@ -84,7 +84,6 @@ export function createStudioServer(folder=root){
       if(pathname==='/admin/state.json'){
         const current=publicState(folder);return json(200,fs.existsSync(draftFile)?{...readJSON(draftFile),current}:{version:1,state:current,base:current,images:[]});
       }
-      if(pathname==='/') {res.writeHead(302,{Location:'/admin/'});res.end();return;}
       let base,relative;
       if(pathname==='/admin/manifest.json'){base=local;relative='manifest.json';}
       else if(pathname.startsWith('/admin/base/')){base=local;relative=pathname.replace('/admin/','');}
