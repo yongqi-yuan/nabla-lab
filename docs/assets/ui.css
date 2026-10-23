@@ -4,9 +4,9 @@
   --serif: var(--sans);
   --paper: #fff;
   --surface: #f0f4f5;
-  --blue: #075571;
+  --blue: #005375;
   --deep: #083748;
-  --red: #a72a32;
+  --red: #a72126;
   --ink: #19323d;
   --muted: #5b6d75;
   --line: #d8e1e4;
@@ -59,7 +59,7 @@ html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visua
 .visual-home .visual-hero-copy > p { font-size: 19px; max-width: 510px; line-height: 1.9; color: #d4e4eb; }
 .visual-hero-links { margin-top: 35px; gap: 14px; }
 .visual-home .visual-hero-links a { min-height: 50px; padding: 12px 21px; gap: 36px; min-width: 153px; font-weight: 500; border-color: #95b1be; }
-.visual-home .visual-hero-links a:first-child { background: #a72a32; border-color: #a72a32; }
+.visual-home .visual-hero-links a:first-child { background: #a72126; border-color: #a72126; }
 .visual-home .visual-hero-links a:hover { background: white; color: var(--blue); border-color: white; }
 .ui-hero-date { display: flex; align-items: center; gap: 15px; margin-top: 47px; font-size: 13px; letter-spacing: .5px; color: #b3cdd8; }
 .ui-hero-date > span { font: 26px/1 var(--display); color: #cfdee4; }
