@@ -215,14 +215,14 @@
           }
         ],
         "portrait": {
-          "src": "/assets/portraits/yongqi-yuan-illustrated.webp",
-          "width": 640,
-          "height": 640,
-          "alt": "Illustrated portrait of Yongqi Yuan.",
+          "src": "/assets/portraits/yongqi-yuan-cartoon-v3.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Cartoon portrait of Yongqi Yuan.",
           "caption": "",
           "location": "",
           "objectPosition": "50% 100%",
-          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "credit": "Cartoon portraits were created using OpenAI ImageGen from a group photograph supplied by Nabla Lab.",
           "kind": "illustration"
         },
         "department": "Department of Engineering Science",
@@ -286,14 +286,14 @@
         "initials": "JT",
         "profileHref": "/people/jiahe-tian/",
         "portrait": {
-          "src": "/assets/portraits/jiahe-tian-illustrated.webp",
-          "width": 640,
-          "height": 640,
-          "alt": "Illustrated portrait of Jiahe Tian.",
+          "src": "/assets/portraits/jiahe-tian-cartoon-v3.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Cartoon portrait of Jiahe Tian.",
           "caption": "",
           "location": "",
           "objectPosition": "50% 100%",
-          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "credit": "Cartoon portraits were created using OpenAI ImageGen from a group photograph supplied by Nabla Lab.",
           "kind": "illustration"
         }
       },
@@ -313,14 +313,14 @@
         "initials": "YZ",
         "profileHref": "/people/yu-zhao/",
         "portrait": {
-          "src": "/assets/portraits/yu-zhao-illustrated.webp",
-          "width": 640,
-          "height": 640,
-          "alt": "Illustrated portrait of Yu Zhao.",
+          "src": "/assets/portraits/yu-zhao-cartoon-v3.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Cartoon portrait of Yu Zhao.",
           "caption": "",
           "location": "",
           "objectPosition": "50% 100%",
-          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "credit": "Cartoon portraits were created using OpenAI ImageGen from a group photograph supplied by Nabla Lab.",
           "kind": "illustration"
         }
       },
@@ -341,14 +341,14 @@
         "initials": "ZH",
         "profileHref": "/people/zhuoxi-hu/",
         "portrait": {
-          "src": "/assets/portraits/zhuoxi-hu-illustrated.webp",
-          "width": 640,
-          "height": 640,
-          "alt": "Illustrated portrait of Zhuoxi Hu.",
+          "src": "/assets/portraits/zhuoxi-hu-cartoon-v3.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Cartoon portrait of Zhuoxi Hu.",
           "caption": "",
           "location": "",
           "objectPosition": "50% 100%",
-          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "credit": "Cartoon portraits were created using OpenAI ImageGen from a group photograph supplied by Nabla Lab.",
           "kind": "illustration"
         }
       },
@@ -366,14 +366,14 @@
         "initials": "ZJ",
         "profileHref": "/people/zhirui-ju/",
         "portrait": {
-          "src": "/assets/portraits/zhirui-ju-illustrated.webp",
-          "width": 640,
-          "height": 640,
-          "alt": "Illustrated portrait of Zhirui Ju.",
+          "src": "/assets/portraits/zhirui-ju-cartoon-v3.webp",
+          "width": 768,
+          "height": 768,
+          "alt": "Cartoon portrait of Zhirui Ju.",
           "caption": "",
           "location": "",
           "objectPosition": "50% 100%",
-          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "credit": "Cartoon portraits were created using OpenAI ImageGen from a group photograph supplied by Nabla Lab.",
           "kind": "illustration"
         }
       }
