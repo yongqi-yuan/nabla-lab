@@ -1,0 +1,117 @@
+/* Shared reading and heading scale, aligned with the personal academic homepage. */
+:root {
+  --type-body: 17px;
+  --type-body-leading: 1.85;
+  --type-section: 31px;
+  --type-record: 20px;
+  --type-article: 23px;
+  --type-title: clamp(38px,5.2vw,72px);
+  --type-title-spacing: -2.8px;
+  --weight-title: 650;
+  --weight-heading: 600;
+  --weight-label: 550;
+}
+body { font-size: var(--type-body); line-height: 1.75; font-weight: 400; }
+strong, b { font-weight: var(--weight-title); }
+
+/* Navigation and small labels stay compact; the active destination is stronger. */
+html[lang] .primary-nav a,
+html[lang] .profile-section-nav a { font-size: 14px; line-height: 1.75; font-weight: var(--weight-label); letter-spacing: 0; }
+html[lang] .primary-nav a.current,
+html[lang] .profile-section-nav a.active { font-weight: var(--weight-title); }
+html[lang] .language-switch a { font-weight: var(--weight-label); }
+html[lang] .language-switch a[aria-current] { font-weight: var(--weight-title); }
+html[lang] .eyebrow,
+html[lang] .ui-section-number { font-size: 13px; line-height: 1.5; font-weight: var(--weight-label); letter-spacing: 1px; }
+html[lang] .button,
+html[lang] .inline-action,
+html[lang] .quiet-link { font-size: 15px; line-height: 1.6; font-weight: var(--weight-heading); }
+
+/* The same title scale applies to English and Chinese. */
+html[lang] :is(.visual-home .visual-hero,.visual-masthead,.profile-intro) h1 {
+  font-family: var(--sans); font-size: var(--type-title); font-weight: var(--weight-title);
+  line-height: 1.13; letter-spacing: var(--type-title-spacing);
+}
+html[lang] .visual-home :is(.quiet-section,.visual-about-title,.visual-editorial-intro) h2,
+html[lang] .is-lab-interior h2 {
+  font-family: var(--sans); font-size: var(--type-section); font-weight: var(--weight-heading);
+  line-height: 1.24; letter-spacing: -.8px;
+}
+html[lang] .is-lab-interior .profile-facts h2,
+html[lang] .is-lab-interior .editorial-body section h2 { font-size: 24px; line-height: 1.4; letter-spacing: -.3px; }
+html[lang] .is-lab-interior .editorial-essay h1 { font-size: clamp(32px,4.2vw,48px); line-height: 1.2; font-weight: var(--weight-title); letter-spacing: -.8px; }
+
+/* Reading copy uses a steady rhythm, without turning entire paragraphs bold. */
+html[lang] .is-lab-interior main p,
+html[lang] .is-lab-interior .prose p,
+html[lang] .is-lab-interior .prose .lead,
+html[lang] .visual-masthead p,
+html[lang] .visual-home :is(.visual-about,.visual-editorial-intro,.quiet-section) p,
+html[lang] .visual-home .visual-hero-copy > p {
+  font-size: var(--type-body); line-height: var(--type-body-leading); font-weight: 400;
+}
+html[lang] .is-lab-interior .prose p { margin-bottom: 18px; }
+html[lang] .is-lab-interior .profile-position { font-size: 17px; line-height: 1.65; font-weight: var(--weight-heading); }
+html[lang] .profile-position > span { font-size: 16px; line-height: 1.7; font-weight: 400; }
+html[lang] .profile-chinese { font-size: 21px; line-height: 1.5; font-weight: var(--weight-label); letter-spacing: .1em; }
+html[lang] .is-lab-interior .profile-summary { font-size: var(--type-body); line-height: var(--type-body-leading); font-weight: 400; }
+
+/* Degrees and awards are records; paper and story titles are article headings. */
+html[lang] .is-lab-interior .profile-education-list h3,
+html[lang] .profile-awards-list h3 { font-size: var(--type-record); line-height: 1.5; font-weight: var(--weight-heading); letter-spacing: -.2px; }
+html[lang] .is-lab-interior .publication-card h3,
+html[lang] .visual-home .quiet-paper h3,
+html[lang] .visual-home .visual-topic h3,
+html[lang] .is-lab-interior .card-copy h3,
+html[lang] .news-copy h3,
+html[lang] .editorial-card h2,
+html[lang] .visual-home .quiet-essay h3 { font-size: var(--type-article); line-height: 1.5; font-weight: var(--weight-heading); letter-spacing: -.3px; }
+html[lang] .is-lab-interior .profile-education-list .education-institution,
+html[lang] .is-lab-interior .profile-awards-list .profile-award-institution { font-size: 16px; line-height: 1.7; font-weight: 400; }
+html[lang] .is-lab-interior .profile-awards-list p,
+html[lang] .is-lab-interior .publication-card p,
+html[lang] .visual-home .visual-topic p { font-size: 16px; line-height: 1.8; }
+html[lang] .is-lab-interior .education-meta,
+html[lang] .is-lab-interior .profile-education-list .education-status,
+html[lang] .profile-awards-list time,
+html[lang] .is-lab-interior .publication-card .publication-dates { font-size: 13px; line-height: 1.7; font-weight: 400; }
+html[lang] .is-lab-interior .profile-education-list .education-honours { font-size: 13px; line-height: 1.7; font-weight: var(--weight-heading); }
+html[lang] .profile-interest-list { font-size: 19px; line-height: 1.65; }
+html[lang] .profile-interest-list li { margin-bottom: 10px; }
+html[lang] .profile-contact-list dt,
+html[lang] .profile-facts dt { font-size: 13px; line-height: 1.6; font-weight: var(--weight-label); }
+html[lang] .profile-contact-list dd { font-size: 20px; line-height: 1.6; font-weight: 500; }
+html[lang] .profile-facts dd { font-size: 15px; line-height: 1.7; font-weight: 400; }
+html[lang] .profile-facts dd:nth-of-type(2),
+html[lang] .profile-facts dd:nth-of-type(3) { font-weight: var(--weight-heading); }
+html[lang] .profile-academic-links h3 { font-size: 20px; line-height: 1.5; font-weight: var(--weight-heading); letter-spacing: -.2px; }
+html[lang] .is-lab-interior .profile-academic-links p { font-size: 15px; line-height: 1.8; }
+html[lang] .is-lab-interior .editorial-abstract h2 { font-size: 15px; line-height: 1.5; font-weight: var(--weight-title); letter-spacing: .5px; }
+html[lang] .is-lab-interior .editorial-body .editorial-opening { font-size: 19px; line-height: 1.65; font-weight: var(--weight-heading); }
+html[lang] .is-lab-interior .editorial-record h2 { font-size: var(--type-record); line-height: 1.5; }
+html[lang] .is-lab-interior .editorial-record p { font-size: 15px; line-height: 1.8; }
+html[lang] .is-lab-interior .translation-note { font-size: 13px; line-height: 1.7; }
+
+/* Member names and footer headings carry emphasis without competing with page titles. */
+html[lang] .member-copy h3 { font-size: 24px; line-height: 1.4; font-weight: var(--weight-heading); }
+html[lang] .visual-people-section .community-name,
+html[lang] .quiet-person-name { font-weight: var(--weight-heading); line-height: 1.35; }
+html[lang] .visual-people-section .community-chinese { font-weight: var(--weight-label); }
+html[lang] .site-footer .footer-column h2 { font-size: 16px; line-height: 1.5; font-weight: var(--weight-heading); letter-spacing: 0; }
+html[lang] .site-footer .footer-column a,
+html[lang] .site-footer .footer-brand p { font-size: 14px; line-height: 1.75; }
+
+@media (max-width:1100px) {
+  :root { --type-title: clamp(38px,5.15vw,59px); }
+}
+@media (max-width:820px) {
+  :root { --type-title: clamp(33px,5.1vw,43px); --type-title-spacing: -1.5px; --type-section: 27px; --type-record: 19px; --type-article: 21px; }
+}
+@media (max-width:600px) {
+  :root { --type-body: 16px; --type-title: clamp(38px,10vw,58px); --type-title-spacing: -1.7px; --type-section: 29px; }
+  html[lang] .is-lab-interior .editorial-essay h1 { font-size: 32px; line-height: 1.25; }
+  html[lang] .profile-position { font-size: 16px; }
+  html[lang] .profile-interest-list { font-size: 18px; }
+  html[lang] .profile-contact-list dd { font-size: 18px; }
+  html[lang] .member-copy h3 { font-size: 21px; }
+}
