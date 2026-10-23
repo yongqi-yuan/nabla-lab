@@ -11,9 +11,9 @@
   --muted: #5b6d75;
   --line: #d8e1e4;
   --display: var(--sans);
-  --header-height: 102px;
+  --header-height: 118px;
 }
-html { scroll-padding-top: 124px; }
+html { scroll-padding-top: 140px; }
 body { background: var(--paper); -webkit-font-smoothing: antialiased; }
 .wrap, .visual-home > .wrap, .visual-home .quiet-section > .wrap { max-width: 1280px; padding-inline: 48px; }
 a, button { -webkit-tap-highlight-color: transparent; }
@@ -241,7 +241,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .visual-home .quiet-paper { gap: 40px; }
 }
 @media (max-width: 1020px) {
-  :root { --header-height: 94px; }
+  :root { --header-height: 110px; }
   .wrap, .visual-home > .wrap, .visual-home .quiet-section > .wrap { padding-inline: 32px; }
   .site-header .header-inner { gap: 12px; }
   .site-header .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-left: auto; color: var(--blue); background: transparent; padding: 8px; }
@@ -337,7 +337,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .site-footer .footer-brand p { margin: 0; }
 }
 @media (max-width: 480px) {
-  :root { --header-height: 86px; }
+  :root { --header-height: 102px; }
   .wrap, .visual-home > .wrap, .visual-home .quiet-section > .wrap { padding-inline: 22px; }
   .site-header .header-inner { gap: 6px; }
   .is-quiet-home .brand img, .is-lab-interior .brand img { width: 112px; height: 50px; }
@@ -433,6 +433,6 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
 @media (max-width:480px) { .visual-people-section .community-center .community-symbol { font-size: 45px; } }
 
 /* Shared brand details: a blue top rule, sans-serif typography and a reverse footer logo. */
-.site-header { border-top: 16px solid var(--blue); }
-.is-quiet-home .header-inner, .is-lab-interior .header-inner { min-height: calc(var(--header-height) - 17px); }
+.site-header { border-top: 32px solid var(--blue); }
+.is-quiet-home .header-inner, .is-lab-interior .header-inner { min-height: calc(var(--header-height) - 33px); }
 .site-footer .footer-brand img { background: transparent; padding: 0; width: 188px; height: auto; }
