@@ -160,44 +160,100 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
   .designed-home .community-member { transform:none; }
 }
 
-/* Member-supplied graduation photograph, reinterpreted as five equal portraits. */
+/* Transparent portraits share a baseline and a steady visual scale. */
+[data-person] { --portrait-scale:1; --portrait-shift:0px; }
+[data-person="yongqi-yuan"] { --portrait-shift:2px; }
+[data-person="jiahe-tian"] { --portrait-scale:.98; --portrait-shift:-2px; }
+[data-person="yu-zhao"] { --portrait-scale:.98; --portrait-shift:10px; }
+[data-person="zhuoxi-hu"] { --portrait-shift:22px; }
+[data-person="zhirui-ju"] { --portrait-scale:1.02; --portrait-shift:-8px; }
+
+/* The figure rises directly from the bottom of the blue profile masthead. */
+.is-lab-interior .profile-hero.has-portrait-illustration { padding-bottom:0; }
+.profile-hero.has-portrait-illustration .profile-hero-grid {
+  grid-template-columns:minmax(0,1.2fr) minmax(280px,1fr);
+  align-items:end;
+  gap:52px;
+  min-height:430px;
+}
+.profile-hero.has-portrait-illustration .profile-intro {
+  align-self:center;
+  padding:24px 0 60px;
+}
+.is-lab-interior .profile-portrait.is-illustration {
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  align-self:end;
+  justify-self:center;
+  width:100%;
+  max-width:none;
+  height:clamp(400px,38vw,500px);
+  aspect-ratio:auto;
+  margin:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  overflow:visible;
+}
+.profile-portrait.is-illustration img {
+  display:block;
+  width:calc(100% + 48px);
+  height:auto;
+  max-width:none;
+  max-height:100%;
+  object-fit:contain;
+  object-position:center bottom;
+  padding:0;
+  transform:translateX(var(--portrait-shift));
+}
+
+/* A fixed image height prevents longer biographies from enlarging the face. */
 .is-lab-interior .people-grid .member-card.has-portrait-illustration {
-  grid-template-columns:minmax(160px,.72fr) minmax(0,1.28fr);
+  grid-template-columns:clamp(190px,17vw,215px) minmax(0,1fr);
 }
 .is-lab-interior .member-portrait.has-illustration {
+  --portrait-height:340px;
+  min-height:380px;
+  position:relative;
+  overflow:hidden;
   background:#e6f0f4;
   background-image:none;
 }
 .member-portrait.has-photo.has-illustration img {
-  object-fit:cover;
-  object-position:center 10%;
-  padding:0;
-}
-.is-lab-interior .profile-portrait.is-illustration {
-  aspect-ratio:1;
-  background:#e6f0f4;
-  border:0;
-  box-shadow:none;
-}
-.profile-portrait.is-illustration img {
+  position:absolute;
+  inset:auto;
+  bottom:0;
+  left:50%;
+  height:calc(var(--portrait-height) * var(--portrait-scale));
+  width:auto;
+  max-width:none;
   object-fit:contain;
   object-position:center bottom;
-  padding:20px 16px 0;
+  padding:0;
+  transform:translateX(calc(-50% + var(--portrait-shift)));
 }
-@media(max-width:960px) {
+@media(max-width:1100px) {
+  .profile-hero.has-portrait-illustration .profile-hero-grid { gap:36px; min-height:400px; }
+  .is-lab-interior .profile-portrait.is-illustration { height:420px; }
+}
+@media(max-width:1100px) {
   .is-lab-interior .people-grid:has(.has-portrait-illustration) { grid-template-columns:1fr; }
   .is-lab-interior .people-grid .member-card.has-portrait-illustration {
-    grid-template-columns:minmax(160px,.65fr) minmax(0,1.35fr);
+    grid-template-columns:220px minmax(0,1fr);
   }
+}
+@media(max-width:760px) {
+  .profile-hero.has-portrait-illustration .profile-hero-grid { grid-template-columns:minmax(0,1fr) 270px; gap:30px; min-height:350px; }
+  .profile-hero.has-portrait-illustration .profile-intro { padding:18px 0 44px; }
+  .is-lab-interior .profile-portrait.is-illustration { height:360px; }
 }
 @media(max-width:600px) {
-  .is-lab-interior .people-grid .member-card.has-portrait-illustration {
-    grid-template-columns:145px minmax(0,1fr);
-  }
-  .member-portrait.has-photo.has-illustration img { padding:0; }
-}
-@media(max-width:420px) {
+  .profile-hero.has-portrait-illustration .profile-hero-grid { grid-template-columns:1fr; gap:0; min-height:0; }
+  .profile-hero.has-portrait-illustration .profile-intro { padding:8px 0 20px; }
+  .is-lab-interior .profile-portrait.is-illustration { width:100%; max-width:360px; height:330px; justify-self:center; }
+  .profile-portrait.is-illustration img { width:100%; height:100%; max-height:none; }
   .is-lab-interior .people-grid .member-card.has-portrait-illustration { grid-template-columns:1fr; }
-  .is-lab-interior .people-grid .member-portrait.has-illustration { height:250px; min-height:0; }
-  .member-portrait.has-photo.has-illustration img { object-fit:contain; object-position:center bottom; padding:10px 0 0; }
+  .is-lab-interior .people-grid .member-portrait.has-illustration { --portrait-height:300px; height:300px; min-height:0; }
+  .member-portrait.has-photo.has-illustration img { width:calc(100% - 40px); height:calc((100% - 20px) * var(--portrait-scale)); }
 }
