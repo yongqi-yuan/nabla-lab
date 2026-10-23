@@ -208,6 +208,11 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
   transform:translateX(var(--portrait-shift));
 }
 
+/* Fine framing adjustments for the member directory. */
+.people-grid [data-person="yu-zhao"] { --portrait-shift:-2px; }
+.people-grid [data-person="zhuoxi-hu"] { --portrait-shift:10px; }
+.people-grid [data-person="zhirui-ju"] { --portrait-shift:4px; }
+
 /* A fixed image height prevents longer biographies from enlarging the face. */
 .is-lab-interior .people-grid .member-card.has-portrait-illustration {
   grid-template-columns:clamp(190px,17vw,215px) minmax(0,1fr);
