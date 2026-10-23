@@ -75,18 +75,9 @@
 const community = document.querySelector('.community');
 if (community) {
   const toggle = community.querySelector('.community-toggle');
-  toggle.addEventListener('click', () => {
+  toggle?.addEventListener('click', () => {
     const paused = community.classList.toggle('is-paused');
     toggle.setAttribute('aria-pressed', String(paused));
     toggle.textContent = paused ? '继续运动' : '暂停运动';
-  });
-}
-
-for (const button of document.querySelectorAll('[data-people-view]')) {
-  button.addEventListener('click', () => {
-    const circle = button.dataset.peopleView === 'circle';
-    document.getElementById('people-list').hidden = circle;
-    document.getElementById('people-circle').hidden = !circle;
-    document.querySelectorAll('[data-people-view]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
   });
 }
