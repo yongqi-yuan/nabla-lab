@@ -286,3 +286,41 @@ html[lang] .designed-home .visual-hero h1 { font-size:clamp(42px,5vw,76px); lett
  .designed-home .visual-hero-shade { display:none; }
  .designed-home .visual-image-caption { left:28px; right:auto; }
 }
+
+/* Reference swatch system: primary colors plus white-mixed tonal steps. */
+:root {
+ --brand-blue:#005375; --brand-red:#a72126;
+ --blue-90:#1a6483; --blue-80:#337590; --blue-70:#4d879e;
+ --blue-60:#6698ac; --blue-50:#80a9ba; --blue-40:#99bac8;
+ --blue-30:#b3cbd6; --blue-20:#ccdde3; --blue-10:#e6eef1; --blue-5:#f2f6f8;
+ --red-80:#b94d51; --red-50:#d39093; --red-20:#edd3d4; --red-10:#f6e9e9;
+ --blue:var(--brand-blue); --red:var(--brand-red); --deep:var(--brand-blue);
+ --network-blue:var(--brand-blue); --pale:var(--blue-5); --surface:var(--blue-5);
+ --line:var(--blue-20); --design-rule:var(--blue-20);
+}
+.site-header { border-top-color:var(--brand-blue); }
+.primary-nav a.current { color:var(--brand-blue); border-bottom-color:var(--brand-red); }
+.site-header .language-switch a[aria-current],
+.site-header .language-switch a:hover { background:var(--blue-10); color:var(--brand-blue); }
+a:focus-visible,button:focus-visible,input:focus-visible { outline-color:var(--brand-red); }
+.is-lab-interior .profile-facts,
+.is-lab-interior .contact-band,
+.is-lab-interior .detail-illustration,
+.is-lab-interior .publication-study-figure,
+.is-lab-interior .people-grid .member-portrait.has-illustration { background-color:var(--blue-10); }
+.is-lab-interior .detail-points article,
+.is-lab-interior .publication-card,
+.is-lab-interior .publication-study-figure figcaption { background-color:var(--blue-5); border-color:var(--blue-20); }
+.is-lab-interior .publication-card { border-top-color:var(--brand-blue); }
+.visual-editorial-intro .ui-section-number,
+.visual-home .visual-editorial-intro p,
+.designed-home .ui-hero-date > span,
+.site-footer .footer-brand p,
+.site-footer .footer-column a,
+.site-footer .footer-bottom { color:var(--blue-20); }
+.visual-editorial-intro a { border-color:var(--blue-50); }
+.designed-home .community-member a { border-color:var(--blue-50); }
+.designed-home .community-member a:hover,
+.designed-home .community-member a:focus-visible { border-color:#fff; }
+.research-brief-index,.visual-paper-journal,.member-copy .member-arrow { color:var(--brand-red); }
+::selection { background:var(--blue-20); color:var(--brand-blue); }

@@ -48,9 +48,9 @@ html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visua
 .visual-home .quiet-link:hover { text-decoration: none; border-color: var(--red); }
 /* The first screen has one strong image and a quieter, functional section index. */
 .visual-hero, .visual-hero-inner { min-height: 596px; }
-.visual-hero { background: #073446; }
+.visual-hero { background: var(--blue); }
 .visual-hero-photo { left: 33%; width: 67%; object-position: 66% 45%; }
-.visual-hero-shade { background: linear-gradient(90deg,#073446 0%,#073446 34%,#073446eb 43%,#07344655 61%,#07344600 82%),linear-gradient(0deg,#07344650,transparent 40%); }
+.visual-hero-shade { background: linear-gradient(90deg,#005375 0%,#005375 34%,#005375e8 43%,#0053754d 61%,#00537500 82%); }
 .visual-hero-inner { max-width: 1280px; padding-top: 65px; padding-bottom: 70px; }
 .visual-hero-copy { max-width: 610px; }
 .ui-hero-kicker { display: flex; gap: 12px; align-items: center; margin-bottom: 30px; font-size: 13px; color: #c5d9e1; letter-spacing: 1.3px; }
@@ -145,8 +145,8 @@ html[lang="zh-Hans"] .visual-home .quiet-section h2, html[lang="zh-Hans"] .visua
 /* Editorial keeps its own warm, book-like material within the same grid. */
 .visual-home .visual-editorial-section { padding-block: 84px; background: var(--paper); }
 .visual-editorial-grid { grid-template-columns: .75fr 1.25fr; }
-.visual-editorial-intro { padding: 44px 38px; background: #0c3e50; }
-.visual-editorial-intro .ui-section-number { color: #98bac9; }
+.visual-editorial-intro { padding: 44px 38px; background: var(--blue); }
+.visual-editorial-intro .ui-section-number { color: #c0d7e1; }
 .visual-home .visual-editorial-intro h2 { color: #fff; font: 400 38px/1.25 var(--display); margin-bottom: 25px; }
 .visual-home .visual-editorial-intro p { font-size: 17px; color: #c0d7e1; max-width: 285px; }
 .visual-home .visual-editorial-intro a { display: inline-flex; min-height: 44px; align-items: center; border-color: #6e95a6; }
@@ -255,7 +255,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .visual-home .visual-hero h1 { font-size: 91px; }
   .visual-hero, .visual-hero-inner { min-height: 575px; }
   .visual-hero-photo { left: 27%; width: 73%; }
-  .visual-hero-shade { background: linear-gradient(90deg,#073446 0%,#073446 28%,#073446ee 40%,#07344688 65%,#07344622 100%); }
+  .visual-hero-shade { background: linear-gradient(90deg,#005375 0%,#005375 28%,#005375eb 40%,#00537566 65%,#0053750d 100%); }
   .ui-home-index a { padding-inline: 14px; font-size: 13px; gap: 8px; }
   .visual-about { gap: 45px; grid-template-columns: .7fr 1.3fr; }
   .visual-home .quiet-research { grid-template-columns: 1fr 1fr; }
@@ -289,7 +289,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .visual-hero-copy { max-width: 560px; }
   .visual-hero, .visual-hero-inner { min-height: 560px; }
   .visual-hero-photo { left: 14%; width: 86%; }
-  .visual-hero-shade { background: linear-gradient(90deg,#073446f5,#073446c9 50%,#07344650),linear-gradient(0deg,#07344677,transparent 65%); }
+  .visual-hero-shade { background: linear-gradient(90deg,#005375 0%,#005375f5 50%,#005375d9 100%); }
   .visual-hero-inner { padding-top: 55px; padding-bottom: 65px; }
   .visual-home .visual-image-caption { right: 32px !important; font-size: 13px; }
   .ui-home-index > .wrap { display: flex; overflow-x: auto; scrollbar-width: thin; }
@@ -351,7 +351,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .ui-hero-kicker { font-size: 12px; letter-spacing: 1px; margin-bottom: 30px; }
   .visual-home .visual-hero-copy > p { font-size: 17px; max-width: 330px; line-height: 1.9; }
   .visual-hero-photo { left: 0; width: 100%; object-position: 62% 50%; }
-  .visual-hero-shade { background: linear-gradient(90deg,#073446ee,#073446bb 55%,#07344680),linear-gradient(0deg,#07344699,transparent 70%); }
+  .visual-hero-shade { background: linear-gradient(90deg,#005375 0%,#005375f5 55%,#005375e6 100%); }
   .visual-home .visual-hero-links a { min-width: 132px; font-size: 14px; padding: 11px 16px; gap: 24px; }
   .ui-hero-date { margin-top: 35px; font-size: 13px; }
   .visual-home .visual-image-caption { right: 22px !important; bottom: 22px; font-size: 12px; }
