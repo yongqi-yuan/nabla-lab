@@ -5,8 +5,7 @@ export function homePage({copy,members,publications,editorial,homePeople,escapeH
   return `<div class="quiet-home visual-home designed-home">
     <header class="visual-hero">
       <picture class="visual-hero-picture">
-        <source media="(max-width: 1100px)" srcset="/assets/graduation-hero-natural.webp">
-        <img class="visual-hero-photo" src="/assets/graduation-hero-wide.webp" width="2800" height="1098" alt="${e(c.heroImageAlt)}" fetchpriority="high">
+        <img class="visual-hero-photo" src="/assets/graduation-hero-natural.webp" width="2000" height="1171" alt="${e(c.heroImageAlt)}" fetchpriority="high">
       </picture>
       <div class="wrap visual-hero-inner"><div class="visual-hero-copy">
         <h1>${e(c.title)}</h1>

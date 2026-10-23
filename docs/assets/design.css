@@ -270,7 +270,11 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
 .designed-home .visual-hero-photo {
  display:block; position:absolute; inset:0 0 auto auto; width:auto; height:100%; max-width:none;
  object-fit:contain; object-position:right center; transform:none; animation:none;
- mask-image:linear-gradient(90deg,transparent 0%,#0000001a 16%,#0000004d 27%,#000 39%);
+ /* Feather the empty left edge and blend diagonally across the sky only. */
+ -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%),linear-gradient(160deg,transparent,#000 25%);
+ -webkit-mask-composite:source-in;
+ mask-image:linear-gradient(90deg,transparent,#000 6%),linear-gradient(160deg,transparent,#000 25%);
+ mask-composite:intersect;
 }
 .designed-home .visual-hero-inner { width:100%; min-height:clamp(390px,30vw,460px); padding-block:40px; }
 .designed-home .visual-hero-copy { display:block; max-width:42%; }
@@ -292,7 +296,10 @@ html[lang] .designed-home .visual-hero h1 { font-size:clamp(52px,5vw,80px); line
  .designed-home .visual-hero-photo {
   position:relative; inset:auto; width:100%; height:auto; max-width:100%; aspect-ratio:2000 / 1171;
   object-fit:contain; object-position:center; margin:0;
-  mask-image:linear-gradient(transparent 0,#000 32px);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#00000026 10%,#0000008c 22%,#000 33%);
+  mask-image:linear-gradient(180deg,transparent 0%,#00000026 10%,#0000008c 22%,#000 33%);
+  -webkit-mask-composite:source-over;
+  mask-composite:add;
  }
 }
 @media(max-width:1100px) and (min-width:600px) and (max-height:600px) {
