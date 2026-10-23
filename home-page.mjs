@@ -4,7 +4,7 @@ export function homePage({copy,members,publications,editorial,homePeople,escapeH
   const mark=(tone,cls)=>`<img class="nabla-mark ${cls}" src="/assets/nabla-mark-${tone}.svg" width="118" height="90" alt="" aria-hidden="true">`;
   return `<div class="quiet-home visual-home designed-home">
     <header class="visual-hero">
-      <img class="visual-hero-photo" src="/assets/graduation-dscf4592-4.webp" width="2000" height="1333" alt="${e(c.heroImageAlt)}" fetchpriority="high">
+      <img class="visual-hero-photo" src="/assets/graduation-dscf4592-4-hero.webp" width="2400" height="1188" alt="${e(c.heroImageAlt)}" fetchpriority="high">
       <div class="visual-hero-shade"></div>
       <div class="wrap visual-hero-inner"><div class="visual-hero-copy">
         <div class="ui-hero-kicker"><span class="ui-red-square" aria-hidden="true"></span><span>${e(c.groupLabel)}</span></div>
