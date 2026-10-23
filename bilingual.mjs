@@ -104,6 +104,8 @@ export function localizeSite(root, routes) {
     html=html.replace(/(property="og:title" content=")([^"]*)"/g,(_,p,t)=>p+translate(t)+'"');
     html=html.replace('/assets/lab.js','/assets/lab.zh.js').replace('/assets/search-index.js','/assets/search-index.zh.js');
     html=html.replace(/___BIBLIOGRAPHY_(\d+)___/g,(_,index)=>bibliography[Number(index)].replace(/\blang="[^"]*"/g,'').replace(/^<(p|cite)\b/,'<$1 lang="en"').replace(/href="(\/[^\"]*)"/g,(full,href)=>isPage(href)?`href="${zhURL(href)}"`:full));
+    // The formal English title is also marked for correct screen-reader pronunciation.
+    html=html.replace(/(<main\b[^>]*>)([\s\S]*?)(<\/main>)/g,(_,start,body,end)=>start+textTransform(body,raw=>bibliographicNames.has(decode(raw).trim())?raw.replace(raw.trim(),`<span lang="en">${raw.trim()}</span>`):raw)+end);
     html=typesetNabla(structuredData(html,true));
     return languageLinks(html,url,true);
   }
