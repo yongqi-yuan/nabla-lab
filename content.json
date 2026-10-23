@@ -138,14 +138,15 @@
         "slug": "yongqi-yuan",
         "name": "Yongqi Yuan",
         "chineseName": "袁泳棋",
-        "role": "DPhil student in Engineering Science",
+        "role": "Graduate student in Engineering Science",
         "institution": "University of Oxford",
         "additionalAffiliation": "Lady Margaret Hall",
-        "bio": "Yongqi is a DPhil student in Engineering Science at the University of Oxford and a member of Lady Margaret Hall. His current academic status is Probationary Research Student (PRS). Research interests include wave–structure interaction, fluid mechanics and computational fluid dynamics.",
+        "bio": "Yongqi Yuan is a graduate student in the Department of Engineering Science and at Lady Margaret Hall, University of Oxford, studying towards a DPhil in Engineering Science as a Probationary Research Student (PRS). His research focuses on nonlinear wave forces and wave–structure interaction, combining computational fluid dynamics with theoretical analysis. He is a co-founder and member of Nabla Lab.",
         "interests": [
-          "Wave–structure interaction",
           "Fluid mechanics",
-          "Computational fluid dynamics (CFD)"
+          "Nonlinear wave forces",
+          "Wave–structure interaction",
+          "Computational fluid dynamics (CFD) and theoretical analysis"
         ],
         "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
         "profileHref": "/people/yongqi-yuan/",
@@ -154,6 +155,18 @@
         "degreeProgramme": "DPhil in Engineering Science",
         "academicStatus": "Probationary Research Student (PRS)",
         "academicProfiles": [
+          {
+            "label": "PERSONAL WEBSITE",
+            "title": "yongqi-yuan.com",
+            "url": "https://yongqi-yuan.com/",
+            "description": "Personal academic homepage"
+          },
+          {
+            "label": "GOOGLE SCHOLAR",
+            "title": "Google Scholar",
+            "url": "https://scholar.google.co.uk/citations?user=y1Ub2esAAAAJ&hl=en",
+            "description": "Publications and citations"
+          },
           {
             "label": "ORCID",
             "title": "0009-0004-7632-3743",
@@ -191,9 +204,9 @@
             "honours": "First Class Honours"
           },
           {
-            "degree": "BEng in Naval Architecture and Marine Engineering",
-            "institution": "Harbin Institute of Technology, Weihai",
-            "institutionUrl": "https://en.hitwh.edu.cn/",
+            "degree": "BEng in Naval Architecture and Ocean Engineering",
+            "institution": "Harbin Institute of Technology",
+            "institutionUrl": "https://www.hit.edu.cn/",
             "startDate": "2022-08",
             "startLabel": "August 2022",
             "endDate": "2026-06",
@@ -202,12 +215,57 @@
           }
         ],
         "portrait": {
-          "src": "/assets/yongqi-yuan-portrait.jpg",
-          "width": 4160,
-          "height": 4160,
-          "alt": "Yongqi Yuan",
+          "src": "/assets/yongqi-yuan-matriculation.webp",
+          "width": 1400,
+          "height": 2100,
+          "alt": "Yongqi Yuan in academic dress on Matriculation Day in Oxford.",
+          "caption": "Oxford",
+          "location": "",
+          "objectPosition": "50% 42%",
           "credit": "Portrait supplied by Yongqi Yuan."
-        }
+        },
+        "department": "Department of Engineering Science",
+        "contact": {
+          "academicEmail": "yongqi.yuan@eng.ox.ac.uk",
+          "personalEmail": "yongqi.yuan@outlook.com",
+          "github": "https://github.com/yongqi-yuan",
+          "scholar": "https://scholar.google.co.uk/citations?user=y1Ub2esAAAAJ&hl=en",
+          "orcid": "https://orcid.org/0009-0004-7632-3743",
+          "lab": "https://nabla.ac.cn/",
+          "homepage": "https://yongqi-yuan.com/"
+        },
+        "awards": [
+          {
+            "name": "Reid Birrell Prize",
+            "institution": "University of Strathclyde",
+            "date": "2026-06",
+            "description": "Awarded to a final-year BEng student for overall distinction in naval architecture."
+          },
+          {
+            "name": "Outstanding Undergraduate Thesis",
+            "institution": "Harbin Institute of Technology",
+            "date": "2026-06",
+            "description": ""
+          },
+          {
+            "name": "Outstanding Graduate",
+            "institution": "Harbin Institute of Technology",
+            "date": "2026-06",
+            "description": ""
+          },
+          {
+            "name": "Global Elite Development Programme Scholarship for Doctoral Study",
+            "institution": "Harbin Institute of Technology",
+            "date": "2026-05",
+            "description": ""
+          },
+          {
+            "name": "Most Influential Graduates",
+            "institution": "Harbin Institute of Technology, Weihai",
+            "date": "2026-05",
+            "description": "One of 10 awardees in the class of 2026 at HIT Weihai."
+          }
+        ]
       },
       {
         "slug": "jiahe-tian",

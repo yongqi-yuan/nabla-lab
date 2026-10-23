@@ -84,6 +84,19 @@
 @media(max-width:560px){.profile-hero-grid:has(.profile-portrait){grid-template-columns:1fr;gap:27px}.profile-portrait{max-width:280px;justify-self:start}}
 
 .profile-section-nav a{font-size:14px}
+.profile-section-nav-yuan{flex-wrap:nowrap;overflow-x:auto;gap:25px}
+.profile-section-nav-yuan a{flex:none;white-space:nowrap}
+.profile-awards-list{list-style:none;margin:26px 0 0;padding:0}
+.profile-awards-list>li{display:grid;grid-template-columns:115px minmax(0,1fr);gap:20px;border-top:1px solid var(--line);padding:24px 0}
+.profile-awards-list time{font-size:14px;color:var(--muted);line-height:1.8}
+.profile-awards-list h3{margin:0 0 8px;font:500 22px/1.4 var(--sans);color:var(--blue)}
+.profile-awards-list p{margin:7px 0 0;font-size:15px}
+.profile-awards-list .profile-award-institution{font-weight:500}
+.profile-contact-list{margin:25px 0 0}
+.profile-contact-list dt{font-size:14px;color:var(--muted);margin-top:22px}
+.profile-contact-list dd{margin:5px 0 0;font-size:18px;line-height:1.7;overflow-wrap:anywhere}
+.profile-contact-list a{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:480px){.profile-awards-list>li{grid-template-columns:1fr;gap:7px}.profile-section-nav-yuan{column-gap:20px}}
 .profile-section>.eyebrow,.profile-facts dt,.profile-academic-links .eyebrow{letter-spacing:1px}
 .education-meta,.profile-education-list .education-status,.profile-education-list .education-honours{font-size:13px}
 .profile-credit{flex-wrap:wrap;row-gap:8px}
