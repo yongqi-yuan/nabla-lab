@@ -215,14 +215,15 @@
           }
         ],
         "portrait": {
-          "src": "/assets/yongqi-yuan-matriculation.webp",
-          "width": 1400,
-          "height": 2100,
-          "alt": "Yongqi Yuan in academic dress on Matriculation Day in Oxford.",
-          "caption": "Oxford",
+          "src": "/assets/portraits/yongqi-yuan-illustrated.webp",
+          "width": 640,
+          "height": 640,
+          "alt": "Illustrated portrait of Yongqi Yuan.",
+          "caption": "",
           "location": "",
-          "objectPosition": "50% 42%",
-          "credit": "Portrait supplied by Yongqi Yuan."
+          "objectPosition": "50% 100%",
+          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "kind": "illustration"
         },
         "department": "Department of Engineering Science",
         "contact": {
@@ -283,7 +284,18 @@
         ],
         "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
         "initials": "JT",
-        "profileHref": "/people/jiahe-tian/"
+        "profileHref": "/people/jiahe-tian/",
+        "portrait": {
+          "src": "/assets/portraits/jiahe-tian-illustrated.webp",
+          "width": 640,
+          "height": 640,
+          "alt": "Illustrated portrait of Jiahe Tian.",
+          "caption": "",
+          "location": "",
+          "objectPosition": "50% 100%",
+          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "kind": "illustration"
+        }
       },
       {
         "slug": "yu-zhao",
@@ -299,7 +311,18 @@
         ],
         "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
         "initials": "YZ",
-        "profileHref": "/people/yu-zhao/"
+        "profileHref": "/people/yu-zhao/",
+        "portrait": {
+          "src": "/assets/portraits/yu-zhao-illustrated.webp",
+          "width": 640,
+          "height": 640,
+          "alt": "Illustrated portrait of Yu Zhao.",
+          "caption": "",
+          "location": "",
+          "objectPosition": "50% 100%",
+          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "kind": "illustration"
+        }
       },
       {
         "slug": "zhuoxi-hu",
@@ -316,7 +339,18 @@
         ],
         "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
         "initials": "ZH",
-        "profileHref": "/people/zhuoxi-hu/"
+        "profileHref": "/people/zhuoxi-hu/",
+        "portrait": {
+          "src": "/assets/portraits/zhuoxi-hu-illustrated.webp",
+          "width": 640,
+          "height": 640,
+          "alt": "Illustrated portrait of Zhuoxi Hu.",
+          "caption": "",
+          "location": "",
+          "objectPosition": "50% 100%",
+          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "kind": "illustration"
+        }
       },
       {
         "slug": "zhirui-ju",
@@ -330,7 +364,18 @@
         ],
         "educationNote": "Shared undergraduate background: the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.",
         "initials": "ZJ",
-        "profileHref": "/people/zhirui-ju/"
+        "profileHref": "/people/zhirui-ju/",
+        "portrait": {
+          "src": "/assets/portraits/zhirui-ju-illustrated.webp",
+          "width": 640,
+          "height": 640,
+          "alt": "Illustrated portrait of Zhirui Ju.",
+          "caption": "",
+          "location": "",
+          "objectPosition": "50% 100%",
+          "credit": "Portraits were adapted from a group photograph supplied by Nabla Lab, with light colour simplification. Facial features and proportions follow the original photograph.",
+          "kind": "illustration"
+        }
       }
     ]
   },

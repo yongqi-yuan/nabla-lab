@@ -159,3 +159,45 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
 @media(prefers-reduced-motion:reduce) and (max-width:600px) {
   .designed-home .community-member { transform:none; }
 }
+
+/* Member-supplied graduation photograph, reinterpreted as five equal portraits. */
+.is-lab-interior .people-grid .member-card.has-portrait-illustration {
+  grid-template-columns:minmax(160px,.72fr) minmax(0,1.28fr);
+}
+.is-lab-interior .member-portrait.has-illustration {
+  background:#e6f0f4;
+  background-image:none;
+}
+.member-portrait.has-photo.has-illustration img {
+  object-fit:cover;
+  object-position:center 10%;
+  padding:0;
+}
+.is-lab-interior .profile-portrait.is-illustration {
+  aspect-ratio:1;
+  background:#e6f0f4;
+  border:0;
+  box-shadow:none;
+}
+.profile-portrait.is-illustration img {
+  object-fit:contain;
+  object-position:center bottom;
+  padding:20px 16px 0;
+}
+@media(max-width:960px) {
+  .is-lab-interior .people-grid:has(.has-portrait-illustration) { grid-template-columns:1fr; }
+  .is-lab-interior .people-grid .member-card.has-portrait-illustration {
+    grid-template-columns:minmax(160px,.65fr) minmax(0,1.35fr);
+  }
+}
+@media(max-width:600px) {
+  .is-lab-interior .people-grid .member-card.has-portrait-illustration {
+    grid-template-columns:145px minmax(0,1fr);
+  }
+  .member-portrait.has-photo.has-illustration img { padding:0; }
+}
+@media(max-width:420px) {
+  .is-lab-interior .people-grid .member-card.has-portrait-illustration { grid-template-columns:1fr; }
+  .is-lab-interior .people-grid .member-portrait.has-illustration { height:250px; min-height:0; }
+  .member-portrait.has-photo.has-illustration img { object-fit:contain; object-position:center bottom; padding:10px 0 0; }
+}
