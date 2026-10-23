@@ -265,16 +265,17 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
 
 /* Brand palette and a soft transition into the graduation photograph. */
 :root { --blue:#005375; --red:#a72126; --deep:#005375; --network-blue:#005375; }
-.designed-home .visual-hero { display:block; min-height:clamp(390px,35vw,470px); background:var(--blue); }
-.designed-home .visual-hero-photo { left:30%; width:70%; height:100%; object-fit:cover; object-position:left bottom; transform:none; animation:none; mask-image:linear-gradient(90deg,transparent,#000 10%); }
-/* Extend the transition through the sky; it fades out above every head. */
-.designed-home .visual-hero-shade { display:block; background:linear-gradient(90deg,#005375 0%,#005375 20%,#005375b3 35%,#00537500 60%); mask-image:linear-gradient(#000,transparent 29%); }
-.designed-home .visual-hero-inner { min-height:clamp(390px,35vw,470px); padding-block:36px; }
-.designed-home .visual-hero-copy { max-width:34%; }
-.designed-home .ui-hero-kicker { margin-bottom:24px; }
-.designed-home .ui-hero-date { margin-top:38px; }
-html[lang] .designed-home .visual-hero h1 { font-size:clamp(42px,5vw,76px); letter-spacing:-2px; margin-bottom:24px; }
-.designed-home .visual-image-caption { right:32px; left:auto; bottom:20px; }
+.designed-home .visual-hero { display:block; min-height:clamp(390px,30vw,460px); background:var(--blue); }
+.designed-home .visual-hero-picture { display:block; position:absolute; inset:0; overflow:hidden; }
+.designed-home .visual-hero-photo {
+ display:block; position:absolute; inset:0 0 auto auto; width:auto; height:100%; max-width:none;
+ object-fit:contain; object-position:right center; transform:none; animation:none;
+ mask-image:linear-gradient(90deg,transparent 0%,#0000001a 16%,#0000004d 27%,#000 39%);
+}
+.designed-home .visual-hero-inner { width:100%; min-height:clamp(390px,30vw,460px); padding-block:40px; }
+.designed-home .visual-hero-copy { display:block; max-width:42%; }
+html[lang] .designed-home .visual-hero h1 { font-size:clamp(52px,5vw,80px); line-height:1.08; letter-spacing:-2px; margin:0; }
+.designed-home .ui-hero-date { margin-top:32px; gap:16px; }
 .designed-home .visual-people-section,
 .visual-editorial-intro,
 .site-footer,
@@ -283,20 +284,21 @@ html[lang] .designed-home .visual-hero h1 { font-size:clamp(42px,5vw,76px); lett
 .ui-red-square { background:var(--red); }
 @media(max-width:1100px) {
  .designed-home .visual-hero { display:flex; flex-direction:column; min-height:0; }
- .designed-home .visual-hero-inner { order:1; width:100%; min-height:0; padding:32px 28px 50px; }
- .designed-home .visual-hero-copy { max-width:none; }
+ .designed-home .visual-hero-inner { order:1; min-height:0; padding:34px 28px 42px; }
+ .designed-home .visual-hero-copy { display:block; max-width:none; }
+ html[lang] .designed-home .visual-hero h1 { font-size:clamp(44px,6vw,64px); }
  .designed-home .ui-hero-date { margin-top:24px; }
- .designed-home .visual-hero-photo { position:relative; order:2; left:0; width:100%; height:auto; margin-top:-24px; mask-image:linear-gradient(transparent,#000 38px); }
- .designed-home .visual-hero-shade { display:none; }
- .designed-home .visual-image-caption { left:28px; right:auto; bottom:17px; }
+ .designed-home .visual-hero-picture { position:relative; inset:auto; order:2; width:100%; margin-top:-18px; }
+ .designed-home .visual-hero-photo {
+  position:relative; inset:auto; width:100%; height:auto; max-width:100%; aspect-ratio:2000 / 1171;
+  object-fit:contain; object-position:center; margin:0;
+  mask-image:linear-gradient(transparent 0,#000 32px);
+ }
 }
 @media(max-width:1100px) and (min-width:600px) and (max-height:600px) {
- .designed-home .visual-hero-inner { padding-block:24px 44px; }
- .designed-home .visual-hero-copy { display:grid; grid-template-columns:1fr 1fr; column-gap:28px; align-items:center; }
- .designed-home .ui-hero-kicker { grid-column:1/-1; margin-bottom:14px; }
- html[lang] .designed-home .visual-hero h1 { margin-bottom:0; }
- .designed-home .visual-hero-copy > p { margin:0; }
- .designed-home .ui-hero-date { grid-column:1/-1; margin-top:18px; }
+ .designed-home .visual-hero-inner { padding-block:26px 40px; }
+ .designed-home .visual-hero-copy { display:flex; align-items:center; justify-content:space-between; gap:32px; }
+ .designed-home .ui-hero-date { margin:0; }
 }
 
 /* Reference swatch system: primary colors plus white-mixed tonal steps. */

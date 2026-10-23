@@ -4,13 +4,14 @@ export function homePage({copy,members,publications,editorial,homePeople,escapeH
   const mark=(tone,cls)=>`<img class="nabla-mark ${cls}" src="/assets/nabla-mark-${tone}.svg" width="118" height="90" alt="" aria-hidden="true">`;
   return `<div class="quiet-home visual-home designed-home">
     <header class="visual-hero">
-      <img class="visual-hero-photo" src="/assets/graduation-dscf4592-4-hero.webp" width="2400" height="1188" alt="${e(c.heroImageAlt)}" fetchpriority="high">
-      <div class="visual-hero-shade"></div>
+      <picture class="visual-hero-picture">
+        <source media="(max-width: 1100px)" srcset="/assets/graduation-hero-natural.webp">
+        <img class="visual-hero-photo" src="/assets/graduation-hero-wide.webp" width="2800" height="1098" alt="${e(c.heroImageAlt)}" fetchpriority="high">
+      </picture>
       <div class="wrap visual-hero-inner"><div class="visual-hero-copy">
-        <div class="ui-hero-kicker"><span class="ui-red-square" aria-hidden="true"></span><span>${e(c.groupLabel)}</span></div>
-        <h1>${e(c.title)}</h1><p>${e(c.heroResearch)}</p>
+        <h1>${e(c.title)}</h1>
         <div class="ui-hero-date">${mark('white','hero-brand-mark')}<span>${e(c.foundedLabel)}</span></div>
-      </div><p class="visual-image-caption">${e(c.heroImageCaption)}</p></div>
+      </div></div>
     </header>
     <nav class="ui-home-index" aria-label="${e(c.moreLabel)}"><div class="wrap">${[['about',c.introTitle],['research',c.researchTitle],['publications',c.papersTitle],['community',c.peopleTitle],['editorial',c.editorialTitle]].map(([id,label],i)=>`<a href="#${id}"><span aria-hidden="true">0${i+1}</span>${e(label)}<span aria-hidden="true">↓</span></a>`).join('')}</div></nav>
     <section class="visual-about wrap" id="about">
