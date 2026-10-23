@@ -11,7 +11,8 @@
   --muted: #5b6d75;
   --line: #d8e1e4;
   --display: var(--sans);
-  --header-height: 102px;
+  --top-bar-height: 14px;
+  --header-height: calc(85px + var(--top-bar-height) + 1px);
 }
 html { scroll-padding-top: 124px; }
 body { background: var(--paper); -webkit-font-smoothing: antialiased; }
@@ -241,7 +242,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .visual-home .quiet-paper { gap: 40px; }
 }
 @media (max-width: 1020px) {
-  :root { --header-height: 94px; }
+  :root { --header-height: calc(77px + var(--top-bar-height) + 1px); }
   .wrap, .visual-home > .wrap, .visual-home .quiet-section > .wrap { padding-inline: 32px; }
   .site-header .header-inner { gap: 12px; }
   .site-header .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 9px; margin-left: auto; color: var(--blue); background: transparent; padding: 8px; }
@@ -337,7 +338,7 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
   .site-footer .footer-brand p { margin: 0; }
 }
 @media (max-width: 480px) {
-  :root { --header-height: 86px; }
+  :root { --header-height: calc(69px + var(--top-bar-height) + 1px); }
   .wrap, .visual-home > .wrap, .visual-home .quiet-section > .wrap { padding-inline: 22px; }
   .site-header .header-inner { gap: 6px; }
   .is-quiet-home .brand img, .is-lab-interior .brand img { width: 112px; height: 50px; }
@@ -433,6 +434,9 @@ html[lang="zh-Hans"] .is-lab-interior h2 { font-family: var(--sans); font-size: 
 @media (max-width:480px) { .visual-people-section .community-center .community-symbol { font-size: 45px; } }
 
 /* Shared brand details: a blue top rule, sans-serif typography and a reverse footer logo. */
-.site-header { border-top: 16px solid var(--blue); }
-.is-quiet-home .header-inner, .is-lab-interior .header-inner { min-height: calc(var(--header-height) - 17px); }
+.site-header { border-top: var(--top-bar-height) solid #005375; }
+.is-quiet-home .header-inner, .is-lab-interior .header-inner { min-height: calc(var(--header-height) - var(--top-bar-height) - 1px); }
 .site-footer .footer-brand img { background: transparent; padding: 0; width: 188px; height: auto; }
+
+/* Match the personal homepage top bar on narrow screens. */
+@media (max-width:600px) { :root { --top-bar-height: 5px; } }
