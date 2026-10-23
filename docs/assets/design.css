@@ -262,3 +262,18 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
   .is-lab-interior .people-grid .member-portrait.has-illustration { --portrait-height:300px; height:300px; min-height:0; }
   .member-portrait.has-photo.has-illustration img { width:calc(100% - 40px); height:calc((100% - 20px) * var(--portrait-scale)); }
 }
+
+/* Group photograph: keep all five members visible, with text beside the photo. */
+.designed-home .visual-hero { display:grid; grid-template-columns:34% 66%; min-height:0; }
+.designed-home .visual-hero-photo { position:static; grid-column:2; grid-row:1; width:100%; height:100%; object-fit:cover; object-position:center; transform:none; animation:none; }
+.designed-home .visual-hero-shade { display:none; }
+.designed-home .visual-hero-inner { grid-column:1; grid-row:1; width:100%; min-height:0; padding:54px 32px 70px max(32px,calc((100vw - 1280px)/2)); }
+html[lang] .designed-home .visual-hero h1 { font-size:clamp(42px,5vw,76px); letter-spacing:-2px; }
+.designed-home .visual-image-caption { left:32px; right:auto; bottom:20px; }
+@media(max-width:900px) {
+ .designed-home .visual-hero { display:flex; flex-direction:column; }
+ .designed-home .visual-hero-photo { order:2; height:auto; }
+ .designed-home .visual-hero-inner { order:1; padding:36px 28px 58px; }
+ .designed-home .visual-hero-copy { max-width:none; }
+ .designed-home .visual-image-caption { left:28px; }
+}
