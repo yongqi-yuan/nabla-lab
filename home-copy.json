@@ -5,29 +5,44 @@
       "Nabla Lab began in 2025 with students from the joint undergraduate programme between Harbin Institute of Technology, Weihai and the University of Strathclyde. We now study and work at different universities, and continue to collaborate on research.",
       "Our interests include fluid mechanics, wave–structure interaction, computational fluid dynamics, aerodynamics and noise. We also share methods and experience from our research."
     ],
-    "aboutLink": "About the group and its history",
+    "aboutLink": "How the group began",
     "researchTitle": "Research",
     "topics": [
       {
         "title": "Waves and structures",
         "text": "Wave loading, gap resonance, fluid–structure interaction and offshore renewable energy.",
-        "url": "/research/wave-loading/"
+        "url": "/research/wave-loading/",
+        "items": [
+          "Wave loading and gap resonance",
+          "Fluid–structure interaction",
+          "Offshore renewable energy"
+        ]
       },
       {
         "title": "Computation and theory",
         "text": "Computational fluid dynamics, theoretical analysis and physics-informed neural networks.",
-        "url": "/research/fluid-mechanics/"
+        "url": "/research/fluid-mechanics/",
+        "items": [
+          "Computational fluid dynamics",
+          "Theoretical analysis",
+          "Physics-informed neural networks"
+        ]
       },
       {
         "title": "Aerodynamics and noise",
         "text": "UAV aerodynamics and noise reduction, including problems related to low-altitude flight.",
-        "url": "/research/aerodynamics-noise/"
+        "url": "/research/aerodynamics-noise/",
+        "items": [
+          "UAV aerodynamics",
+          "Noise reduction",
+          "Low-altitude flight"
+        ]
       }
     ],
     "papersTitle": "Publications",
-    "papersLink": "Publication details and BibTeX",
+    "papersLink": "Publication details",
     "peopleTitle": "People",
-    "peopleIntro": "Five members, working together across institutions. Select a name to read their academic profile.",
+    "peopleIntro": "Five members with a shared undergraduate background, now continuing research at different institutions.",
     "listView": "List",
     "circleView": "Circle",
     "editorialTitle": "Nabla Editorial",
@@ -49,7 +64,11 @@
     "publicationLink": "View publications",
     "groupLabel": "Independent research group",
     "foundedLabel": "Founded in 2025",
-    "introPrefix": "About"
+    "introPrefix": "About",
+    "membersLabel": "members",
+    "paperYearLabel": "Publication year",
+    "volumeLabel": "Volume",
+    "articleLabel": "Article"
   },
   "zh": {
     "title": "Nabla Lab",
@@ -57,29 +76,44 @@
       "Nabla Lab 成立于 2025 年。我们相识于哈工大（威海）—思克莱德大学联合培养项目，目前在不同院校继续学习和研究，并保持科研合作。",
       "我们的研究兴趣包括流体力学、波浪–结构物作用、计算流体力学、空气动力学与噪声，也交流研究方法和科研经验。"
     ],
-    "aboutLink": "团队介绍与发展经历",
+    "aboutLink": "团队的发展经历",
     "researchTitle": "研究",
     "topics": [
       {
         "title": "波浪与结构物",
         "text": "波浪荷载、间隙共振、流固耦合，以及海上可再生能源。",
-        "url": "/research/wave-loading/"
+        "url": "/research/wave-loading/",
+        "items": [
+          "波浪荷载与间隙共振",
+          "流固耦合",
+          "海上可再生能源"
+        ]
       },
       {
         "title": "计算与理论方法",
         "text": "计算流体力学、理论分析与物理信息神经网络。",
-        "url": "/research/fluid-mechanics/"
+        "url": "/research/fluid-mechanics/",
+        "items": [
+          "计算流体力学",
+          "理论分析",
+          "物理信息神经网络"
+        ]
       },
       {
         "title": "空气动力学与噪声",
         "text": "无人机空气动力学、降噪，以及低空飞行中的相关工程问题。",
-        "url": "/research/aerodynamics-noise/"
+        "url": "/research/aerodynamics-noise/",
+        "items": [
+          "无人机空气动力学",
+          "噪声控制",
+          "低空飞行"
+        ]
       }
     ],
     "papersTitle": "论文",
-    "papersLink": "论文详情与 BibTeX",
+    "papersLink": "论文详情",
     "peopleTitle": "成员",
-    "peopleIntro": "目前有五位成员，在不同院校保持合作。点击姓名可查看个人学术主页。",
+    "peopleIntro": "五位成员有着共同的本科教育背景，目前在不同院校继续学习、研究与合作。",
     "listView": "列表",
     "circleView": "圆形",
     "editorialTitle": "Nabla 社论",
@@ -101,6 +135,10 @@
     "publicationLink": "论文成果",
     "groupLabel": "独立科研团队",
     "foundedLabel": "成立于 2025 年",
-    "introPrefix": "关于"
+    "introPrefix": "关于",
+    "membersLabel": "位成员",
+    "paperYearLabel": "发表年份",
+    "volumeLabel": "卷号",
+    "articleLabel": "文章编号"
   }
 }

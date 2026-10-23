@@ -2,6 +2,21 @@
 export const escapeHTML = (s='') => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function decodeHTML(s='') {return s.replace(/&(#x[\da-f]+|#\d+|amp|lt|gt|quot|apos|nbsp|#39);/gi,(all,k)=>{if(k[0]==='#'){const n=k[1].toLowerCase()==='x'?parseInt(k.slice(2),16):Number(k.slice(1));return n>0&&n<=0x10ffff?String.fromCodePoint(n):all;}return ({amp:'&',lt:'<',gt:'>',quot:'"',apos:"'",nbsp:' '})[k.toLowerCase()]||all;});}
 function hash(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return (h>>>0).toString(36);}
+export function articleAuthor(author='',lang='zh') {
+  const value=String(author).trim(),parts=value.split(/\s*[/／]\s*/);
+  if(parts.length!==2)return value;
+  const chinese=parts.find(part=>/\p{Script=Han}/u.test(part));
+  const english=parts.find(part=>!/\p{Script=Han}/u.test(part)&&/\p{Script=Latin}/u.test(part));
+  // Choose an explicitly supplied counterpart; never invent a transliteration.
+  return chinese&&english?(lang==='zh'?chinese:english):value;
+}
+function revisionList(revisions,lang,chineseURL,withAnchor=true) {
+  return revisions.map((revision,index)=>{
+    const original=String(revision.note||'');
+    const note=lang!=='zh'&&/\p{Script=Han}/u.test(original)?`Revision details are available in the Chinese original. <a href="${escapeHTML(chineseURL)}${withAnchor?`#revision-${index+1}`:''}">Read the original revision</a>.`:escapeHTML(original);
+    return `<p id="revision-${index+1}"><time>${escapeHTML(revision.date)}</time> — ${note}</p>`;
+  }).join('');
+}
 const tokenRE=/<!--[\s\S]*?-->|<(script|style|svg|noscript|textarea)\b[^>]*>[\s\S]*?<\/\1\s*>|<[^>]+>|[^<]+/gi;
 const attr=(tag,name)=>decodeHTML(tag.match(new RegExp('\\b'+name+'="([^"]*)"','i'))?.[1]||'');
 function setAttr(tag,name,value){const re=new RegExp('\\b'+name+'="[^"]*"','i');if(re.test(tag)&&attr(tag,name)===String(value))return tag;return re.test(tag)?tag.replace(re,`${name}="${escapeHTML(value)}"`):tag.replace(/\s*\/?>$/,` ${name}="${escapeHTML(value)}">`);}
@@ -53,7 +68,9 @@ export function renderEditedPage(html,record={},shared={},lang='zh') {
   result=applyTextBlocks(html,result,record.blocks||{});
   if(record.revisions?.length&&/editorial-essay/.test(result)){
     const heading=lang==='zh'?'更正与补充':'Corrections and additions';
-    const note=`<aside class="editorial-record"><h2>${heading}</h2>${record.revisions.map(r=>`<p><time>${escapeHTML(r.date)}</time> — ${escapeHTML(r.note)}</p>`).join('')}</aside>`;
+    const canonical=result.match(/rel="canonical" href="https:\/\/nabla.ac.cn([^"#]*)/)?.[1]||'/editorial/';
+    const chineseURL=canonical.startsWith('/zh/')?canonical:'/zh'+canonical;
+    const note=`<aside class="editorial-record"><h2>${heading}</h2>${revisionList(record.revisions,lang,chineseURL,false)}</aside>`;
     result=result.replace('<div class="editorial-record">',note+'<div class="editorial-record">');
   }
   return result;
@@ -76,12 +93,15 @@ export function markdown(text='') {
   return text.replace(/\r/g,'').split(/\n\s*\n/).filter(s=>s.trim()).map(block=>{const h=block.match(/^(#{1,3})\s+([^\n]+)$/);if(h)return `<h${h[1].length+1}>${inline(h[2])}</h${h[1].length+1}>`;if(block.split('\n').every(l=>/^[-*] /.test(l)))return '<ul>'+block.split('\n').map(l=>`<li>${inline(l.slice(2))}</li>`).join('')+'</ul>';return `<p>${inline(block).replace(/\n/g,'<br>')}</p>`;}).join('\n');
 }
 export function articleMain(a,lang='zh') {
-  const zh=lang==='zh',base=zh?'/zh':'',l=a[lang],title=l.title||a.en.title;
-  return `<article class="editorial-essay"><header class="editorial-essay-header"><nav class="breadcrumb" aria-label="${zh?'面包屑导航':'Breadcrumb'}"><a href="${base}/">${zh?'首页':'Home'}</a><span>/</span><a href="${base}/editorial/">${zh?'Nabla 社论':'Nabla Editorial'}</a></nav><span class="eyebrow">NABLA EDITORIAL</span><h1>${escapeHTML(title)}</h1><p class="editorial-subtitle">${escapeHTML(zh?a.en.title:a.zh.title)}</p><div class="editorial-meta"><span>${escapeHTML(a.author)}</span><time datetime="${a.date}">${a.date}</time>${a.status==='draft'?'<span>草稿 · DRAFT</span>':''}</div><div class="editorial-abstract" lang="en"><h2>Abstract</h2><p>${escapeHTML(a.en.abstract)}</p></div>${a.cover?`<figure class="cms-article-cover"><img src="${escapeHTML(a.cover)}" alt="${escapeHTML(a.coverAlt||'')}" loading="lazy"></figure>`:''}</header><div class="editorial-body" lang="${zh?'zh-Hans':'en'}">${l.body?.trim()?markdown(l.body):`<p>${zh?'':'This essay is available in Chinese. '}<a href="/zh/editorial/${a.slug}/">阅读中文原文</a></p>`}${a.revisions?.length?`<aside class="editorial-record"><h2>${zh?'更正与补充':'Corrections and additions'}</h2>${a.revisions.map(r=>`<p><time>${escapeHTML(r.date)}</time> — ${escapeHTML(r.note)}</p>`).join('')}</aside>`:''}<div class="editorial-record"><p>${zh?'首次发表':'First published'}: ${a.date}. © ${a.date.slice(0,4)} ${escapeHTML(a.author)}.</p><p>${zh?'本文代表署名作者的观点。':'This article represents the named author’s views.'}</p></div><div class="editorial-feedback"><h2>${zh?'继续这场讨论':'Continue the conversation'}</h2><a href="mailto:yongqi.yuan@eng.ox.ac.uk?subject=Nabla%20Editorial%20feedback">yongqi.yuan@eng.ox.ac.uk</a></div></div></article>`;
+  const zh=lang==='zh',base=zh?'/zh':'',l=a[lang],title=l.title||'',author=articleAuthor(a.author,lang);
+  const abstract=l.abstract?.trim()?`<div class="editorial-abstract" lang="${zh?'zh-Hans':'en'}"><h2>${zh?'摘要':'Abstract'}</h2><p>${escapeHTML(l.abstract)}</p></div>`:'';
+  const body=l.body?.trim()?markdown(l.body):zh?'<p>中文正文尚未提供。</p>':`<p>This essay is available in Chinese. <a href="/zh/editorial/${a.slug}/">Read the Chinese original</a>.</p>`;
+  const revisions=a.revisions?.length?`<aside class="editorial-record"><h2>${zh?'更正与补充':'Corrections and additions'}</h2>${revisionList(a.revisions,lang,`/zh/editorial/${a.slug}/`)}</aside>`:'';
+  return `<article class="editorial-essay"><header class="editorial-essay-header"><nav class="breadcrumb" aria-label="${zh?'面包屑导航':'Breadcrumb'}"><a href="${base}/">${zh?'首页':'Home'}</a><span>/</span><a href="${base}/editorial/">${zh?'Nabla 社论':'Nabla Editorial'}</a></nav><span class="eyebrow">${zh?'Nabla 社论':'NABLA EDITORIAL'}</span><h1>${escapeHTML(title)}</h1><div class="editorial-meta"><span>${escapeHTML(author)}</span><time datetime="${a.date}">${a.date}</time>${a.status==='draft'?`<span>${zh?'草稿':'DRAFT'}</span>`:''}</div>${abstract}${a.cover?`<figure class="cms-article-cover"><img src="${escapeHTML(a.cover)}" alt="${escapeHTML(a.coverAlt||'')}" loading="lazy"></figure>`:''}</header><div class="editorial-body" lang="${zh?'zh-Hans':'en'}">${body}${revisions}<div class="editorial-record"><p>${zh?'首次发表：':'First published: '}${a.date}${zh?'。':'.'} © ${a.date.slice(0,4)} ${escapeHTML(author)}${zh?'。':'.'}</p><p>${zh?'本文代表署名作者的观点。':'This article represents the named author’s views.'}</p></div><div class="editorial-feedback"><h2>${zh?'继续这场讨论':'Continue the conversation'}</h2><a href="mailto:yongqi.yuan@eng.ox.ac.uk?subject=Nabla%20Editorial%20feedback">yongqi.yuan@eng.ox.ac.uk</a></div></div></article>`;
 }
 export function articleDocument(shell,a,lang='zh') {
-  const url=`${lang==='zh'?'/zh':''}/editorial/${a.slug}/`,title=a[lang].title||a.en.title;
-  return shell.replace(/<main id="main">[\s\S]*?<\/main>/,`<main id="main">${articleMain(a,lang)}</main>`).replace(/<title>[\s\S]*?<\/title>/,`<title>${escapeHTML(title)} | Nabla Lab</title>`).replace(/(name="description" content=")[^"]*/,(_,p)=>p+escapeHTML(a[lang].abstract||a.en.abstract)).replace(/(property="og:title" content=")[^"]*/,(_,p)=>p+escapeHTML(title)).replace(/(property="og:description" content=")[^"]*/,(_,p)=>p+escapeHTML(a[lang].abstract||a.en.abstract)).replace(/(rel="canonical" href=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(property="og:url" content=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(<link rel="alternate" hreflang="(?:en|x-default)" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/editorial/'+a.slug+'/').replace(/(<link rel="alternate" hreflang="zh-Hans" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/zh/editorial/'+a.slug+'/').replace(/(<a href=")[^"]*(" lang="(?:en|zh-Hans)" hreflang=)/g,(_,p,suffix)=>p+(suffix.includes('zh-Hans')?'/zh':'')+'/editorial/'+a.slug+'/'+suffix);
+  const url=`${lang==='zh'?'/zh':''}/editorial/${a.slug}/`,title=a[lang].title||'',description=a[lang].abstract?.trim()?a[lang].abstract:title;
+  return shell.replace(/<main id="main">[\s\S]*?<\/main>/,`<main id="main">${articleMain(a,lang)}</main>`).replace(/<title>[\s\S]*?<\/title>/,`<title>${escapeHTML(title)} | Nabla Lab</title>`).replace(/(name="description" content=")[^"]*/,(_,p)=>p+escapeHTML(description)).replace(/(property="og:title" content=")[^"]*/,(_,p)=>p+escapeHTML(title)).replace(/(property="og:description" content=")[^"]*/,(_,p)=>p+escapeHTML(description)).replace(/(rel="canonical" href=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(property="og:url" content=")[^"]*/,(_,p)=>p+'https://nabla.ac.cn'+url).replace(/(<link rel="alternate" hreflang="(?:en|x-default)" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/editorial/'+a.slug+'/').replace(/(<link rel="alternate" hreflang="zh-Hans" href=")[^"]*/g,(_,p)=>p+'https://nabla.ac.cn/zh/editorial/'+a.slug+'/').replace(/(<a href=")[^"]*(" lang="(?:en|zh-Hans)" hreflang=)/g,(_,p,suffix)=>p+(suffix.includes('zh-Hans')?'/zh':'')+'/editorial/'+a.slug+'/'+suffix);
 }
 
 // Paragraph-level editing keeps inline formatting and links together in one field.

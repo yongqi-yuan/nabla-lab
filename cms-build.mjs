@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {inspectPage, inspectTextBlocks, renderEditedPage, articleDocument, escapeHTML, validateArticles} from './editor/editor-core.mjs';
+import {inspectPage, inspectTextBlocks, renderEditedPage, articleDocument, articleAuthor, escapeHTML, validateArticles} from './editor/editor-core.mjs';
 const e=escapeHTML;
 export function buildCMS(root,routes){
   const dir=path.join(root,'docs'),admin=path.join(root,'.local-studio');
@@ -19,8 +19,8 @@ export function buildCMS(root,routes){
       const localURL=(lang==='zh'?'/zh':'')+url;
       let html=fs.readFileSync(pageFile(localURL),'utf8');
       if(url==='/editorial/'&&publicArticles.length){
-        const cards=[...publicArticles].sort((a,b)=>b.date.localeCompare(a.date)).map(a=>`<a class="editorial-card" href="${lang==='zh'?'/zh':''}/editorial/${a.slug}/"><span class="eyebrow">NABLA EDITORIAL</span><h2>${e(a[lang].title)}</h2><p class="editorial-card-title">${e(lang==='zh'?a.en.title:a.zh.title)}</p><p>${e(a[lang].abstract||a.en.abstract)}</p><div class="editorial-meta"><span>${e(a.author)}</span><time datetime="${a.date}">${a.date}</time></div><span class="inline-action">${lang==='zh'?'阅读全文':'Read the essay'} ↗</span></a>`).join('');
-        html=html.replace('<a class="editorial-card"',cards+'<a class="editorial-card"').replace(/01 essay/,`${publicArticles.length+1} essays`);
+        const cards=[...publicArticles].sort((a,b)=>b.date.localeCompare(a.date)).map(a=>`<a class="editorial-card" href="${lang==='zh'?'/zh':''}/editorial/${a.slug}/"><span class="eyebrow">${lang==='zh'?'Nabla 社论':'NABLA EDITORIAL'}</span><h2>${e(a[lang].title)}</h2>${a[lang].abstract?.trim()?`<p>${e(a[lang].abstract)}</p>`:''}<div class="editorial-meta"><span>${e(articleAuthor(a.author,lang))}</span><time datetime="${a.date}">${a.date}</time></div><span class="inline-action">${lang==='zh'?'阅读全文':'Read the essay'} ↗</span></a>`).join('');
+        html=html.replace('<a class="editorial-card"',cards+'<a class="editorial-card"').replace(/01 essay|01 篇文章/,`${publicArticles.length+1}${lang==='zh'?' 篇文章':' essays'}`);
       }
       originals[lang]=html;
       const file=`${slug}.${lang}.html`;

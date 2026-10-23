@@ -19,7 +19,7 @@ test('exact field edits escape HTML, preserve adjacent copy and restore the orig
   assert.equal(inspectPage(home,{}).html,home);
 });
 test('shared header/footer field identifiers apply across routes',()=>{
-  const field=inspectPage(home).fields.find(f=>f.scope==='shared'&&f.kind==='text'&&f.value==='研究 · 成员 · 思想');assert.ok(field);
+  const field=inspectPage(home).fields.find(f=>f.scope==='shared'&&f.kind==='text'&&f.value==='探索 Nabla');assert.ok(field);
   const about=fs.readFileSync(path.join(root,'.local-studio/base/about.zh.html'),'utf8');
   assert.ok(inspectPage(about,{}, {[field.key]:'研究与交流'}).html.includes('研究与交流'));
 });
@@ -36,6 +36,8 @@ test('article rendering uses safe formatting, correct locale links and preserved
   assert.ok(html.includes('href="/zh/editorial/test-essay/" lang="zh-Hans"'));assert.ok(html.includes('This essay is available in Chinese.'));assert.ok(html.includes('2026-10-19'));
   assert.ok(markdown('<script>bad()</script>').includes('&lt;script&gt;'));assert.ok(!markdown('[bad](javascript:alert)').includes('<a'));
   assert.ok(markdown(article.zh.body).includes('<strong>科研</strong>'));
+  assert.ok(html.includes('Test Author'));assert.ok(!html.includes('测试作者'));assert.ok(!html.includes('中文摘要'));
+  const zhHTML=articleDocument(shell,article,'zh');assert.ok(zhHTML.includes('测试作者'));assert.ok(!zhHTML.includes('A test abstract.'));assert.ok(!zhHTML.includes('A Test Essay'));
   validateArticles({articles:[article]});assert.throws(()=>validateArticles({articles:[{...article,date:'2026-02-31'}]}));
 });
 test('build applies bilingual edits and indexes published articles, excluding drafts',()=>{
@@ -92,7 +94,19 @@ test('whole-paragraph editing preserves links, formatting and saved legacy edits
   const updated=renderEditedPage(html,record);assert.ok(updated.includes('<p class="lead">A complete introduction.</p><p>Read <a href="/research/"'));assert.ok(updated.includes('<p>Another paragraph.</p>'));
   record.blocks[blocks[0].key]='<script>alert(1)</script>';assert.ok(!renderEditedPage(html,record).includes('<script>'));
 });
-test('visual homepage keeps descriptive headings, images and equal circular member display',()=>{
-  assert.ok(home.indexOf('id="research"')<home.indexOf('id="publications"'));assert.ok(home.indexOf('id="publications"')<home.indexOf('id="community"'));
-  assert.ok(home.includes('id="people-circle">'));assert.ok(home.includes('id="people-list" hidden'));assert.ok(home.includes('class="visual-hero-photo"'));assert.ok(home.includes('/assets/gap-resonance-sketch.svg'));assert.ok(!home.includes('共同的起点。'));
+test('homepage presents research and publications without placeholder imagery, with five equal members',()=>{
+  assert.ok(home.indexOf('id="research"')<home.indexOf('id="publications"'));
+  assert.ok(home.indexOf('id="publications"')<home.indexOf('id="community"'));
+  const research=home.split('id="research"')[1].split('id="publications"')[0];
+  const papers=home.split('id="publications"')[1].split('id="community"')[0];
+  assert.ok(!/<(?:img|svg|figure)\b/.test(research));
+  assert.ok(!/<(?:img|svg|figure)\b/.test(papers));
+  assert.equal((research.match(/<li>/g)||[]).length,9);
+  assert.equal((home.match(/class="community-member"/g)||[]).length,5);
+  assert.ok(home.includes('nabla-mark-white.svg'));
+  assert.ok(!home.includes('id="people-list"'));
+  assert.ok(!home.includes('class="visual-essay-arrow"'));
+  const paper=JSON.parse(fs.readFileSync(path.join(root,'content.json'),'utf8')).publications[0];
+  assert.ok(papers.includes(paper.title));assert.ok(papers.includes(paper.journal));
+  for(const author of paper.authors)assert.ok(papers.includes(author.name));
 });

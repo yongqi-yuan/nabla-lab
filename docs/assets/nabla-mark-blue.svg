@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="226.1569" height="172.7188" viewBox="25.2925 54.9902 226.1569 172.7188" fill="#005375">
+  <title>Nabla Lab symbol — blue</title>
+  <desc>The original paired inverted and upright triangle outlines on a transparent background.</desc>
+  <metadata>Original Nabla Laboratory artwork supplied by Nabla Lab. Source: nabla-lab-logo-2.pdf and nabla-lab-symbol.svg. This colour variant preserves the original vector outlines. Copyright and reuse rights remain with the original rights holder; permission is required to reuse the Nabla identity.</metadata>
+  <defs><path id="nabla-mark-triangle" d="M.024414063 0 .32128907 .6767578H.33789063L.61816409 0H.024414063M.50146487 .041503908 .30371095 .52745059 .08984375 .041503908H.50146487Z"/></defs>
+  <use href="#nabla-mark-triangle" transform="matrix(233.111,0,0,-240,102.3486,222.709)"/>
+  <use href="#nabla-mark-triangle" transform="matrix(-240,0,0,240,178.6519,59.990205)"/>
+</svg>
