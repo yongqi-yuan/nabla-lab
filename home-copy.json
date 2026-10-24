@@ -2,8 +2,8 @@
   "en": {
     "title": "Nabla Lab",
     "intro": [
-      "Nabla Lab began in 2025 with students from the joint undergraduate programme between Harbin Institute of Technology, Weihai and the University of Strathclyde. We now study and work at different universities, and continue to collaborate on research.",
-      "Our interests include fluid mechanics, wave–structure interaction, computational fluid dynamics, aerodynamics and noise. We also share methods and experience from our research."
+      "Nabla Lab is an open, independent, and curiosity-driven research community. We share a passion for science and engineering, value collaboration, and embrace the opportunities and challenges of the AI era.",
+      "Founded in 2025, we continue to collaborate across universities on fluid mechanics, computational fluid dynamics and wave–structure interaction, alongside interests in marine engineering, aerodynamics and noise. We also share research methods and experience."
     ],
     "aboutLink": "How the group began",
     "researchTitle": "Research",
@@ -42,7 +42,7 @@
     "papersTitle": "Publications",
     "papersLink": "Publication details",
     "peopleTitle": "People",
-    "peopleIntro": "Five members with a shared undergraduate background, now continuing research at different institutions.",
+    "peopleIntro": "Meet our five members and explore their academic profiles.",
     "listView": "List",
     "circleView": "Circle",
     "editorialTitle": "Nabla Editorial",
@@ -73,8 +73,8 @@
   "zh": {
     "title": "Nabla Lab",
     "intro": [
-      "Nabla Lab 成立于 2025 年。我们相识于哈工大（威海）—思克莱德大学联合培养项目，目前在不同院校继续学习和研究，并保持科研合作。",
-      "我们的研究兴趣包括流体力学、波浪–结构物作用、计算流体力学、空气动力学与噪声，也交流研究方法和科研经验。"
+      "Nabla Lab 是一个开放、独立、由好奇心驱动的研究共同体。我们对科学与工程怀有共同的热情，珍视合作，也愿意面对人工智能时代的机遇与挑战。",
+      "Nabla Lab 成立于 2025 年。我们在不同院校持续开展流体力学、计算流体力学和波浪–结构物作用等方面的合作研究，并关注海洋工程、空气动力学与噪声，也交流研究方法和科研经验。"
     ],
     "aboutLink": "团队的发展经历",
     "researchTitle": "研究",
@@ -113,7 +113,7 @@
     "papersTitle": "论文",
     "papersLink": "论文详情",
     "peopleTitle": "成员",
-    "peopleIntro": "五位成员有着共同的本科教育背景，目前在不同院校继续学习、研究与合作。",
+    "peopleIntro": "认识我们的五位成员，了解各自的学术背景与研究兴趣。",
     "listView": "列表",
     "circleView": "圆形",
     "editorialTitle": "Nabla 社论",
