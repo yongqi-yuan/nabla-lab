@@ -20,7 +20,7 @@ export function renderYuanProfile({yuan, year, educationHistory, publicationCard
 
     </section>
     <section class="profile-section prose" id="education" aria-labelledby="profile-education-title"><span class="eyebrow">02 / EDUCATION</span><h2 id="profile-education-title">Education</h2>${educationHistory(yuan)}
-      <div class="profile-education-note"><span class="eyebrow">JOINT UNDERGRADUATE PROGRAMME</span><p>My undergraduate background is in the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.</p><a class="inline-action" href="/about/#shared-background">Our shared background ${arrow}</a></div>
+      <div class="profile-education-note"><span class="eyebrow">JOINT UNDERGRADUATE PROGRAMME</span><p>My undergraduate background is in the joint programme between Harbin Institute of Technology, Weihai and the University of Strathclyde.</p></div>
     </section>
     <section class="profile-section prose" id="research" aria-labelledby="profile-research-title"><span class="eyebrow">03 / RESEARCH</span><h2 id="profile-research-title">Research interests</h2><ul class="profile-interest-list">${researchItems}</ul>
       <a class="inline-action" href="/research/fluid-mechanics/">Explore fluid mechanics and computation ${arrow}</a>

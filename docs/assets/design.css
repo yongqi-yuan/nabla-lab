@@ -460,3 +460,70 @@ html[lang] .designed-home .quiet-essay-author { color:var(--muted); font-size:16
 @media(max-width:360px) {
  .is-lab-interior .visual-masthead-art { margin-inline:-17px; }
 }
+
+/* A concise five-column directory on desktop; retain the existing mobile cards. */
+@media(min-width:1101px) {
+ .is-lab-interior .people-grid:has(.has-portrait-illustration) {
+  grid-template-columns:repeat(5,minmax(0,1fr)); gap:22px; align-items:stretch;
+ }
+ .is-lab-interior .people-grid .member-card.has-portrait-illustration {
+  display:flex; flex-direction:column; min-width:0; background:#fff;
+ }
+ .is-lab-interior .people-grid .member-portrait.has-illustration {
+  --portrait-height:260px; height:280px; min-height:280px; width:100%;
+ }
+ .is-lab-interior .people-grid .member-copy { padding:22px 0 24px; }
+ .is-lab-interior .people-grid .member-copy h3 {
+  font-size:22px; line-height:1.3; margin-bottom:14px; letter-spacing:-.025em;
+ }
+ .is-lab-interior .people-grid .member-copy h3 svg { width:17px; height:17px; flex:none; }
+ .is-lab-interior .people-grid .member-copy p { font-size:14px; line-height:1.7; margin:0; }
+ .is-lab-interior .people-grid .member-copy .eyebrow,
+ .is-lab-interior .people-grid .member-interests,
+ .is-lab-interior .people-grid .member-action,
+ .is-lab-interior .people-grid .member-extra-affiliation { display:none; }
+}
+
+/* Compact interior mastheads: one shared grid, with page-specific vector studies. */
+.is-lab-interior .visual-masthead { padding:18px 0 26px; }
+.is-lab-interior .visual-masthead .breadcrumb { margin:0 0 12px; font-size:12px; }
+.is-lab-interior .visual-masthead-grid {
+ grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:48px; min-height:0; align-items:center;
+}
+.is-lab-interior .visual-masthead-copy { padding:12px 0; }
+.is-lab-interior .visual-masthead-copy > .eyebrow { display:none; }
+html[lang] .is-lab-interior .visual-masthead h1 {
+ display:table; max-width:100%; margin:0 0 15px; font:700 44px/1.18 var(--sans); letter-spacing:-.04em;
+}
+.is-lab-interior .visual-masthead h1::after { width:100%; height:2px; margin-top:14px; }
+html[lang] .is-lab-interior .visual-masthead p { margin:0; max-width:650px; font-size:16px; line-height:1.75; }
+.is-lab-interior .visual-masthead-art {
+ align-self:center; min-height:0; height:196px; margin:0; padding:0 14px;
+ border:0; background:transparent; overflow:visible;
+}
+.is-lab-interior .visual-masthead-art::before { content:none; }
+.visual-masthead-art .page-study { display:block; width:100%; height:100%; max-width:380px; }
+.compact-science-art { display:grid; place-items:center; width:100%; height:100%; }
+.compact-science-art svg { width:100%; height:100%; stroke:var(--blue); stroke-width:1.5; }
+.compact-science-art .diagram-accent { stroke:var(--red); }
+.compact-science-art .diagram-structure { fill:var(--blue-20); }
+.about-introduction { padding-block:56px 72px; }
+.about-reading { max-width:800px; margin-inline:auto; }
+html[lang] .is-lab-interior .about-reading .lead { font-size:clamp(23px,2.3vw,30px); font-weight:600; line-height:1.6; color:var(--blue); margin-bottom:28px; }
+.is-lab-interior .about-reading p { margin-bottom:24px; }
+.about-reading .inline-action { margin-top:10px; }
+@media(max-width:760px) {
+ .is-lab-interior .visual-masthead { padding:16px 0 22px; }
+ .is-lab-interior .visual-masthead-grid { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:18px; }
+ html[lang] .is-lab-interior .visual-masthead h1 { font-size:34px; }
+ html[lang] .is-lab-interior .visual-masthead p { font-size:14px; line-height:1.65; }
+ .is-lab-interior .visual-masthead-art { height:160px; padding:0; }
+ .is-lab-interior .visual-masthead-copy { padding:8px 0; }
+ .about-introduction { padding-block:36px 48px; }
+}
+@media(max-width:480px) {
+ .is-lab-interior .visual-masthead-grid { grid-template-columns:minmax(0,1.35fr) minmax(0,.85fr); gap:12px; }
+ html[lang] .is-lab-interior .visual-masthead h1 { font-size:30px; }
+ .is-lab-interior .visual-masthead-art { height:132px; }
+ .is-lab-interior .visual-masthead h1::after { margin-top:10px; }
+}
