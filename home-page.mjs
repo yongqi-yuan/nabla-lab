@@ -3,16 +3,15 @@ export function homePage({copy,members,publications,editorial,homePeople,escapeH
   const c=copy.en;
   const mark=(tone,cls)=>`<img class="nabla-mark ${cls}" src="/assets/nabla-mark-${tone}.svg" width="118" height="90" alt="" aria-hidden="true">`;
   return `<div class="quiet-home visual-home designed-home">
-    <header class="visual-hero">
-      <picture class="visual-hero-picture">
-        <img class="visual-hero-photo" src="/assets/graduation-hero-natural.webp" width="2000" height="1171" alt="${e(c.heroImageAlt)}" fetchpriority="high">
-      </picture>
-      <div class="wrap visual-hero-inner"><div class="visual-hero-copy">
-        <h1>${e(c.title)}</h1>
-        <div class="ui-hero-date">${mark('white','hero-brand-mark')}<span>${e(c.foundedLabel)}</span></div>
-      </div></div>
+    <header class="photo-masthead">
+      <div class="wrap photo-masthead-layout">
+        <div class="photo-masthead-heading">
+          <h1>${e(c.title)}</h1>
+          <p class="photo-masthead-date">${mark('pale','photo-masthead-emblem')}<span>${e(c.foundedLabel)}</span></p>
+        </div>
+        <div class="photo-masthead-media"><img class="photo-masthead-photo" src="/assets/graduation-hero-full.jpg" width="2400" height="1600" alt="${e(c.heroImageAlt)}" fetchpriority="high"></div>
+      </div>
     </header>
-    <nav class="ui-home-index" aria-label="${e(c.moreLabel)}"><div class="wrap">${[['about',c.introTitle],['research',c.researchTitle],['publications',c.papersTitle],['community',c.peopleTitle],['editorial',c.editorialTitle]].map(([id,label],i)=>`<a href="#${id}"><span aria-hidden="true">0${i+1}</span>${e(label)}<span aria-hidden="true">↓</span></a>`).join('')}</div></nav>
     <section class="visual-about wrap" id="about">
       <div class="visual-about-title"><span class="ui-section-number" aria-hidden="true">01 /</span><h2>${e(c.introPrefix)} <span class="ui-brand-name">Nabla Lab</span></h2>${mark('pale','visual-brand-mark')}</div>
       <div>${c.intro.map(p=>`<p>${e(p)}</p>`).join('')}<a class="quiet-link" href="/about/history/">${e(c.aboutLink)} <span aria-hidden="true">→</span></a></div>

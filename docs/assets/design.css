@@ -263,50 +263,48 @@ html[lang] .designed-home .quiet-essay h3 { font-size:clamp(28px,3vw,40px); line
   .member-portrait.has-photo.has-illustration img { width:calc(100% - 40px); height:calc((100% - 20px) * var(--portrait-scale)); }
 }
 
-/* Brand palette and a soft transition into the graduation photograph. */
-:root { --blue:#005375; --red:#a72126; --deep:#005375; --network-blue:#005375; }
-.designed-home .visual-hero { display:block; min-height:clamp(390px,30vw,460px); background:var(--blue); }
-.designed-home .visual-hero-picture { display:block; position:absolute; inset:0; overflow:hidden; }
-.designed-home .visual-hero-photo {
- display:block; position:absolute; inset:0 0 auto auto; width:auto; height:100%; max-width:none;
- object-fit:contain; object-position:right center; transform:none; animation:none;
- /* Feather the empty left edge and blend diagonally across the sky only. */
- -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%),linear-gradient(160deg,transparent,#000 25%);
- -webkit-mask-composite:source-in;
- mask-image:linear-gradient(90deg,transparent,#000 6%),linear-gradient(160deg,transparent,#000 25%);
- mask-composite:intersect;
+/* A single-line title and framed, uncropped photograph share the opening spread. */
+.photo-masthead { background:var(--blue); color:#fff; overflow:clip; }
+.photo-masthead-layout {
+ display:grid; grid-template-columns:1fr 1.65fr; gap:56px;
+ align-items:center; padding-block:72px;
 }
-.designed-home .visual-hero-inner { width:100%; min-height:clamp(390px,30vw,460px); padding-block:40px; }
-.designed-home .visual-hero-copy { display:block; max-width:42%; }
-html[lang] .designed-home .visual-hero h1 { font-size:clamp(52px,5vw,80px); line-height:1.08; letter-spacing:-2px; margin:0; }
-.designed-home .ui-hero-date { margin-top:32px; gap:16px; }
+.photo-masthead-heading { min-width:0; padding-block:8px; container-type:inline-size; }
+html[lang] .photo-masthead h1 {
+ margin:0; color:#fff; font-family:var(--sans); font-size:24.58cqw;
+ font-weight:700; line-height:1.08; letter-spacing:-.05em; white-space:nowrap;
+}
+html[lang] .photo-masthead .photo-masthead-date {
+ display:flex; align-items:center; gap:13px;
+ margin:28px 0 0; padding-top:22px; width:100%; border-top:1px solid var(--blue-40);
+ color:var(--blue-10); font:500 14px/1.6 var(--sans); letter-spacing:.02em;
+}
+.photo-masthead-emblem { display:block; width:32px; height:auto; flex:none; }
+.photo-masthead-media { min-width:0; position:relative; width:92%; justify-self:end; margin:0; padding:3px; background:var(--blue-30); }
+.photo-masthead-photo {
+ display:block; position:static; width:100%; height:auto; margin:0; padding:0;
+ aspect-ratio:3 / 2; object-fit:contain; transform:none; filter:none; animation:none;
+}
+@media(max-width:1020px) and (min-width:701px) {
+ .photo-masthead-layout { grid-template-columns:1fr 1.45fr; gap:32px; padding-block:48px; }
+
+ .photo-masthead-media { padding:2px; }
+}
+@media(max-width:700px) {
+ .photo-masthead-layout { grid-template-columns:1fr; gap:30px; padding-block:36px 40px; }
+ .photo-masthead-heading { padding:0; }
+ html[lang] .photo-masthead h1 { font-size:12.5cqw; }
+
+ html[lang] .photo-masthead .photo-masthead-date { margin-top:20px; padding-top:16px; gap:10px; font-size:13px; justify-content:flex-end; }
+ .photo-masthead-emblem { width:28px; }
+ .photo-masthead-media { padding:2px; justify-self:center; }
+}
 .designed-home .visual-people-section,
 .visual-editorial-intro,
 .site-footer,
 .is-quiet-home .site-footer,
 .is-lab-interior .profile-hero { background:var(--blue); }
 .ui-red-square { background:var(--red); }
-@media(max-width:1100px) {
- .designed-home .visual-hero { display:flex; flex-direction:column; min-height:0; }
- .designed-home .visual-hero-inner { order:1; min-height:0; padding:34px 28px 42px; }
- .designed-home .visual-hero-copy { display:block; max-width:none; }
- html[lang] .designed-home .visual-hero h1 { font-size:clamp(44px,6vw,64px); }
- .designed-home .ui-hero-date { margin-top:24px; }
- .designed-home .visual-hero-picture { position:relative; inset:auto; order:2; width:100%; margin-top:-18px; }
- .designed-home .visual-hero-photo {
-  position:relative; inset:auto; width:100%; height:auto; max-width:100%; aspect-ratio:2000 / 1171;
-  object-fit:contain; object-position:center; margin:0;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#00000026 10%,#0000008c 22%,#000 33%);
-  mask-image:linear-gradient(180deg,transparent 0%,#00000026 10%,#0000008c 22%,#000 33%);
-  -webkit-mask-composite:source-over;
-  mask-composite:add;
- }
-}
-@media(max-width:1100px) and (min-width:600px) and (max-height:600px) {
- .designed-home .visual-hero-inner { padding-block:26px 40px; }
- .designed-home .visual-hero-copy { display:flex; align-items:center; justify-content:space-between; gap:32px; }
- .designed-home .ui-hero-date { margin:0; }
-}
 
 /* Reference swatch system: primary colors plus white-mixed tonal steps. */
 :root {
@@ -345,3 +343,120 @@ a:focus-visible,button:focus-visible,input:focus-visible { outline-color:var(--b
 .designed-home .community-member a:focus-visible { border-color:#fff; }
 .research-brief-index,.visual-paper-journal,.member-copy .member-arrow { color:var(--brand-red); }
 ::selection { background:var(--blue-20); color:var(--brand-blue); }
+
+
+/* Pale-blue surfaces connect the masthead, research records and reading areas. */
+.designed-home .ui-home-index { background:var(--blue-5); border-bottom-color:var(--blue-20); }
+.designed-home .ui-home-index a { border-right-color:var(--blue-20); transition:background .18s,color .18s; }
+.designed-home .ui-home-index a:hover,
+.designed-home .ui-home-index a:focus-visible { background:var(--blue-10); color:var(--blue); }
+.designed-home .ui-section-heading { gap:32px; }
+.designed-home .ui-section-heading::after { content:""; flex:1; height:1px; background:var(--blue-20); align-self:flex-end; margin-bottom:10px; }
+.designed-home .visual-about > div:last-child { border-left:2px solid var(--blue-20); padding-left:32px; }
+.designed-home .visual-about .quiet-link { border-bottom:1px solid var(--blue-30); padding-bottom:7px; }
+
+.designed-home .visual-research-section { background:var(--blue-10); border-top:0; }
+.designed-home .research-briefs { gap:0; }
+.designed-home .research-brief { border-top:1px solid var(--blue-40); padding:28px 30px 0; }
+.designed-home .research-brief + .research-brief { border-left:1px solid var(--blue-30); }
+.designed-home .research-brief:first-child { padding-left:0; }
+.designed-home .research-brief:last-child { padding-right:0; }
+.designed-home .research-brief-index {
+ display:inline-flex; align-items:center; justify-content:center; width:40px; height:32px;
+ background:#fff; border-bottom:2px solid var(--red); margin-bottom:24px;
+}
+.designed-home .research-brief li { color:var(--ink); }
+
+.designed-home .visual-publications-section { border-top:0; }
+.designed-home .publication-record { gap:40px; border-top:0; padding-top:0; align-items:start; }
+.designed-home .publication-record-year {
+ background:var(--blue-10); padding:28px 22px 34px; border-top:3px solid var(--red); min-height:170px;
+}
+.designed-home .publication-record-body { min-width:0; border-top:1px solid var(--blue-30); padding-top:24px; }
+.designed-home .publication-record-meta { background:var(--blue-5); padding:18px 22px; border-top:0; border-left:2px solid var(--blue-30); }
+.designed-home .community-count { border-top-color:var(--blue-50); }
+.designed-home .community-member a { background:var(--blue-90); }
+.designed-home .community-member a:hover,
+.designed-home .community-member a:focus-visible { background:#fff; }
+.designed-home .community-ring { border-color:var(--blue-50); }
+
+.designed-home .visual-editorial-section { background:var(--blue-5); }
+.designed-home .visual-editorial-grid { gap:0; padding-top:0; border-top:0; align-items:stretch; }
+.designed-home .visual-editorial-intro { padding:40px 32px; }
+.designed-home .quiet-essay { background:#fff; padding:40px; border-bottom:3px solid var(--blue-20); }
+html[lang] .designed-home .quiet-essay-meta { color:var(--blue); font-size:14px; flex-wrap:wrap; }
+.designed-home .quiet-essay-meta > span { border-left:1px solid var(--blue-30); padding-left:20px; }
+html[lang] .designed-home .quiet-essay-author { color:var(--muted); font-size:16px; padding-top:22px; border-top:1px solid var(--blue-20); margin-bottom:0; }
+
+/* Carry the same surfaces into the existing bilingual interior pages. */
+.is-lab-interior .visual-masthead { background:var(--blue-5); border-bottom-color:var(--blue-20); }
+.is-lab-interior .visual-masthead-art { background-color:var(--blue-10); border-color:var(--blue-20); }
+.is-lab-interior .research-card { display:block; background:var(--blue-5); border-color:var(--blue-20); }
+.is-lab-interior .research-card .card-copy { padding:28px; }
+.is-lab-interior .publication-study { grid-template-columns:minmax(0,1fr); max-width:920px; }
+.is-lab-interior .editorial-card,
+.is-lab-interior .editorial-feedback,
+.is-lab-interior .contact-panel { background:var(--blue-5); border-color:var(--blue-20); }
+.is-lab-interior .editorial-card { border-left-color:var(--red); }
+.is-lab-interior .editorial-abstract { background:var(--blue-5); }
+.is-lab-interior .editorial-essay-header { border-color:var(--blue-20); border-top-color:var(--red); }
+.is-lab-interior .editorial-cover-art { box-shadow:12px 12px 0 var(--blue-10); }
+
+@media(max-width:1100px) {
+ .designed-home .publication-record { gap:28px; }
+ .designed-home .publication-record-year { padding-inline:18px; }
+ .designed-home .publication-record-year strong { font-size:44px; }
+}
+@media(max-width:760px) {
+ .designed-home .visual-about > div:last-child { padding-left:22px; }
+ .designed-home .research-brief,
+ .designed-home .research-brief:first-child,
+ .designed-home .research-brief:last-child { padding:24px 0; }
+ .designed-home .research-brief + .research-brief { border-left:0; }
+ .designed-home .research-brief-index { margin:0; }
+ .designed-home .research-brief h3 { margin-bottom:5px; }
+ .designed-home .research-brief li:last-child { margin-bottom:0; }
+ .designed-home .visual-editorial-intro,
+ .designed-home .quiet-essay { padding:30px 26px; }
+ .is-lab-interior .research-card .card-copy { padding:24px; }
+}
+@media(max-width:600px) {
+ .designed-home .publication-record-year { min-height:0; padding:18px 22px; justify-content:space-between; }
+ .designed-home .publication-record-year strong { font-size:36px; }
+ .designed-home .publication-record-body { border-top:0; padding-top:0; }
+ .designed-home .publication-record-meta { padding:16px; gap:18px 24px; }
+ .designed-home .community-member a { background:none; }
+ .designed-home .ui-section-heading { gap:20px; }
+}
+
+/* Layout audit: consistent reading edges and enough room for records. */
+.is-lab-interior .related-people,
+.is-lab-interior .related-link,
+.is-lab-interior .detail-points { max-width:920px; }
+.is-lab-interior .article-body { max-width:1000px; }
+.is-lab-interior .history-intro,
+.is-lab-interior .history-timeline { max-width:1050px; }
+.is-lab-interior .history-timeline { background:none; }
+.is-lab-interior .history-timeline article > div { background:var(--blue-5); padding-right:24px; }
+.is-lab-interior .publication-card { padding:28px; }
+.is-lab-interior .publication-actions { gap:12px 24px; }
+@media(min-width:601px) and (max-width:1100px) {
+ .designed-home .publication-record { grid-template-columns:150px minmax(0,1fr); }
+}
+@media(min-width:601px) and (max-width:760px) {
+ .profile-hero.has-portrait-illustration .profile-hero-grid { grid-template-columns:minmax(0,1fr) 220px; gap:24px; }
+ .profile-hero.has-portrait-illustration .profile-portrait.is-illustration img { width:100%; }
+}
+@media(max-width:760px) {
+ .is-lab-interior .news-card { display:block; }
+ .is-lab-interior .news-art { min-height:200px; }
+ .is-lab-interior .news-copy { padding:26px; }
+ .is-lab-interior .article-body { gap:20px; }
+ .is-lab-interior .publication-card { padding:22px; }
+}
+@media(max-width:480px) {
+ .is-lab-interior .history-timeline article > div { background:none; padding-right:0; }
+}
+@media(max-width:360px) {
+ .is-lab-interior .visual-masthead-art { margin-inline:-17px; }
+}
