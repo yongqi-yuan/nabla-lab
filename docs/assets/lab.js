@@ -71,13 +71,3 @@
     if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
   });
 })();
-
-const community = document.querySelector('.community');
-if (community) {
-  const toggle = community.querySelector('.community-toggle');
-  toggle?.addEventListener('click', () => {
-    const paused = community.classList.toggle('is-paused');
-    toggle.setAttribute('aria-pressed', String(paused));
-    toggle.textContent = paused ? 'Resume motion' : 'Pause motion';
-  });
-}

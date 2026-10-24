@@ -527,3 +527,265 @@ html[lang] .is-lab-interior .about-reading .lead { font-size:clamp(23px,2.3vw,30
  .is-lab-interior .visual-masthead-art { height:132px; }
  .is-lab-interior .visual-masthead h1::after { margin-top:10px; }
 }
+
+/* Home section headings are direct routes; the community is a light portrait orbit. */
+.designed-home :is(h2,h3) > a { text-decoration:none; text-underline-offset:.18em; }
+.designed-home :is(h2,h3) > a:hover { text-decoration:underline; text-decoration-thickness:1px; }
+.designed-home .visual-people-section { background:#fff; color:var(--blue); border-top:1px solid var(--blue-20); padding-block:48px; }
+.designed-home .visual-people-section > .community-layout { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:48px; }
+.designed-home .community-overview .ui-section-number { color:var(--red); }
+html[lang] .designed-home .community-overview h2 { color:var(--blue); font-size:32px; letter-spacing:-.03em; margin-bottom:20px; }
+html[lang] .designed-home .community-overview p { color:var(--muted); max-width:320px; font-size:17px; }
+.designed-home .community-portraits { padding:0; overflow:visible; margin:0; }
+.designed-home .community-portraits .community-stage { --radius:165px; height:450px; max-width:500px; margin:0 auto; }
+.designed-home .community-portraits .community-ring { display:block; border:1px solid var(--blue-20); }
+.designed-home .community-portraits .community-ring::before,
+.designed-home .community-portraits .community-ring::after { content:none; }
+.designed-home .community-portraits .community-members { display:block; }
+.designed-home .community-portraits .community-member {
+ position:absolute; top:50%; left:50%; width:120px;
+ animation:community-orbit 100s linear infinite; animation-play-state:running;
+}
+.designed-home .community-portraits .community-member a {
+ display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:10px;
+ width:100%; height:auto; min-height:0; padding:0; border:0; border-radius:0;
+ background:none; box-shadow:none; text-align:center;
+}
+.community-avatar { display:block; width:88px; height:88px; overflow:hidden; border-radius:50%; background:var(--blue-10); border:1px solid var(--blue-20); }
+.community-avatar img { display:block; width:100%; height:100%; object-fit:cover; }
+html[lang] .designed-home .community-portraits .community-name { color:var(--blue); font:600 15px/1.3 var(--sans); padding:2px 4px; background:#fff; }
+.designed-home .community-portraits .community-member a:hover .community-avatar { border-color:var(--blue); }
+@media(max-width:900px) {
+ .designed-home .visual-people-section > .community-layout { grid-template-columns:1fr; gap:24px; }
+ .designed-home .community-overview { display:block; }
+ .designed-home .community-overview p { max-width:540px; }
+ .designed-home .community-portraits .community-stage { height:430px; }
+}
+@media(max-width:600px) {
+ .designed-home .visual-people-section { padding-block:40px; }
+ .designed-home .community-portraits .community-stage { --radius:clamp(98px,29vw,145px); height:350px; }
+ .designed-home .community-portraits .community-member { width:94px; }
+ .community-avatar { width:66px; height:66px; }
+ html[lang] .designed-home .community-portraits .community-name { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .designed-home .community-portraits .community-member { animation:none; transform:translate(-50%,-50%) rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle))); }
+}
+/* Heading links inherit the heading scale instead of the smaller action-link style. */
+html[lang] .designed-home :is(h2,h3) > a {
+ font:inherit; color:inherit; display:inline; padding:0; margin:0; border:0;
+ letter-spacing:inherit; text-decoration:none;
+}
+html[lang] .designed-home :is(h2,h3) > a:hover { text-decoration:underline; text-decoration-thickness:1px; }
+.community-avatar { position:relative; }
+.community-avatar img { position:absolute; top:0; left:50%; width:145%; height:145%; max-width:none; transform:translateX(-50%); }
+
+/* White section surfaces, with brand colour concentrated in small internal blocks. */
+.designed-home .visual-research-section,
+.designed-home .visual-editorial-section { background:#fff; border-top:1px solid var(--blue-20); }
+.designed-home .research-brief-index { background:var(--blue); color:#fff; border-bottom:0; }
+.designed-home .publication-record-year { background:var(--blue); border-top:0; }
+.designed-home .publication-record-year > span { color:var(--blue-10); }
+.designed-home .publication-record-year strong { color:#fff; }
+
+/* A quieter editorial rhythm: white canvas, framed records, small solid-blue markers. */
+.designed-home .visual-about,
+.designed-home .visual-research-section,
+.designed-home .visual-publications-section,
+.designed-home .visual-editorial-section { padding-block:64px; }
+.designed-home .ui-section-heading { margin-bottom:32px; }
+.designed-home .research-briefs { gap:24px; }
+.designed-home .research-brief,
+.designed-home .research-brief:first-child,
+.designed-home .research-brief:last-child {
+ display:block; padding:24px; border:1px solid var(--blue-20); border-top:3px solid var(--blue);
+ background:#fff; transition:border-color .2s;
+}
+.designed-home .research-brief + .research-brief { border-left:1px solid var(--blue-20); }
+.designed-home .research-brief:focus-within,
+.designed-home .research-brief:hover { border-color:var(--blue-50); }
+.designed-home .research-brief-index { width:32px; height:32px; margin:0 0 22px; font-size:12px; }
+html[lang] .designed-home .research-brief h3 { margin-bottom:20px; font-size:22px; }
+.designed-home .research-brief li:last-child { margin-bottom:0; }
+.designed-home .publication-record-year { min-height:150px; padding:24px; }
+.designed-home .publication-record-meta {
+ background:none; border:0; border-top:1px solid var(--blue-20); border-bottom:1px solid var(--blue-20);
+ padding:18px 0; gap:20px 36px;
+}
+.designed-home .visual-editorial-grid { grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr); gap:48px; align-items:center; }
+.designed-home .visual-editorial-intro { background:none; padding:0; overflow:visible; color:var(--blue); }
+html[lang] .designed-home .visual-editorial-intro h2 { color:var(--blue); }
+html[lang] .designed-home .visual-editorial-intro p { color:var(--muted); }
+.designed-home .visual-editorial-intro .ui-section-number { color:var(--red); }
+.designed-home .visual-editorial-intro .quiet-link { color:var(--blue); border-color:var(--blue-30); }
+.designed-home .visual-editorial-intro .editorial-ornament {
+ display:block; position:static; width:64px; height:64px; padding:12px; margin:26px 0 0;
+ background:var(--blue); opacity:1; transform:none; object-fit:contain;
+}
+.designed-home .quiet-essay { background:var(--blue-5); border:1px solid var(--blue-20); border-top:3px solid var(--blue); padding:32px; min-height:0; }
+html[lang] .designed-home .quiet-essay h3 { font-size:clamp(25px,2.4vw,34px); margin-bottom:24px; }
+@media(max-width:760px) {
+ .designed-home .visual-about,
+ .designed-home .visual-research-section,
+ .designed-home .visual-publications-section,
+ .designed-home .visual-editorial-section { padding-block:44px; }
+ .designed-home .research-briefs { gap:18px; }
+ .designed-home .research-brief,
+ .designed-home .research-brief:first-child,
+ .designed-home .research-brief:last-child { padding:22px; }
+ .designed-home .visual-editorial-grid { grid-template-columns:1fr; gap:28px; }
+ .designed-home .visual-editorial-intro .editorial-ornament { width:48px; height:48px; padding:9px; margin-top:20px; }
+ .designed-home .quiet-essay { padding:24px; }
+}
+@media(max-width:600px) {
+ .designed-home .publication-record-year { min-height:0; padding:18px 22px; }
+}
+
+/* Publication dates read as a timeline marker, rather than a feature panel. */
+.designed-home .publication-record-year {
+ position:relative; background:none; border:0; min-height:150px;
+ padding:0 0 0 24px; gap:7px; align-items:flex-start; justify-content:flex-start;
+}
+.designed-home .publication-record-year::before {
+ content:""; position:absolute; left:0; top:5px; width:9px; height:9px;
+ border:1.5px solid var(--blue); border-radius:50%; background:#fff;
+}
+.designed-home .publication-record-year::after {
+ content:""; position:absolute; left:5px; top:21px; bottom:0; width:1px; background:var(--blue-30);
+}
+.designed-home .publication-record-year > span { color:var(--muted); font-size:12px; }
+.designed-home .publication-record-year strong { color:var(--blue); font-size:24px; line-height:1.3; letter-spacing:0; font-weight:600; }
+@media(max-width:600px) {
+ .designed-home .publication-record-year { flex-direction:row; align-items:baseline; gap:12px; min-height:0; padding:0 0 18px 24px; }
+ .designed-home .publication-record-year strong { font-size:22px; }
+}
+
+/* Keep timeline labels close to their records after removing the year panel. */
+.designed-home .publication-record { grid-template-columns:112px minmax(0,1fr); gap:28px; }
+.designed-home .publication-record-year { min-height:0; align-self:stretch; padding-left:22px; }
+.designed-home .publication-record-year::after { bottom:0; }
+.designed-home .publication-record-body { padding-top:0; border-top:0; }
+html[lang] .designed-home .publication-record-body .visual-paper-journal { margin-bottom:14px; }
+html[lang] .designed-home .publication-record h3 { margin-bottom:20px; }
+html[lang] .designed-home .publication-record-authors { margin-bottom:22px; }
+.designed-home .publication-record-meta { margin-bottom:22px; padding-block:14px; }
+@media(max-width:760px) and (min-width:601px) {
+ .designed-home .publication-record { grid-template-columns:96px minmax(0,1fr); gap:22px; }
+}
+@media(max-width:600px) {
+ .designed-home .publication-record { grid-template-columns:1fr; gap:16px; }
+ .designed-home .publication-record-year { padding:0 0 12px 22px; }
+ .designed-home .publication-record-year::after { bottom:0; }
+}
+
+/* Restore a little more blue within cards, while keeping section canvases white. */
+html[lang] .designed-home .research-brief h3 {
+ margin:0 -24px 20px; padding:14px 24px; background:var(--blue); color:#fff;
+}
+.designed-home .publication-record-meta {
+ background:var(--blue-10); border-top:0; border-bottom:0;
+ border-left:3px solid var(--blue); padding:16px 20px;
+}
+.designed-home .quiet-essay { border-top-width:5px; border-left:3px solid var(--blue); background:var(--blue-10); }
+.designed-home .community-portraits .community-ring { border-color:var(--blue-50); }
+@media(max-width:760px) {
+ html[lang] .designed-home .research-brief h3 { margin-inline:-22px; padding-inline:22px; }
+}
+
+/* Let the article title carry the emphasis; secondary metadata stays quiet. */
+.designed-home .quiet-essay {
+ background:#fff; border:0; border-top:1px solid var(--blue-20);
+ padding:26px 0 0; min-height:0;
+}
+html[lang] .designed-home .quiet-essay-meta { color:var(--muted); font-size:12px; gap:14px; margin-bottom:18px; }
+.designed-home .quiet-essay-meta > span { padding-left:14px; }
+html[lang] .designed-home .quiet-essay h3 { color:var(--blue); font-size:clamp(24px,2.2vw,30px); line-height:1.4; margin-bottom:16px; }
+html[lang] .designed-home .quiet-essay-author { border:0; padding:0; font-size:14px; margin:0; }
+.designed-home .publication-record-year::before { top:8px; }
+.designed-home .publication-record-year::after { top:24px; }
+html[lang] .designed-home .publication-record-authors { margin-bottom:20px; }
+
+/* Restore the selected editorial composition: a blue introduction beside a white essay. */
+.designed-home .visual-editorial-section { background:var(--blue-5); border-top:1px solid var(--blue-20); }
+.designed-home .visual-editorial-grid { grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr); gap:0; align-items:stretch; }
+.designed-home .visual-editorial-intro { position:relative; overflow:hidden; background:var(--blue); color:#fff; padding:40px 32px; }
+html[lang] .designed-home .visual-editorial-intro h2 { color:#fff; }
+html[lang] .designed-home .visual-editorial-intro p { color:var(--blue-20); }
+.designed-home .visual-editorial-intro .ui-section-number { color:var(--blue-40); }
+.designed-home .visual-editorial-intro .quiet-link { color:#fff; border-color:var(--blue-50); }
+.designed-home .visual-editorial-intro .editorial-ornament {
+ position:absolute; width:210px; height:auto; right:-30px; bottom:-24px;
+ padding:0; margin:0; background:none; opacity:.09; transform:rotate(-12deg);
+}
+.designed-home .quiet-essay { background:#fff; padding:40px; border:0; border-bottom:3px solid var(--blue-20); }
+html[lang] .designed-home .quiet-essay-meta { font-size:14px; gap:20px; margin-bottom:24px; }
+html[lang] .designed-home .quiet-essay h3 { font-size:clamp(26px,2.7vw,38px); line-height:1.35; margin-bottom:30px; }
+html[lang] .designed-home .quiet-essay-author { font-size:16px; border-top:1px solid var(--blue-20); padding-top:22px; }
+@media(max-width:760px) {
+ .designed-home .visual-editorial-grid { grid-template-columns:1fr; gap:0; }
+ .designed-home .visual-editorial-intro { padding:30px 26px; }
+ .designed-home .visual-editorial-intro .editorial-ornament { width:160px; height:auto; }
+ .designed-home .quiet-essay { padding:28px 26px; }
+}
+
+/* Extend the selected blue/white editorial language without adding large section fills. */
+.designed-home .visual-about { align-items:center; }
+.designed-home .visual-about-title {
+ padding:30px 26px; min-height:220px; background:var(--blue); color:#fff;
+ overflow:hidden; isolation:isolate; display:flex; flex-direction:column; justify-content:center;
+}
+html[lang] .designed-home .visual-about-title h2 { position:relative; z-index:1; color:#fff; margin-bottom:0; line-height:1.3; }
+.designed-home .visual-about-title .ui-section-number { color:var(--blue-40); }
+.designed-home .visual-about-title .visual-brand-mark {
+ width:174px; height:auto; top:auto; left:auto; right:-24px; bottom:-32px;
+ opacity:.12; transform:rotate(-12deg); z-index:-1;
+}
+.designed-home .visual-about > div:last-child { border:0; padding-left:0; }
+.designed-home .research-brief,
+.designed-home .research-brief:first-child,
+.designed-home .research-brief:last-child { padding:0 24px 26px; border-top:0; }
+.research-brief-heading {
+ position:relative; display:flex; align-items:center; gap:16px; min-height:100px;
+ margin:0 -24px 24px; padding:24px; background:var(--blue); overflow:hidden;
+}
+.research-brief-heading::after {
+ content:""; position:absolute; right:-18px; bottom:-26px; width:120px; height:92px;
+ background:url('/assets/nabla-mark-white.svg') center/contain no-repeat; opacity:.06; pointer-events:none;
+}
+.designed-home .research-brief-heading .research-brief-index {
+ flex:none; width:32px; height:32px; margin:0; color:var(--blue-20);
+ background:none; border:1px solid var(--blue-50);
+}
+html[lang] .designed-home .research-brief-heading h3 {
+ position:relative; z-index:1; margin:0; padding:0; background:none; font-size:22px; line-height:1.35;
+}
+html[lang] .designed-home .community-overview h2 {
+ display:table; padding:14px 24px; margin-bottom:24px; background:var(--blue); color:#fff;
+}
+html[lang] .designed-home .community-overview p { border-left:2px solid var(--blue-30); padding-left:18px; }
+.designed-home .visual-paper-journal::before {
+ content:""; display:inline-block; width:24px; height:2px; margin-right:12px; vertical-align:middle; background:var(--blue);
+}
+@media(max-width:760px) {
+ .designed-home .visual-about-title { min-height:160px; padding:26px; }
+ .designed-home .visual-about-title .visual-brand-mark { width:150px; bottom:-28px; }
+ .designed-home .research-brief,
+ .designed-home .research-brief:first-child,
+ .designed-home .research-brief:last-child { padding:0 22px 24px; }
+ .research-brief-heading { min-height:84px; padding:20px 22px; margin-inline:-22px; margin-bottom:22px; }
+ html[lang] .designed-home .research-brief-heading h3 { font-size:21px; }
+ html[lang] .designed-home .community-overview h2 { padding:12px 22px; }
+}
+
+/* Alternate quiet section surfaces; stronger blue stays inside the modules. */
+.designed-home .visual-about,
+.designed-home .visual-publications-section,
+.designed-home .visual-editorial-section { background:#fff; }
+.designed-home .visual-research-section,
+.designed-home .visual-people-section { background:var(--blue-5); }
+.designed-home .community-portraits .community-name { background:var(--blue-5); }
+
+/* The community title sits directly on the pale section surface. */
+html[lang] .designed-home .community-overview h2 {
+ display:block; padding:0; background:none; color:var(--blue); margin-bottom:20px;
+}
